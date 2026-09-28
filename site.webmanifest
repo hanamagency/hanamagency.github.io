@@ -1,0 +1,12 @@
+{
+  "name": "HÀ NAM Agency",
+  "short_name": "HÀ NAM",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#FFF8EC",
+  "theme_color": "#0E4F57",
+  "icons": [
+    { "src": "assets/icons/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
