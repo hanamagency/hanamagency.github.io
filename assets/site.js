@@ -6,10 +6,10 @@
   // ===== CẤU HÌNH =====
   var CONFIG = {
     // Dán URL web app Apps Script (kết thúc bằng /exec). Để trống = chế độ xem thử, form không gửi đi đâu.
-    ENDPOINT: '',
+    ENDPOINT: 'https://script.google.com/macros/s/AKfycbz7BI9N59VKI98j3Dpnk7LWaQLkyEPmgwrRzpMzzzOBCSdMoileak4UwC_SoKhTAbWvUA/exec',
     // Mã Meta Pixel và GA4. Để trống thì không tải.
-    META_PIXEL_ID: '',
-    GA4_ID: '',
+    META_PIXEL_ID: '939933335396008',
+    GA4_ID: 'G-BTZNP2S6D1',
     ZALO_URL: 'https://zalo.me/0986219360',
     THANK_YOU_PAGE: 'cam-on.html',
     // Đổi số phiên bản mỗi khi sửa câu chữ ô đồng ý, để nhật ký đồng ý khớp văn bản
