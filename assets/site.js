@@ -7,7 +7,10 @@
   var CONFIG = {
     // Dán URL web app Apps Script (kết thúc bằng /exec). Để trống = chế độ xem thử, form không gửi đi đâu.
     ENDPOINT: 'https://script.google.com/macros/s/AKfycbz7BI9N59VKI98j3Dpnk7LWaQLkyEPmgwrRzpMzzzOBCSdMoileak4UwC_SoKhTAbWvUA/exec',
-    // Mã Meta Pixel và GA4. Để trống thì không tải.
+    // false = GA4 và Pixel do Google Tag Manager (GTM-KGTWH2R4) tải, web chỉ đẩy sự kiện vào dataLayer.
+    // true = web tự tải GA4 và Pixel như trước. Khi để true thì KHÔNG gắn thẻ GA4, Pixel trong GTM, tránh đếm hai lần.
+    LOAD_TAGS_DIRECT: false,
+    // Mã Meta Pixel và GA4, chỉ dùng khi LOAD_TAGS_DIRECT là true. Để trống thì không tải.
     META_PIXEL_ID: '939933335396008',
     GA4_ID: 'G-BTZNP2S6D1',
     ZALO_URL: 'https://zalo.me/0986219360',
@@ -24,6 +27,8 @@
 
   // ===== Đo lường: chỉ tải khi đã điền mã =====
   function loadTracking() {
+    window.dataLayer = window.dataLayer || [];
+    if (!CONFIG.LOAD_TAGS_DIRECT) return;
     if (CONFIG.META_PIXEL_ID && !window.fbq) {
       (function (f, b, e, v, n, t, s) {
         if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
@@ -107,9 +112,28 @@
     };
   }
 
-  function track(source, eventId) {
-    try { if (window.fbq) window.fbq('track', 'Lead', { content_name: source }, { eventID: eventId }); } catch (e) {}
-    try { if (window.gtag) window.gtag('event', 'generate_lead', { form_source: source }); } catch (e) {}
+  // Báo gửi form thành công. Luôn đẩy sự kiện generate_lead vào dataLayer cho GTM.
+  // done() chạy khi GTM bắn xong thẻ, hoặc sau tối đa 1,5 giây (phòng GTM bị chặn), rồi mới chuyển trang.
+  function track(source, eventId, data, done) {
+    var called = false;
+    function finish() { if (!called) { called = true; if (done) done(); } }
+    setTimeout(finish, 1500);
+    if (CONFIG.LOAD_TAGS_DIRECT) {
+      try { if (window.fbq) window.fbq('track', 'Lead', { content_name: source }, { eventID: eventId }); } catch (e) {}
+      try { if (window.gtag) window.gtag('event', 'generate_lead', { form_source: source }); } catch (e) {}
+    }
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'generate_lead',
+        form_source: source,
+        lead_need: (data && data.need) || '',
+        lead_budget: (data && data.budget) || '',
+        event_id: eventId,
+        eventCallback: finish,
+        eventTimeout: 1500
+      });
+    } catch (e) { finish(); }
   }
 
   function goThanks(data) {
@@ -163,13 +187,12 @@
 
       if (!CONFIG.ENDPOINT) {
         // Chế độ xem thử: không gửi dữ liệu đi đâu, chỉ chuyển sang trang cảm ơn
-        track(source, eventId);
-        setTimeout(function () { goThanks(data); }, 400);
+        track(source, eventId, data, function () { goThanks(data); });
         return;
       }
 
       fetch(CONFIG.ENDPOINT, { method: 'POST', mode: 'no-cors', body: payload })
-        .then(function () { track(source, eventId); goThanks(data); })
+        .then(function () { track(source, eventId, data, function () { goThanks(data); }); })
         .catch(function () {
           button.disabled = false;
           button.textContent = oldLabel;
