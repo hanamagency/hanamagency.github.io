@@ -73,11 +73,40 @@
   var CAMPAIGN_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_id', 'utm_term', 'utm_content', 'fbclid', 'gclid', 'ttclid'];
   function nowIso() { return new Date().toISOString(); }
   function fresh(t) { return t && t.ts && (Date.now() - Date.parse(t.ts)) < CONFIG.ATTRIBUTION_DAYS * 864e5; }
+  // Trang công cụ (thử GTM, Apps Script, đăng nhập Google...) không phải nguồn khách: bỏ qua
+  var IGNORE_REFERRER = /(^|\.)(tagassistant\.google\.com|tagmanager\.google\.com|analytics\.google\.com|script\.google\.com|script\.googleusercontent\.com|accounts\.google\.com|business\.facebook\.com|adsmanager\.facebook\.com)$/i;
+  function ignoredSource(s) { return IGNORE_REFERRER.test(String(s || '')); }
+  // Gom tên miền web dẫn tới về tên nguồn dễ đọc (cách gom gần giống nhóm kênh mặc định của GA4)
+  var REFERRER_RULES = [
+    [/(^|\.)(facebook\.com|fb\.com|fb\.me|messenger\.com)$/, 'facebook', 'social'],
+    [/(^|\.)instagram\.com$/, 'instagram', 'social'],
+    [/(^|\.)threads\.(net|com)$/, 'threads', 'social'],
+    [/(^|\.)(zalo\.me|zaloapp\.com|zalo\.vn)$/, 'zalo', 'social'],
+    [/(^|\.)tiktok\.com$/, 'tiktok', 'social'],
+    [/(^|\.)(youtube\.com|youtu\.be)$/, 'youtube', 'social'],
+    [/(^|\.)(linkedin\.com|lnkd\.in)$/, 'linkedin', 'social'],
+    [/^mail\.google\.com$/, 'gmail', 'email'],
+    [/(^|\.)(chatgpt\.com|chat\.openai\.com)$/, 'chatgpt', 'referral'],
+    [/^gemini\.google\.com$/, 'gemini', 'referral'],
+    [/(^|\.)perplexity\.ai$/, 'perplexity', 'referral'],
+    [/(^|\.)claude\.ai$/, 'claude', 'referral'],
+    [/(^|\.)google\.[a-z.]+$/, 'google', 'organic'],
+    [/(^|\.)bing\.com$/, 'bing', 'organic'],
+    [/(^|\.)coccoc\.com$/, 'coccoc', 'organic']
+  ];
+  function referralTouch(host) {
+    var h = String(host || '').toLowerCase().replace(/^www\./, '');
+    for (var i = 0; i < REFERRER_RULES.length; i++) {
+      if (REFERRER_RULES[i][0].test(h)) return { utm_source: REFERRER_RULES[i][1], utm_medium: REFERRER_RULES[i][2] };
+    }
+    return { utm_source: h, utm_medium: 'referral' };
+  }
   function externalReferrer() {
     try {
       if (!document.referrer) return '';
       var u = new URL(document.referrer);
-      return u.hostname && u.hostname !== window.location.hostname ? u.hostname : '';
+      if (!u.hostname || u.hostname === window.location.hostname || ignoredSource(u.hostname)) return '';
+      return u.hostname;
     } catch (e) { return ''; }
   }
   function captureAttribution() {
@@ -90,11 +119,12 @@
     if (has) {
       touch = params;
     } else if (ref) {
-      touch = { utm_source: ref, utm_medium: 'referral' };
+      touch = referralTouch(ref);
     }
     if (touch) { touch.landing = path; touch.ref = ref; touch.ts = nowIso(); }
 
     var first = jGet(lGet, 'hn_ft');
+    if (first && (ignoredSource(first.utm_source) || ignoredSource(first.ref))) first = null; // dọn nguồn công cụ đã lưu từ trước
     if (!fresh(first)) {
       first = touch || { utm_source: '(direct)', utm_medium: '(none)', landing: path, ref: '', ts: nowIso() };
       lSet('hn_ft', JSON.stringify(first));
@@ -128,7 +158,7 @@
   function attributionFields() {
     var out = {};
     var last = jGet(lGet, 'hn_lt');
-    if (fresh(last)) CAMPAIGN_KEYS.forEach(function (k) { if (last[k]) out[k] = last[k]; });
+    if (fresh(last) && !ignoredSource(last.utm_source)) CAMPAIGN_KEYS.forEach(function (k) { if (last[k]) out[k] = last[k]; });
     var first = jGet(lGet, 'hn_ft');
     if (first) {
       out.first_source = first.utm_source || (first.fbclid ? 'facebook' : first.gclid ? 'google' : first.ttclid ? 'tiktok' : '');
@@ -542,7 +572,7 @@
     render(false);
   }
 
-  // ===== Checklist 30 điểm (trang quà tặng) =====
+  // ===== Checklist 30 mục (trang quà tặng) =====
   function initChecklist(root) {
     var boxes = Array.prototype.slice.call(root.querySelectorAll('input[type="checkbox"]'));
     var bar = document.querySelector('[data-progress-bar]');
@@ -636,5 +666,5 @@
   }
 
   // Cho phép kiểm thử bằng Node
-  if (typeof module !== 'undefined') module.exports = { normalizePhone: normalizePhone, isPhone: isPhone, feeFor: feeFor, pct: pct, parseGaClientId: parseGaClientId, detectInApp: detectInApp, detectDevice: detectDevice };
+  if (typeof module !== 'undefined') module.exports = { referralTouch: referralTouch, ignoredSource: ignoredSource, normalizePhone: normalizePhone, isPhone: isPhone, feeFor: feeFor, pct: pct, parseGaClientId: parseGaClientId, detectInApp: detectInApp, detectDevice: detectDevice };
 })();
