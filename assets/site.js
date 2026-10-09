@@ -262,6 +262,7 @@
     sSet('hn_event_id', eventId || '');
     sSet('hn_form_id', formId || '');
     sSet('hn_lead_short', isShort ? '1' : '');
+    sSet('hn_lead_platform', data.platform || '');
     window.location.href = CONFIG.THANK_YOU_PAGE;
   }
 
@@ -473,11 +474,17 @@
     });
   }
 
-  // ===== Máy tính phí dịch vụ (trang Facebook Ads) =====
-  function vnd(n) { return Math.round(n).toLocaleString('vi-VN') + 'đ'; }
-  function feeFor(budget) {
-    // Giữ khớp với bảng giá trên trang facebook-ads.html. Phí luôn từ 10% ngân sách trở lên
-    // và không giảm khi ngân sách tăng.
+  // ===== Tính thử phí dịch vụ (dùng chung các trang nền tảng) =====
+  function groupDigits(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function vnd(n) { return groupDigits(n) + 'đ'; }
+  // Bảng phí theo nền tảng. Giữ khớp với bảng giá trên từng trang. Phí luôn từ 10% ngân sách trở lên
+  // và không giảm khi ngân sách tăng.
+  function feeFor(budget, platform) {
+    if (platform === 'shopee') {
+      if (budget <= 20000000) return { plan: 'Khởi đầu', fee: 2000000 };
+      if (budget <= 80000000) return { plan: 'Tăng trưởng', fee: budget * 0.12 };
+      return { plan: 'Mở rộng', fee: Math.max(9600000, budget * 0.10) };
+    }
     if (budget <= 30000000) return { plan: 'Khởi đầu', fee: 3000000 };
     if (budget <= 100000000) return { plan: 'Tăng trưởng', fee: budget * 0.12 };
     return { plan: 'Mở rộng', fee: Math.max(12000000, budget * 0.10) };
@@ -486,34 +493,78 @@
     var r = Math.round(x * 10) / 10;
     return (r % 1 === 0 ? String(r) : r.toFixed(1).replace('.', ',')) + '%';
   }
+  // Ô nhập số tiền: chỉ giữ chữ số, bỏ số 0 ở đầu, tối đa 12 chữ số
+  function onlyDigits(s) { return String(s || '').replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 12); }
   function initCalc(root) {
-    var input = root.querySelector('input[type="range"]');
-    var out = {
-      budget: root.querySelector('[data-out="budget"]'),
-      plan: root.querySelector('[data-out="plan"]'),
-      fee: root.querySelector('[data-out="fee"]'),
-      share: root.querySelector('[data-out="share"]'),
-      total: root.querySelector('[data-out="total"]'),
-      daily: root.querySelector('[data-out="daily"]')
-    };
+    var range = root.querySelector('input[type="range"]');
+    var amount = root.querySelector('[data-calc-amount]');
+    var platform = root.getAttribute('data-calc') || document.body.getAttribute('data-platform') || 'facebook';
+    var min = Number(range.min), max = Number(range.max);
+    var exact = Number(range.value) * 1000000;
+    var out = {};
+    ['plan', 'fee', 'share', 'total', 'daily', 'note'].forEach(function (k) { out[k] = root.querySelector('[data-out="' + k + '"]'); });
+    function set(k, text) { if (out[k]) out[k].textContent = text; }
     var used = false;
-    function render() {
-      var b = Number(input.value) * 1000000;
-      var r = feeFor(b);
-      out.budget.textContent = vnd(b) + '/tháng';
-      out.daily.textContent = 'khoảng ' + vnd(b / 30) + ' mỗi ngày';
-      out.plan.textContent = r.plan;
-      out.fee.textContent = vnd(r.fee);
-      out.share.textContent = pct(r.fee / b * 100);
-      out.total.textContent = vnd(b + r.fee);
-      input.setAttribute('aria-valuetext', vnd(b));
-    }
-    input.addEventListener('input', render);
-    input.addEventListener('change', function () {
-      if (used) return;
+    function track() {
+      if (used || exact < 1000000) return;
       used = true;
-      dl({ event: 'fee_calculator_use', budget_million: Number(input.value) });
+      dl({ event: 'fee_calculator_use', budget_million: Math.round(exact / 10000) / 100 });
+    }
+    function render() {
+      var b = exact;
+      if (b < 1000000) {
+        ['plan', 'fee', 'share', 'total'].forEach(function (k) { set(k, '—'); });
+        set('daily', 'Nhập số tiền quảng cáo mỗi tháng để tính');
+        if (out.note) out.note.hidden = true;
+        return;
+      }
+      var r = feeFor(b, platform);
+      set('daily', 'khoảng ' + vnd(b / 30) + ' mỗi ngày');
+      set('plan', r.plan);
+      set('fee', vnd(r.fee));
+      set('share', pct(r.fee / b * 100));
+      set('total', vnd(b + r.fee));
+      range.setAttribute('aria-valuetext', vnd(b));
+      if (out.note) {
+        var note = b < min * 1000000 ? root.getAttribute('data-note-min') : b > max * 1000000 ? root.getAttribute('data-note-max') : '';
+        out.note.hidden = !note;
+        out.note.textContent = note || '';
+      }
+    }
+    function syncRange() { range.value = String(Math.min(max, Math.max(min, Math.round(exact / 1000000)))); }
+    // Gõ tới đâu thêm dấu chấm tới đó, giữ con trỏ đúng sau chữ số vừa gõ
+    function reformat() {
+      var pos = amount.selectionStart == null ? amount.value.length : amount.selectionStart;
+      var before = onlyDigits(amount.value.slice(0, pos)).length;
+      var d = onlyDigits(amount.value);
+      amount.value = d ? groupDigits(Number(d)) : '';
+      var i = 0, seen = 0;
+      while (i < amount.value.length && seen < before) { if (/\d/.test(amount.value.charAt(i))) seen++; i++; }
+      try { if (document.activeElement === amount) amount.setSelectionRange(i, i); } catch (e) {}
+      return d;
+    }
+    range.addEventListener('input', function () {
+      exact = Number(range.value) * 1000000;
+      if (amount) amount.value = groupDigits(exact);
+      render();
     });
+    range.addEventListener('change', track);
+    if (amount) {
+      amount.value = groupDigits(exact);
+      amount.addEventListener('input', function () {
+        var d = reformat();
+        exact = d ? Number(d) : 0;
+        if (exact >= 1000000) syncRange();
+        render();
+      });
+      amount.addEventListener('change', track);
+      amount.addEventListener('blur', function () {
+        if (exact >= 1000000) return;
+        exact = Number(range.value) * 1000000; // bỏ trống hoặc quá nhỏ: quay về số trên thanh kéo
+        amount.value = groupDigits(exact);
+        render();
+      });
+    }
     render();
   }
 
@@ -539,6 +590,8 @@
     var text = root.querySelector('[data-quiz-text]');
     var unsureEl = root.querySelector('[data-quiz-unsure]');
     var reported = false;
+    // Lời nhận xét lấy từ thuộc tính của khung tự kiểm tra, {n} là số mục còn thiếu. Không có thì dùng lời trang Facebook
+    function say(key, fallback, missing) { return (root.getAttribute('data-text-' + key) || fallback).replace('{n}', missing); }
     function render(fromUser) {
       var answered = 0, yes = 0, unsure = 0;
       items.forEach(function (q) {
@@ -555,11 +608,11 @@
       if (answered < total) {
         text.textContent = 'Đã trả lời ' + answered + '/' + total + ' câu. Trả lời đủ để xem kết quả.';
       } else if (yes === total) {
-        text.textContent = 'Phần đo đã đủ. Bước tiếp theo là đọc số liệu đúng cách để tăng ngân sách mà vẫn giữ được lãi.';
+        text.textContent = say('full', 'Phần đo đã đủ. Bước tiếp theo là đọc số liệu đúng cách để tăng ngân sách mà vẫn giữ được lãi.', missing);
       } else if (yes >= 3) {
-        text.textContent = 'Còn thiếu ' + missing + ' mục. Facebook đang tìm khách với thông tin chưa đủ, nên bổ sung trước khi tăng ngân sách.';
+        text.textContent = say('mid', 'Còn thiếu {n} mục. Facebook đang tìm khách với thông tin chưa đủ, nên bổ sung trước khi tăng ngân sách.', missing);
       } else {
-        text.textContent = 'Còn thiếu ' + missing + ' mục. Facebook chưa biết ai là người mua, nên tiền quảng cáo dễ chạy theo lượt bấm hơn là theo đơn hàng.';
+        text.textContent = say('low', 'Còn thiếu {n} mục. Facebook chưa biết ai là người mua, nên tiền quảng cáo dễ chạy theo lượt bấm hơn là theo đơn hàng.', missing);
       }
       unsureEl.hidden = !unsure;
       unsureEl.textContent = unsure ? 'Có ' + unsure + ' câu bạn chưa rõ. Buổi kiểm tra 20 phút sẽ trả lời giúp bạn.' : '';
@@ -572,33 +625,71 @@
     render(false);
   }
 
-  // ===== Checklist 30 mục (trang quà tặng) =====
+  // ===== Checklist 30 mục (trang quà tặng): mỗi nền tảng một tab, link #facebook, #shopee mở thẳng tab =====
+  // Mỗi tab lưu dấu tick riêng trong trình duyệt. Tab Facebook giữ khóa cũ hn_checklist để không mất tick đã có.
   function initChecklist(root) {
+    var platform = root.getAttribute('data-checklist') || 'facebook';
+    var key = platform === 'facebook' ? 'hn_checklist' : 'hn_checklist_' + platform;
     var boxes = Array.prototype.slice.call(root.querySelectorAll('input[type="checkbox"]'));
     var bar = document.querySelector('[data-progress-bar]');
     var label = document.querySelector('[data-progress-label]');
     var verdict = document.querySelector('[data-progress-verdict]');
-    var saved = jGet(lGet, 'hn_checklist') || {};
+    var saved = jGet(lGet, key) || {};
     boxes.forEach(function (b) { if (saved[b.id]) b.checked = true; });
     var reached = {};
     function render(fromUser) {
       var done = boxes.filter(function (b) { return b.checked; }).length;
+      [10, 20, 30].forEach(function (m) {
+        if (done >= m && !reached[m]) { reached[m] = true; if (fromUser) dl({ event: 'checklist_progress', checked_count: m, checklist_platform: platform }); }
+      });
+      var state = {};
+      boxes.forEach(function (b) { if (b.checked) state[b.id] = 1; });
+      if (fromUser) lSet(key, JSON.stringify(state));
+      if (root.hidden) return; // thanh tiến độ chỉ theo tab đang mở
       var p = boxes.length ? Math.round(done / boxes.length * 100) : 0;
       if (bar) bar.style.width = p + '%';
       if (label) label.textContent = done + '/' + boxes.length + ' mục đã sẵn sàng';
       if (verdict) {
-        verdict.textContent = done >= 26 ? 'Tài khoản khá sẵn sàng' :
-          done >= 18 ? 'Còn vài lỗ hổng cần vá' : 'Nên sửa trước khi tăng ngân sách';
+        verdict.textContent = done >= 26 ? (root.getAttribute('data-verdict-high') || 'Tài khoản khá sẵn sàng') :
+          done >= 18 ? (root.getAttribute('data-verdict-mid') || 'Còn vài lỗ hổng cần vá') :
+          (root.getAttribute('data-verdict-low') || 'Nên sửa trước khi tăng ngân sách');
       }
-      [10, 20, 30].forEach(function (m) {
-        if (done >= m && !reached[m]) { reached[m] = true; if (fromUser) dl({ event: 'checklist_progress', checked_count: m }); }
-      });
-      var state = {};
-      boxes.forEach(function (b) { if (b.checked) state[b.id] = 1; });
-      lSet('hn_checklist', JSON.stringify(state));
     }
     root.addEventListener('change', function () { render(true); });
     render(false);
+    return { platform: platform, root: root, render: render };
+  }
+  function initChecklists() {
+    var lists = {}, order = [];
+    each('[data-checklist]', function (root) { var c = initChecklist(root); lists[c.platform] = c; order.push(c.platform); });
+    if (!order.length) return;
+    var title = document.querySelector('[data-ck-title]');
+    function show(p) {
+      if (!lists[p]) p = order[0];
+      order.forEach(function (k) { lists[k].root.hidden = k !== p; });
+      each('[data-ck-tab]', function (t) {
+        var on = t.getAttribute('data-ck-tab') === p;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      var r = lists[p].root;
+      if (title && r.getAttribute('data-title')) title.textContent = r.getAttribute('data-title');
+      if (r.getAttribute('data-doc-title')) document.title = r.getAttribute('data-doc-title');
+      // Nút đăng ký ở đầu trang và màu nút theo nền tảng của tab đang mở
+      if (r.getAttribute('data-signup')) each('[data-ck-signup]', function (a) { a.setAttribute('href', r.getAttribute('data-signup')); });
+      document.body.setAttribute('data-platform', p);
+      lists[p].render(false);
+    }
+    // Bấm tab chỉ đổi nội dung, không đổi địa chỉ trang, để GA4 và Pixel không tính thêm lượt xem trang
+    document.addEventListener('click', function (ev) {
+      var t = ev.target.closest && ev.target.closest('[data-ck-tab]');
+      if (t) show(t.getAttribute('data-ck-tab'));
+    });
+    window.addEventListener('hashchange', function () {
+      var h = window.location.hash.slice(1);
+      if (lists[h]) { show(h); window.scrollTo(0, 0); }
+    });
+    show(window.location.hash.slice(1));
   }
 
   // ===== Thu gọn phần dài trên điện thoại (data-more="nhãn nút") =====
@@ -640,9 +731,20 @@
     if (hello && name) hello.textContent = 'Cảm ơn ' + name + ', HÀ NAM AGENCY đã nhận thông tin của bạn';
     var mail = root.querySelector('[data-email-note]');
     if (mail) mail.hidden = sGet('hn_lead_email') !== '1';
-    var audit = root.querySelector('[data-audit-note]');
+    // Phần chỉ dành cho một nền tảng (data-only="shopee"): ẩn và khóa ô nhập của nền tảng khác.
+    // Không rõ nền tảng (khách từ trang chủ) thì dùng phần Facebook như trước.
+    var platform = sGet('hn_lead_platform') === 'shopee' ? 'shopee' : 'facebook';
+    function matches(el) { var o = el.getAttribute('data-only'); return !o || o.split(' ').indexOf(platform) > -1; }
+    each('[data-only]', function (el) {
+      var on = matches(el);
+      el.hidden = !on;
+      each('input, select, textarea', function (i) { i.disabled = !on; }, el);
+    }, root);
+    if (platform === 'shopee') each('[data-placeholder-shopee]', function (i) { i.placeholder = i.getAttribute('data-placeholder-shopee'); }, root);
     var need = sGet('hn_lead_need');
-    if (audit) audit.hidden = need !== 'kiem-tra-tai-khoan' && need !== 'tang-ngan-sach';
+    each('[data-audit-note]', function (a) {
+      a.hidden = !matches(a) || (need !== 'kiem-tra-tai-khoan' && need !== 'tang-ngan-sach');
+    }, root);
   }
 
   // ===== Khởi động =====
@@ -656,7 +758,7 @@
     initPrefillLinks();
     initContactLinks();
     initMore();
-    each('[data-checklist]', initChecklist);
+    initChecklists();
     each('[data-thanks]', initThanks);
     each('[data-year]', function (el) { el.textContent = new Date().getFullYear(); });
   }
@@ -666,5 +768,5 @@
   }
 
   // Cho phép kiểm thử bằng Node
-  if (typeof module !== 'undefined') module.exports = { referralTouch: referralTouch, ignoredSource: ignoredSource, normalizePhone: normalizePhone, isPhone: isPhone, feeFor: feeFor, pct: pct, parseGaClientId: parseGaClientId, detectInApp: detectInApp, detectDevice: detectDevice };
+  if (typeof module !== 'undefined') module.exports = { referralTouch: referralTouch, ignoredSource: ignoredSource, normalizePhone: normalizePhone, isPhone: isPhone, feeFor: feeFor, pct: pct, onlyDigits: onlyDigits, groupDigits: groupDigits, parseGaClientId: parseGaClientId, detectInApp: detectInApp, detectDevice: detectDevice };
 })();

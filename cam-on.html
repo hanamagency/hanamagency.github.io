@@ -52,7 +52,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <p class="muted">Không bắt buộc. Bạn điền mục nào cũng được, Nam đọc trước khi nhắn Zalo cho bạn.</p>
         <form class="stack" data-lead-details novalidate>
           <div class="field-row">
-            <div class="field" data-field="budget">
+            <div class="field" data-field="budget" data-only="facebook">
               <label for="d-budget">Ngân sách quảng cáo mỗi tháng</label>
               <select id="d-budget" name="budget">
                 <option value="">Chọn khoảng</option>
@@ -61,6 +61,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <option value="10-30tr">10 – 30 triệu</option>
                 <option value="30-100tr">30 – 100 triệu</option>
                 <option value="tren-100tr">Trên 100 triệu</option>
+              </select>
+            </div>
+            <div class="field" data-field="budget" data-only="shopee" hidden>
+              <label for="d-budget-s">Ngân sách quảng cáo Shopee mỗi tháng</label>
+              <select id="d-budget-s" name="budget" disabled>
+                <option value="">Chọn khoảng</option>
+                <option value="chua-chay">Chưa chạy quảng cáo</option>
+                <option value="duoi-5tr">Dưới 5 triệu</option>
+                <option value="5-20tr">5 – 20 triệu</option>
+                <option value="20-80tr">20 – 80 triệu</option>
+                <option value="tren-80tr">Trên 80 triệu</option>
               </select>
             </div>
             <div class="field" data-field="lead_source">
@@ -76,7 +87,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </select>
             </div>
           </div>
-          <fieldset class="field" data-field="need">
+          <fieldset class="field" data-field="need" data-only="shopee" hidden>
+            <legend>Bạn cần gì?</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="need" value="kiem-tra-tai-khoan" disabled><span>Kiểm tra quảng cáo Shopee miễn phí</span></label>
+              <label class="choice"><input type="radio" name="need" value="tang-ngan-sach" disabled><span>Kế hoạch ngân sách ngày sale</span></label>
+              <label class="choice"><input type="radio" name="need" value="bao-gia" disabled><span>Báo giá chạy quảng cáo Shopee</span></label>
+              <label class="choice"><input type="radio" name="need" value="chi-checklist" disabled><span>Chỉ nhận Checklist</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="field" data-field="need" data-only="facebook">
             <legend>Bạn cần gì?</legend>
             <div class="choices">
               <label class="choice"><input type="radio" name="need" value="kiem-tra-tai-khoan"><span>Kiểm tra tài khoản miễn phí</span></label>
@@ -87,7 +107,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </fieldset>
           <div class="field" data-field="page">
             <label for="d-page">Link Fanpage hoặc shop</label>
-            <input id="d-page" name="page" type="url" inputmode="url" placeholder="Ví dụ: facebook.com/HaNamAgency">
+            <input id="d-page" name="page" type="url" inputmode="url" placeholder="Ví dụ: facebook.com/HaNamAgency" data-placeholder-shopee="Ví dụ: shopee.vn/ten-shop-cua-ban">
             <p class="error" aria-live="polite"></p>
           </div>
           <div class="field" data-field="email">
@@ -105,7 +125,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <h2 style="font-size:1.4rem">Việc tiếp theo</h2>
         <ol class="next-steps">
           <li><p><b>Nhắn Zalo xác nhận.</b> Nam nhắn bạn từ số 0986 219 360, hỏi thêm 2 đến 3 câu về sản phẩm và mục tiêu.</p></li>
-          <li data-audit-note hidden><p><b>Hẹn buổi xem tài khoản 20 phút.</b> Bạn thêm HÀ&nbsp;NAM&nbsp;AGENCY vào tài khoản quảng cáo đang chạy với quyền chỉ xem: xem được số liệu, không sửa, không tiêu tiền được, gỡ ra lúc nào cũng được. Nam hướng dẫn từng bước qua Zalo.</p></li>
+          <li data-audit-note data-only="shopee" hidden><p><b>Hẹn buổi kiểm tra quảng cáo Shopee 20 phút.</b> Xem cùng bạn qua TeamViewer hoặc gọi video Zalo chia sẻ màn hình: bạn mở shop trên máy của bạn, không cần gửi mật khẩu, không sửa gì trong shop. Nam hẹn giờ qua Zalo.</p></li>
+          <li data-audit-note data-only="facebook" hidden><p><b>Hẹn buổi xem tài khoản 20 phút.</b> Bạn thêm HÀ&nbsp;NAM&nbsp;AGENCY vào tài khoản quảng cáo đang chạy với quyền chỉ xem: xem được số liệu, không sửa, không tiêu tiền được, gỡ ra lúc nào cũng được. Nam hướng dẫn từng bước qua Zalo.</p></li>
           <li><p><b>Nhận 1 trang nhận xét.</b> Chỗ đang tốn tiền, việc cần sửa trước và việc bạn tự làm được ngay.</p></li>
         </ol>
       </div>
@@ -115,7 +136,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <h2 style="font-size:1.4rem">Quà của bạn: Checklist 30 mục</h2>
           <p>Mở ngay để tự chấm tài khoản trong lúc chờ HÀ&nbsp;NAM&nbsp;AGENCY liên hệ.</p>
           <p class="muted" data-email-note hidden>Bản sao đã được gửi vào email của bạn. Không thấy thì xem mục Quảng cáo hoặc Thư rác trong Gmail.</p>
-          <div class="btn-row"><a class="btn btn-brand" href="qua-tang.html">Mở Checklist</a></div>
+          <div class="btn-row"><a class="btn btn-brand" href="qua-tang.html" data-only="facebook">Mở Checklist</a><a class="btn btn-brand" href="qua-tang.html#shopee" data-only="shopee" hidden>Mở Checklist Shopee</a></div>
         </div>
         <div class="gift-item">
           <h3>Muốn được ưu tiên?</h3>
@@ -124,7 +145,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
 
-      <p><a href="index.html">Về trang chủ</a> · <a href="facebook-ads.html">Xem lại dịch vụ quảng cáo Facebook</a></p>
+      <p><a href="index.html">Về trang chủ</a> · <a href="facebook-ads.html" data-only="facebook">Xem lại dịch vụ quảng cáo Facebook</a><a href="shopee-ads.html" data-only="shopee" hidden>Xem lại dịch vụ quảng cáo Shopee</a></p>
     </div>
   </section>
 </main>

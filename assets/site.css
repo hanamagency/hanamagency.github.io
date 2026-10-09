@@ -67,6 +67,7 @@ body {
   font-family: var(--f-body); font-size: 16px; line-height: 1.6;
 }
 body[data-platform="facebook"] { --cta: var(--fb); --cta-ink: var(--fb-ink); }
+body[data-platform="shopee"] { --cta: var(--shopee); --cta-ink: #FFFFFF; }
 body:has(.mobile-bar) { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
 @media (min-width: 900px) { body:has(.mobile-bar) { padding-bottom: 0; } }
 img, svg { max-width: 100%; }
@@ -519,3 +520,34 @@ a.sample-tag { text-decoration: none; }
 /* Bổ sung thông tin ở trang cảm ơn */
 .details-box { border: 2px solid var(--brand); }
 .form-done { font-weight: 600; color: var(--ok); }
+
+/* ===== Tính thử phí: ô nhập số tiền (dùng chung các trang nền tảng) ===== */
+.calc .calc-title { font-family: var(--f-body); font-size: 1.15rem; font-weight: 700; color: var(--band-ink); }
+.calc .amount { display: flex; align-items: baseline; gap: 8px; background: color-mix(in srgb, #FFFFFF 7%, transparent); border: 1px solid var(--band-line); border-radius: 10px; padding: 6px 12px; }
+.calc .amount:focus-within { outline: 3px solid var(--gold); outline-offset: 2px; }
+.calc .amount input { flex: 1; min-width: 0; width: 100%; background: transparent; border: 0; padding: 0; color: var(--gold); font-family: var(--f-data); font-size: 1.6rem; font-variant-numeric: tabular-nums; outline: none; }
+.calc .amount input::placeholder { color: var(--band-muted); opacity: .7; }
+.calc .amount span { color: var(--band-muted); font-size: 0.9rem; white-space: nowrap; }
+.calc .range-label { font-size: 0.85rem; color: var(--band-muted); font-weight: 500; margin-bottom: -6px; }
+.calc .calc-note { color: var(--band-ink); background: color-mix(in srgb, var(--gold) 18%, transparent); border-left: 3px solid var(--gold); border-radius: 6px; padding: 8px 10px; }
+
+/* ===== Cách tính mức hòa vốn (trang Shopee) ===== */
+.breakeven { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; display: grid; gap: 10px; }
+.breakeven-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+.breakeven-head h3 { font-family: var(--f-body); font-size: 1rem; font-weight: 700; }
+.breakeven dl { margin: 0; display: grid; }
+.breakeven .row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 0.93rem; }
+.breakeven dt { color: var(--muted); }
+.breakeven dd { margin: 0; font-family: var(--f-data); font-variant-numeric: tabular-nums; text-align: right; }
+.breakeven .result { border-bottom: 0; }
+.breakeven .result dt { color: var(--ink); font-weight: 700; }
+.breakeven .result dd { color: var(--brand); font-weight: 700; font-size: 1.1rem; }
+.breakeven p { font-size: 0.93rem; }
+@media (min-width: 860px) { .breakeven { grid-template-columns: 1fr 1fr; column-gap: 28px; align-items: start; } .breakeven-head { grid-column: 1 / -1; } }
+
+/* ===== Checklist có tab theo nền tảng ===== */
+.ck-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+.ck-tabs button { flex: 1 1 0; min-height: 44px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 8px 16px; font: 600 0.95rem var(--f-body); cursor: pointer; }
+.ck-tabs button[aria-selected="true"] { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+@media (min-width: 640px) { .ck-tabs button { flex: 0 0 auto; min-width: 150px; } }
+@media print { .ck-tabs, .site-header, .mobile-bar { display: none !important; } .progress { position: static; } }

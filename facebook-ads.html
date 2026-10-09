@@ -566,13 +566,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </article>
       </div>
 
-      <div class="calc on-band" data-calc>
+      <div class="calc on-band" data-calc="facebook" data-note-min="Dưới mức nhận chạy 10 triệu/tháng. Bạn có thể dùng Checklist 30 mục miễn phí để tự chạy trước." data-note-max="Trên 300 triệu/tháng: phí 10%, nhắn Zalo để nhận báo giá chi tiết.">
         <div class="stack">
-          <label for="calc-budget">Kéo để chọn ngân sách quảng cáo mỗi tháng</label>
-          <p class="budget" data-out="budget">30.000.000đ/tháng</p>
-          <input id="calc-budget" type="range" min="10" max="300" step="1" value="30" aria-describedby="calc-daily">
+          <h3 class="calc-title">Tính thử phí theo ngân sách của bạn</h3>
+          <label for="calc-amount">Nhập số tiền quảng cáo mỗi tháng</label>
+          <div class="amount"><input id="calc-amount" type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" placeholder="Ví dụ 30.000.000" value="30.000.000" data-calc-amount aria-describedby="calc-daily"><span>đ/tháng</span></div>
+          <p class="range-label" aria-hidden="true">Hoặc kéo để chọn nhanh</p>
+          <input id="calc-budget" type="range" min="10" max="300" step="1" value="30" aria-label="Kéo để chọn ngân sách quảng cáo mỗi tháng" aria-describedby="calc-daily">
           <p class="range-ends"><span>10 triệu</span><span>300 triệu</span></p>
           <p id="calc-daily" data-out="daily">khoảng 1.000.000đ mỗi ngày</p>
+          <p class="calc-note" data-out="note" role="status" hidden></p>
         </div>
         <div class="stack">
           <dl>
@@ -820,7 +823,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h3>Dịch vụ</h3>
       <ul>
         <li><a href="facebook-ads.html">Quảng cáo Facebook &amp; Instagram</a></li>
-        <li><a href="index.html#nen-tang">TikTok, Google, Shopee</a></li>
+        <li><a href="shopee-ads.html">Quảng cáo Shopee</a></li>
+        <li><a href="index.html#nen-tang">TikTok, Google</a></li>
         <li><a href="qua-tang.html">Checklist 30 mục</a></li>
       </ul>
     </div>
