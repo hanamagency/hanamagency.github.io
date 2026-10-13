@@ -1,92 +1,58 @@
 # Ghi chú cho Claude: web HÀ NAM AGENCY
 
-File này giúp mọi phiên Claude (trên web claude.ai/code hay trên máy của Nam) nắm ngay bối cảnh. Đọc hết file này và `_ghi_chu/LICH_SU.md` trước khi sửa web.
+Đọc file này trước khi làm việc với repo. Sau đó đọc:
+- `docs/IMPLEMENTATION_STATUS.md`: hạng mục nào đã xong, đang chờ gì
+- `docs/HA_NAM_AGENCY_CONTEXT.md`: định vị, khách hàng, các quyết định đã thống nhất, cách diễn đạt
+- `docs/CHANGELOG.md`: lịch sử thay đổi (mới nhất ở trên)
+- `docs/TRACKING_PLAN.md`: GTM, GA4, Meta Pixel và các sự kiện, khi đụng tới đo lường, form, nút liên hệ
+- `docs/CONTENT_AND_BLOG_WORKFLOW.md`: khi viết bài cho mục Kiến thức
 
-Repo này công khai trên GitHub. Không ghi vào đây hay bất kỳ file nào trong repo: thông tin thuế, doanh thu, chiến lược kinh doanh riêng, mật khẩu, mã bí mật, email cá nhân của Nam.
+Repo công khai trên GitHub. Không ghi vào bất kỳ file nào trong repo: thông tin thuế, doanh thu, chiến lược kinh doanh riêng, mật khẩu, token, email cá nhân của Nam.
 
-## Web là gì
+## Web và triển khai
 
-- Địa chỉ: https://hanamagency.github.io/ (GitHub Pages, repo `hanamagency/hanamagency.github.io`, nhánh `main` là bản đang chạy).
-- Web tĩnh, HTML viết tay, không có bước build. Jekyll mặc định của GitHub Pages chỉ chép file ra. `_config.yml` chỉ dùng để không xuất bản file ghi chú.
-- Chủ web: Nam. Trên web ghi "Nam, phụ trách HÀ NAM AGENCY". Không dùng "nhà sáng lập", "founder", "CEO", "giám đốc": agency mới bắt đầu, Nam muốn cách ghi khiêm tốn. Ảnh `assets/nam.jpg` là ảnh tạm (cắt từ ảnh đi chơi, chỉ lấy mặt Nam); có ảnh chân dung mới thì thay file này, ảnh vuông từ 360x360px.
-- Tài khoản doanh nghiệp (BM) của HÀ NAM AGENCY đã được Meta xác minh (Nam xác nhận ngày 13/10/2026), nên web được ghi "đã được Facebook xác minh".
-- Đăng ký kinh doanh: HỘ KINH DOANH HÀ NAM, mã số hộ kinh doanh 8130617574-001 (ghi ở chân trang), mã số thuế 045088006768 (ghi trong schema.org `taxID`), địa chỉ đăng ký 84/11/3 Lê Duẩn, khu Bàu Cá, xã An Phước, huyện Long Thành, tỉnh Đồng Nai.
-- Văn phòng: Block E, Khu ID Town, đường N3, Khu đô thị iD Junction, đường Phạm Văn Đồng, phường Long Thành, thành phố Đồng Nai.
-- Liên hệ trên web: Zalo và điện thoại 0986 219 360, email hanamagency@gmail.com, Fanpage facebook.com/HaNamAgency. Giờ làm việc 8:00 đến 17:00. Không dùng email cá nhân của Nam ở bất kỳ đâu.
-- Mục đích ban đầu: để Meta xác minh doanh nghiệp. Hiện tại: web giới thiệu dịch vụ quảng cáo Facebook, Shopee, TikTok, Google cho chủ shop và doanh nghiệp nhỏ.
-
-## Các trang
-
-| File | Nội dung |
-|---|---|
-| `index.html` | Trang chủ: 4 nền tảng, quy trình, cách làm việc, hỏi đáp, form liên hệ nhanh |
-| `facebook-ads.html` | Dịch vụ Facebook & Instagram: nỗi lo, phạm vi, tài khoản và thanh toán, bảng giá, tính thử phí, form đăng ký |
-| `shopee-ads.html` | Dịch vụ quảng cáo Shopee, cấu trúc giống trang Facebook |
-| `qua-tang.html` | Checklist 30 mục miễn phí, có tab Facebook và Shopee (`#shopee` mở tab Shopee, do site.js xử lý) |
-| `cam-on.html` | Trang cảm ơn sau khi gửi form, không cho Google lập chỉ mục. Bước tiếp theo hiện theo lựa chọn "Bạn cần gì?" |
-| `chinh-sach.html` | Chính sách bảo mật và điều khoản |
-| `404.html` | Trang lỗi. Mọi link và file phải viết từ gốc (`/assets/...`, `/facebook-ads.html`) vì trang này hiện ở mọi đường dẫn sai |
-| `assets/site.css`, `assets/site.js` | Giao diện và mã chạy chung cho mọi trang |
-| `sitemap.xml`, `robots.txt` | Cập nhật `lastmod` khi sửa nội dung trang |
-
-TikTok và Google chưa có trang riêng, menu đang dẫn qua Zalo.
+- https://hanamagency.github.io/ chạy GitHub Pages từ nhánh `main` của repo `hanamagency/hanamagency.github.io`. Gộp vào `main` là xuất bản.
+- Trang .html viết tay, không có phần khai báo đầu file nên Jekyll chép nguyên trạng: `facebook-ads.html`, `shopee-ads.html`, `qua-tang.html` (Checklist), `cam-on.html`, `chinh-sach.html`, `404.html`.
+- Jekyll dựng: `index.html` (có phần khai báo đầu file để chèn 3 bài mới), `sitemap.xml`, mục Kiến thức (`_posts/`, `_layouts/`, `_includes/`, `kien-thuc/`). Trong mọi trang không được có dấu ngoặc nhọn đôi hay `{%` ngoài mã Liquid cố ý.
+- `_config.yml` loại `CLAUDE.md`, `docs/` khỏi web. `asset_v` trong đó phải bằng số `?v=` ở các trang .html.
+- `404.html` dùng đường dẫn từ gốc (`/assets/...`). Khuôn mục Kiến thức cũng dùng đường dẫn từ gốc.
+- Mã Apps Script nhận form (bản 2.4, gửi email theo lựa chọn "Bạn cần gì?") nằm trong Google Sheet của Nam, không có trong repo. Bản sao Nam lưu trên máy, ngoài repo.
 
 ## Quy trình làm việc với Nam (bắt buộc)
 
-1. Đề xuất trước, chờ Nam đồng ý hướng làm.
-2. Làm trên một nhánh riêng, mở PR nháp vào `main`, gửi ảnh xem trước.
-3. Chỉ gộp vào `main` (tức là xuất bản) khi Nam trả lời đúng chữ "duyệt".
+1. Đọc mã thật trước khi kết luận. Không mặc định bản trên máy giống bản trên web.
+2. Đề xuất trước với thay đổi lớn (kiến trúc, CMS, thiết kế lại, quy trình thanh toán thật).
+3. Làm trên nhánh riêng, mở PR nháp vào `main`, gửi ảnh chụp các phần đã sửa.
+4. Chỉ gộp vào `main` khi Nam trả lời đúng chữ "duyệt".
+5. Cập nhật `docs/CHANGELOG.md` và `docs/IMPLEMENTATION_STATUS.md` sau mỗi đợt sửa.
 
-Nam không xem được web từ trang PR (trang PR chỉ có mô tả và mã). Sau mỗi lần đẩy, gửi Nam:
-- Ảnh chụp các phần đã sửa.
-- Link xem trước theo mã commit: `https://raw.githack.com/hanamagency/hanamagency.github.io/<mã commit>/index.html`. Dặn Nam không bấm gửi form trên link này vì form ghi thẳng vào Google Sheet thật (muốn thử thì dùng email có `+test`).
-- Cách dự phòng: trên GitHub chọn nhánh, bấm Code > Download ZIP, giải nén, mở `index.html`.
+Trước khi sửa luôn `git fetch` và xem nhánh mới nhất, vì có hơn một phiên Claude cùng làm trên repo này. Không ghi đè việc của phiên khác.
 
-Trước khi sửa luôn chạy `git fetch` và xem nhánh mới nhất, vì có hơn một phiên Claude cùng commit vào repo này. Không ghi đè việc của phiên khác.
+Xem trước: link `https://raw.githack.com/hanamagency/hanamagency.github.io/<mã commit>/facebook-ads.html` xem được các trang .html cố định. Trang chủ và mục Kiến thức cần Jekyll dựng nên chỉ xem được bằng ảnh chụp hoặc máy chủ thử. Dặn Nam không bấm gửi form trên link xem trước.
 
-Cách trả lời Nam: tiếng Việt, không dùng ký tự markdown (dấu sao, dấu thăng, gạch ngang đôi), dùng icon thay gạch đầu dòng, xuống dòng đơn, không để dòng trống giữa các mục. Trả lời đủ mọi ý Nam hỏi trong một lượt.
+Cách trả lời Nam: tiếng Việt, không dùng ký tự markdown (dấu sao, dấu thăng, gạch ngang đôi), dùng icon thay gạch đầu dòng, xuống dòng đơn, không để dòng trống giữa các mục. Trả lời đủ mọi ý Nam hỏi trong một lượt. Tách rõ phần đã làm và phần mới là đề xuất.
 
-## Quy ước câu chữ
+## Quy ước nội dung
 
-- Không dùng: cam kết, đảm bảo, 100%, tốt nhất, số 1, hàng đầu, duy nhất, tuyệt đối, và các từ hứa hẹn kết quả tương tự (vi phạm chính sách quảng cáo và Luật Quảng cáo).
-- Không bịa con số, lời khen của khách, logo khách. Web không đăng số liệu của khách. Bảng số mẫu phải gắn nhãn "VÍ DỤ MINH HỌA".
-- Giọng văn chuyên nghiệp, rõ ràng. Tránh từ suồng sã như "nói chuyện", "chuyện", "hở", "nhảy lên", "đội lên", "gánh". Dùng "trao đổi", "trường hợp", "còn thiếu sót", "tăng đột biến", "không như kỳ vọng".
-- Thương hiệu viết `HÀ&nbsp;NAM&nbsp;AGENCY` trong HTML để không bị ngắt dòng.
-- Thanh toán tiền quảng cáo luôn trình bày 2 lựa chọn ngang nhau: dùng thẻ của khách, hoặc dùng thẻ của HÀ NAM AGENCY. Không tự bỏ hay đổi thứ tự 2 lựa chọn này khi chưa hỏi Nam.
-- Tài khoản quảng cáo Facebook: thường chạy trên tài khoản agency (gắn được thẻ của khách), hoặc trên tài khoản quảng cáo đứng tên khách nếu khách muốn. Nam nhận cả hai cách.
-- Tài khoản agency có kênh hỗ trợ riêng của nền tảng, khi có sự cố thường được xử lý nhanh hơn tài khoản cá nhân. Không hứa thời gian xử lý cụ thể.
+- Không dùng: cam kết, đảm bảo, bảo đảm, 100%, tốt nhất, số 1, hàng đầu, duy nhất, tuyệt đối, chắc chắn, ngay lập tức và các lời hứa kết quả tương tự.
+- Không bịa con số, lời chứng thực, logo khách. Số liệu mẫu ghi "Ví dụ minh họa".
+- Tránh từ suồng sã ("nói chuyện", "chuyện", "hở", "đội lên", "gánh"). Dùng "trao đổi", "trường hợp", "tăng đột biến", "không như kỳ vọng".
+- Người sáng lập: "Nam, người sáng lập HÀ NAM AGENCY", dòng nhỏ "Người trực tiếp đồng hành cùng bạn". Không dùng "CEO", "founder", "giám đốc", "nhà sáng lập".
+- Thanh toán tiền quảng cáo luôn có 2 lựa chọn ngang nhau (thẻ của khách, hoặc thẻ của HÀ NAM AGENCY), phí dịch vụ ghi tách riêng. Không tự đổi khi chưa hỏi Nam.
+- Tài khoản agency: có kênh hỗ trợ riêng của nền tảng, xử lý tùy trường hợp và chính sách nền tảng. Không hứa thời gian xử lý.
+- Thương hiệu viết `HÀ&nbsp;NAM&nbsp;AGENCY` trong HTML.
 
-## Đo lường (đừng đổi tên sự kiện khi chưa hỏi Nam)
+## Giao diện và mã
 
-- Google Tag Manager `GTM-KGTWH2R4` tải GA4 `G-BTZNP2S6D1` và Meta Pixel `939933335396008`. Web chỉ đẩy sự kiện vào `dataLayer`, phần mô tả đầy đủ nằm ở đầu `assets/site.js`.
-- Sự kiện chính: `generate_lead` (Meta: Lead), `contact` (Meta: Contact, có `method` và `click_location`), `select_content`. Sự kiện riêng: `contact_panel_open`, `self_check_complete`, `fee_calculator_use`, `checklist_progress`, `lead_details_submit`.
-- `click_location` lấy từ hàm `locationOf()` trong site.js, gồm `floating_button`, `mobile_bar`, `header`, `footer`, `hero`, hoặc `id` của mục chứa nút. Khung liên hệ giữ vị trí của nút đã mở nó. Thêm nút liên hệ mới thì thêm vị trí vào hàm này.
-- Mỗi trang khai báo `content_group` và `page_type` trong `<head>` trước mã GTM.
-
-## Form
-
-- Form gửi tới Google Apps Script (`CONFIG.ENDPOINT` trong site.js), chế độ `no-cors`, nên web không đọc được phản hồi.
-- Mã Apps Script (ghi Google Sheet, báo Telegram, gửi email cho khách) không nằm trong repo, Nam giữ bản trên máy. Muốn sửa thì xin Nam bản mới nhất.
-- Apps Script bản 2.4 (13/10/2026): email gửi khách đổi tiêu đề và các bước theo `need` (khai báo trong `EMAIL_KINDS`), Checklist gửi kèm ở cuối. Đổi câu chữ các bước trên `cam-on.html` thì sửa `EMAIL_KINDS` cho khớp, và ngược lại.
-- Trường gửi đi gồm `need` (kiem-tra-tai-khoan, tang-ngan-sach, bao-gia, chi-checklist, hoặc trống) và `platform` (facebook, shopee...). Trang cảm ơn đọc `sessionStorage` `hn_lead_need`, `hn_lead_platform` để hiện bước tiếp theo đúng lựa chọn.
-- Đổi câu chữ ô đồng ý thì tăng `CONSENT_VERSION`.
-
-## Mục Kiến thức (blog)
-
-Nam để Claude quyết. Quyết định ngày 13/10/2026: chưa mở trang trống. Khi có 3 bài đầu thì dựng mục Kiến thức bằng Jekyll (`_posts`, một khuôn trang dùng chung đầu trang và chân trang). Quy trình: Nam gửi nội dung, Claude dàn trang, soát 3 lớp (từ cấm, chính sách Meta, quy định quảng cáo), gửi xem trước, Nam "duyệt" rồi mới đăng. Không chép bài báo, ảnh phải có quyền dùng.
-
-## Giao diện
-
-- Màu và cỡ chữ là biến CSS ở đầu `site.css` (`--brand`, `--fb`, `--shopee`, `--tiktok`, `--google`, `--zalo`...). Có chế độ tối.
-- Lưu ý: `[hidden] { display: none !important; }` áp cho toàn web. Muốn phần tử có `hidden` vẫn hiện ở một kích cỡ màn hình thì phải dùng `!important` trong media query (xem menu Nền tảng trên điện thoại).
-- Đầu trang: menu xổ xuống "Nền tảng" (`.nav-drop`) và nút menu điện thoại (`.menu-toggle`). Menu này đang chép tay ở 5 trang: index, facebook-ads, shopee-ads, qua-tang, chinh-sach. Sửa menu thì sửa đủ 5 trang.
-- Nút liên hệ nổi (`.float-contact`) do site.js tự tạo, mở khung liên hệ Zalo, Messenger, gọi điện. Trên điện thoại nó ẩn ở trang đã có thanh liên hệ dưới đáy. Thêm `data-no-float` vào `<body>` để tắt ở một trang.
-- Sau mỗi lần sửa `site.css` hoặc `site.js`, tăng số phiên bản `?v=` ở mọi trang (kể cả 404.html) để trình duyệt tải bản mới. Bản hiện tại: xem `_ghi_chu/LICH_SU.md`.
+- Biến màu ở đầu `assets/site.css`, có chế độ tối. `[hidden] { display: none !important; }` áp toàn web: muốn phần tử có `hidden` vẫn hiện ở một cỡ màn hình thì dùng `!important` trong media query.
+- Menu "Dịch vụ" (`.nav-drop`, mỗi mục có `data-menu`) chép tay ở 5 trang .html và ở `_includes/dau-trang.html`. Sửa menu thì sửa đủ 6 chỗ.
+- Nút liên hệ nổi do `site.js` tạo. Thêm `data-no-float` vào `<body>` để tắt ở một trang.
+- Sửa `site.css` hoặc `site.js` thì tăng `?v=` ở mọi trang .html và `asset_v` trong `_config.yml`, trừ khi số hiện tại chưa từng được xuất bản.
+- Không đổi tên sự kiện đo lường khi chưa hỏi Nam.
 
 ## Kiểm tra trước khi gửi Nam
 
-- Chạy thử bằng `python3 -m http.server` rồi mở trên trình duyệt, xem ở bề rộng 360, 390, 900, 1280 và 1440px.
-- Không có trang nào bị tràn ngang, không lỗi JavaScript, mọi ảnh có `alt`.
+- `jekyll build --safe` bằng Jekyll 3.10 (cùng bản GitHub Pages), không lỗi.
+- Chạy máy chủ thử trong `_site`, xem ở 360, 390, 900, 1280, 1440px: không tràn ngang, không lỗi JavaScript, ảnh có `alt`, link nội bộ không hỏng.
 - Gửi thử form với từng lựa chọn "Bạn cần gì?" và xem trang cảm ơn.
-- Soát lại từ cấm ở trên.
-- Thêm dòng vào `_ghi_chu/LICH_SU.md` cho mỗi lần thay đổi.
+- Soát từ cấm.

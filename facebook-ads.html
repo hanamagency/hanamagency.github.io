@@ -50,16 +50,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </a>
     <nav class="nav" id="site-nav" aria-label="Chính">
       <div class="nav-drop" data-nav-drop>
-        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-controls="menu-nen-tang">Nền tảng<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-controls="menu-nen-tang">Dịch vụ<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="nav-drop-menu" id="menu-nen-tang" hidden>
-          <p class="nav-drop-label">Nền tảng</p>
-          <a class="dd-item pf-facebook" href="facebook-ads.html" aria-current="page"><b>Facebook &amp; Instagram</b><span>Từ 3.000.000đ/tháng</span></a>
-          <a class="dd-item pf-shopee" href="shopee-ads.html"><b>Shopee</b><span>Từ 2.000.000đ/tháng</span></a>
-          <a class="dd-item pf-tiktok" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>TikTok</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
-          <a class="dd-item pf-google" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>Google</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
+          <p class="nav-drop-label">Dịch vụ theo nền tảng</p>
+          <a data-menu="facebook" class="dd-item pf-facebook" href="facebook-ads.html" aria-current="page"><b>Facebook &amp; Instagram</b><span>Từ 3.000.000đ/tháng</span></a>
+          <a data-menu="shopee" class="dd-item pf-shopee" href="shopee-ads.html"><b>Shopee</b><span>Từ 2.000.000đ/tháng</span></a>
+          <a data-menu="tiktok" class="dd-item pf-tiktok" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>TikTok</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
+          <a data-menu="google" class="dd-item pf-google" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>Google</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
           <div class="dd-sep" aria-hidden="true"></div>
-          <a class="dd-item dd-plain" href="qua-tang.html"><b>Checklist 30 mục miễn phí</b><span>Tự chấm trước khi chạy quảng cáo</span></a>
-          <a class="dd-item dd-plain" href="index.html#nen-tang"><b>Xem tất cả dịch vụ</b><span>So sánh các nền tảng trên trang chủ</span></a>
+          <a data-menu="checklist" class="dd-item dd-plain" href="qua-tang.html"><b>Checklist 30 mục miễn phí</b><span>Tự chấm trước khi chạy quảng cáo</span></a>
+          <a data-menu="kien_thuc" class="dd-item dd-plain" href="kien-thuc/"><b>Kiến thức</b><span>Bài viết về quảng cáo cho chủ shop</span></a>
+          <a data-menu="all_services" class="dd-item dd-plain" href="index.html#nen-tang"><b>Xem tất cả dịch vụ</b><span>So sánh các nền tảng trên trang chủ</span></a>
         </div>
       </div>
       <a href="#do-luong">Tự kiểm tra</a>
@@ -177,7 +178,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </article>
         <article class="card pain">
           <p class="problem">"Quảng cáo bị từ chối, tài khoản bị hạn chế."</p>
-          <p class="answer"><b>Chạy trên tài khoản agency, nội dung soát 2 lần.</b> Tài khoản agency có kênh hỗ trợ riêng của nền tảng, khi có sự cố ngoài ý muốn thường được xử lý nhanh hơn tài khoản cá nhân. Nội dung được soát theo quy định quảng cáo của Facebook và quy định từng ngành trước khi chạy.</p>
+          <p class="answer"><b>Chạy trên tài khoản agency, nội dung soát 2 lần.</b> Tài khoản agency có kênh hỗ trợ riêng của nền tảng. Khi có sự cố ngoài ý muốn, HÀ&nbsp;NAM&nbsp;AGENCY làm việc qua kênh này để phối hợp xử lý, thường kịp thời hơn tài khoản cá nhân, tùy từng trường hợp. Nội dung được soát theo quy định quảng cáo của Facebook và quy định từng ngành trước khi chạy.</p>
         </article>
         <article class="card pain">
           <p class="problem">"Giao cho người chạy rồi không biết tiền đi đâu."</p>
@@ -273,7 +274,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="stack" style="gap:12px">
             <h3>Dấu hiệu hay gặp</h3>
             <ul class="signs">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4M12 17h.01"/></svg><span>Tăng gấp đôi ngân sách trong một ngày, Facebook phải dò lại người xem từ đầu nên chi phí tăng đột biến.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4M12 17h.01"/></svg><span>Tăng gấp đôi ngân sách trong một ngày dễ đưa nhóm quảng cáo quay lại giai đoạn máy học, Facebook phải dò lại người xem nên chi phí thường tăng đột biến.</span></li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4M12 17h.01"/></svg><span>Gần hết đơn đến từ một mẫu quảng cáo. Mẫu đó cũ dần thì doanh thu giảm theo.</span></li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4M12 17h.01"/></svg><span>Chỉ chạy một nhóm khách, càng chi nhiều càng gặp lại đúng những người đã xem.</span></li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4M12 17h.01"/></svg><span>Chưa biết mỗi đơn còn lãi bao nhiêu, nên không biết tăng tới đâu thì dừng.</span></li>
@@ -287,6 +288,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <li><div><b>Tăng từng bước, mở rộng song song</b><span>Mỗi lần thường tăng 15 đến 20%, cách nhau 2 đến 3 ngày. Cùng lúc thêm nhóm khách, mẫu quảng cáo mới và nơi hiển thị (bảng tin, Reels, Messenger).</span></div></li>
               <li><div><b>Có điểm dừng rõ ràng</b><span>Chi phí mỗi đơn vượt mức tối đa 2 ngày liền thì lùi về mức trước và tìm nguyên nhân.</span></div></li>
             </ol>
+            <p class="muted">Đọc thêm: <a href="kien-thuc/tang-ngan-sach-facebook-chi-phi-tang/">Vì sao tăng ngân sách Facebook thì chi phí mỗi đơn tăng đột biến</a></p>
           </div>
         </div>
 
@@ -345,7 +347,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <article class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div>
           <h3>Tài khoản agency</h3>
-          <p class="muted">Chạy trên tài khoản quảng cáo của HÀ&nbsp;NAM&nbsp;AGENCY, có kênh hỗ trợ riêng của nền tảng để xử lý kịp thời khi có sự cố ngoài ý muốn, có người theo dõi tình trạng tài khoản mỗi ngày. Thanh toán bằng thẻ của bạn hoặc thẻ của HÀ&nbsp;NAM&nbsp;AGENCY, tùy bạn chọn.</p>
+          <p class="muted">Chạy trên tài khoản quảng cáo của HÀ&nbsp;NAM&nbsp;AGENCY, có kênh hỗ trợ riêng của nền tảng để phối hợp xử lý khi có sự cố ngoài ý muốn, có người theo dõi tình trạng tài khoản mỗi ngày. Thanh toán bằng thẻ của bạn hoặc thẻ của HÀ&nbsp;NAM&nbsp;AGENCY, tùy bạn chọn.</p>
         </article>
         <article class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4zM14 6l3 3"/></svg></div>
@@ -394,6 +396,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <ul class="checklist">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Bảng đối soát đã chuyển, đã chi, còn lại mỗi thứ Hai</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Ngừng hợp tác: tiền đã chuyển mà chưa chạy hết được hoàn trả</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Tiền quảng cáo và phí dịch vụ ghi tách riêng, kèm số liệu chi tiêu xuất từ trình quản lý quảng cáo</span></li>
           </ul>
         </article>
       </div>
@@ -680,13 +683,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- 13. Người phụ trách -->
   <section class="section" aria-labelledby="founder-title">
     <div class="wrap founder">
-      <img class="avatar" src="assets/nam.jpg" alt="Ảnh chân dung Nam, phụ trách HÀ NAM AGENCY" width="180" height="180" loading="lazy" decoding="async">
+      <img class="avatar" src="assets/nam.jpg" alt="Ảnh chân dung Nam, người sáng lập HÀ NAM AGENCY" width="180" height="180" loading="lazy" decoding="async">
       <div class="stack">
-        <p class="eyebrow">Người trực tiếp làm việc với bạn</p>
-        <h2 id="founder-title">Nam, phụ trách HÀ&nbsp;NAM&nbsp;AGENCY</h2>
-        <p class="lead">Bạn trao đổi trực tiếp với người lên chiến dịch, soát nội dung và viết báo cáo, không qua khâu trung gian.</p>
+        <p class="eyebrow">Người trực tiếp đồng hành cùng bạn</p>
+        <h2 id="founder-title">Nam, người sáng lập HÀ&nbsp;NAM&nbsp;AGENCY</h2>
+        <p class="lead">Từ buổi trao đổi đầu tiên đến báo cáo mỗi thứ Hai, Nam trực tiếp lên kế hoạch, triển khai chiến dịch và giải thích số liệu cho bạn. Có việc cần hỏi, bạn liên hệ thẳng người đang theo sát tài khoản của mình.</p>
         <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Trực tiếp vận hành quảng cáo Facebook, Google, TikTok và Shopee cho chủ shop và doanh nghiệp nhỏ</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Vận hành quảng cáo Facebook, Google, TikTok và Shopee cho chủ shop và doanh nghiệp nhỏ</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Xây dựng công cụ đối soát chi phí quảng cáo với đơn hàng thực tế</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Sản xuất video ngắn bằng AI, giúp shop có nội dung mới mỗi tuần</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Hẹn gặp trực tiếp tại văn phòng Long Thành, Đồng Nai hoặc tại TP.HCM</span></li>
@@ -709,7 +712,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </details>
         <details>
           <summary>Vì sao chạy trên tài khoản agency của HÀ&nbsp;NAM&nbsp;AGENCY?</summary>
-          <p>Bạn không cần tài khoản quảng cáo cá nhân. Tài khoản quảng cáo nằm trong tài khoản doanh nghiệp của HÀ&nbsp;NAM&nbsp;AGENCY (Business Manager) đã được Facebook xác minh, có kênh hỗ trợ riêng của nền tảng khi có sự cố ngoài ý muốn và có người theo dõi tình trạng mỗi ngày, nên ít bị gián đoạn vì lỗi thanh toán hay thao tác sai. Fanpage vẫn là của bạn. Nếu bạn muốn chạy trên tài khoản quảng cáo đứng tên mình, HÀ&nbsp;NAM&nbsp;AGENCY vẫn làm được, chỉ là không có kênh hỗ trợ riêng của tài khoản agency.</p>
+          <p>Bạn không cần tài khoản quảng cáo cá nhân. Tài khoản quảng cáo nằm trong tài khoản doanh nghiệp của HÀ&nbsp;NAM&nbsp;AGENCY (Business Manager) đã được Facebook xác minh, có kênh hỗ trợ riêng của nền tảng khi có sự cố ngoài ý muốn và có người theo dõi tình trạng mỗi ngày, nên hạn chế được gián đoạn do lỗi thanh toán hay thao tác sai. Kênh hỗ trợ làm việc theo chính sách của nền tảng, thời gian xử lý tùy từng trường hợp. Tài khoản agency dùng cho sản phẩm và nội dung đáp ứng chính sách quảng cáo của Meta, HÀ&nbsp;NAM&nbsp;AGENCY xem trước điều này khi tư vấn. Fanpage vẫn là của bạn. Nếu bạn muốn chạy trên tài khoản quảng cáo đứng tên mình, HÀ&nbsp;NAM&nbsp;AGENCY vẫn làm được, chỉ là không có kênh hỗ trợ riêng của tài khoản agency.</p>
         </details>
         <details>
           <summary>Tôi có tự xem số liệu được không?</summary>
@@ -869,6 +872,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <li><a href="shopee-ads.html">Quảng cáo Shopee</a></li>
         <li><a href="index.html#nen-tang">TikTok, Google</a></li>
         <li><a href="qua-tang.html">Checklist 30 mục</a></li>
+        <li><a href="kien-thuc/">Kiến thức</a></li>
       </ul>
     </div>
     <div>

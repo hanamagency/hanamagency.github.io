@@ -1,6 +1,39 @@
-# Web là HTML tĩnh, không dùng theme hay plugin của Jekyll.
-# File này chỉ để không xuất bản các file ghi chú lên web.
-# Thư mục _ghi_chu tự được bỏ qua vì bắt đầu bằng dấu gạch dưới.
+# Web HÀ NAM AGENCY trên GitHub Pages.
+# Các trang .html cũ không có phần khai báo đầu file (front matter) nên Jekyll chép nguyên trạng.
+# Jekyll chỉ dựng: mục Kiến thức (_posts, kien-thuc/), sitemap.xml và khối bài viết mới ở trang chủ.
+# Cách thêm bài: xem docs/CONTENT_AND_BLOG_WORKFLOW.md
+
+title: HÀ NAM AGENCY
+description: Quảng cáo Facebook, TikTok, Google, Shopee cho chủ shop và doanh nghiệp nhỏ.
+url: https://hanamagency.github.io
+lang: vi
+timezone: Asia/Ho_Chi_Minh
+
+# Bài viết nằm ở /kien-thuc/<tên-file-bỏ-ngày>/
+permalink: /kien-thuc/:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+  hard_wrap: false
+
+# Số phiên bản CSS, JS. Tăng số này và số ?v= ở các trang .html cùng lúc mỗi khi sửa site.css, site.js
+asset_v: 6
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: bai-viet
+      tac_gia: Nam
+
+# Không xuất bản tài liệu nội bộ lên web (thư mục bắt đầu bằng dấu gạch dưới tự được bỏ qua)
 exclude:
   - CLAUDE.md
   - README.md
+  - docs
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules

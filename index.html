@@ -1,3 +1,6 @@
+---
+# Trang chủ có khai báo này để Jekyll chèn danh sách bài viết mới ở mục Kiến thức. Không dùng dấu ngoặc nhọn đôi trong trang.
+---
 <!doctype html>
 <html lang="vi">
 <head>
@@ -69,6 +72,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
  ],
  "foundingDate": "2025-01-15",
+ "founder": {
+  "@type": "Person",
+  "name": "Nam",
+  "jobTitle": "Người sáng lập",
+  "image": "https://hanamagency.github.io/assets/nam.jpg"
+ },
  "address": {
   "@type": "PostalAddress",
   "streetAddress": "84/11/3 Lê Duẩn, khu Bàu Cá",
@@ -119,16 +128,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </a>
     <nav class="nav" id="site-nav" aria-label="Chính">
       <div class="nav-drop" data-nav-drop>
-        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-controls="menu-nen-tang">Nền tảng<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-controls="menu-nen-tang">Dịch vụ<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="nav-drop-menu" id="menu-nen-tang" hidden>
-          <p class="nav-drop-label">Nền tảng</p>
-          <a class="dd-item pf-facebook" href="facebook-ads.html"><b>Facebook &amp; Instagram</b><span>Từ 3.000.000đ/tháng</span></a>
-          <a class="dd-item pf-shopee" href="shopee-ads.html"><b>Shopee</b><span>Từ 2.000.000đ/tháng</span></a>
-          <a class="dd-item pf-tiktok" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>TikTok</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
-          <a class="dd-item pf-google" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>Google</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
+          <p class="nav-drop-label">Dịch vụ theo nền tảng</p>
+          <a data-menu="facebook" class="dd-item pf-facebook" href="facebook-ads.html"><b>Facebook &amp; Instagram</b><span>Từ 3.000.000đ/tháng</span></a>
+          <a data-menu="shopee" class="dd-item pf-shopee" href="shopee-ads.html"><b>Shopee</b><span>Từ 2.000.000đ/tháng</span></a>
+          <a data-menu="tiktok" class="dd-item pf-tiktok" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>TikTok</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
+          <a data-menu="google" class="dd-item pf-google" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>Google</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
           <div class="dd-sep" aria-hidden="true"></div>
-          <a class="dd-item dd-plain" href="qua-tang.html"><b>Checklist 30 mục miễn phí</b><span>Tự chấm trước khi chạy quảng cáo</span></a>
-          <a class="dd-item dd-plain" href="#nen-tang"><b>Xem tất cả dịch vụ</b><span>So sánh các nền tảng trên trang chủ</span></a>
+          <a data-menu="checklist" class="dd-item dd-plain" href="qua-tang.html"><b>Checklist 30 mục miễn phí</b><span>Tự chấm trước khi chạy quảng cáo</span></a>
+          <a data-menu="kien_thuc" class="dd-item dd-plain" href="kien-thuc/"><b>Kiến thức</b><span>Bài viết về quảng cáo cho chủ shop</span></a>
+          <a data-menu="all_services" class="dd-item dd-plain" href="#nen-tang"><b>Xem tất cả dịch vụ</b><span>So sánh các nền tảng trên trang chủ</span></a>
         </div>
       </div>
       <a href="#cach-lam">Cách làm việc</a>
@@ -324,14 +334,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
         <div class="gift-item">
           <h3>Muốn được kiểm tra trực tiếp? <span class="tag">5 suất mỗi tuần</span></h3>
-          <p>Đăng ký buổi kiểm tra tài khoản bạn đang chạy, 20 phút. HÀ&nbsp;NAM&nbsp;AGENCY xem bằng quyền chỉ xem (không sửa, không tiêu tiền được) và gửi 1 trang nhận xét, không cần mật khẩu.</p>
+          <p>Đăng ký buổi kiểm tra tài khoản bạn đang chạy, 20 phút. HÀ&nbsp;NAM&nbsp;AGENCY xem bằng <a href="kien-thuc/quyen-chi-xem-tai-khoan-quang-cao/">quyền chỉ xem</a> (không sửa, không tiêu tiền được) và gửi 1 trang nhận xét, không cần mật khẩu.</p>
           <div class="btn-row"><a class="btn btn-ghost" href="facebook-ads.html#dang-ky">Đăng ký kiểm tra</a></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="hoi-dap" aria-labelledby="faq-title">
+  <section class="section" id="kien-thuc" aria-labelledby="blog-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Kiến thức</p>
+        <h2 id="blog-title">Bài viết mới cho chủ shop</h2>
+        <p class="lead">Viết từ việc vận hành quảng cáo hằng ngày: vì sao số liệu thay đổi, nên làm gì trước, làm sao giữ an toàn cho tài khoản.</p>
+      </div>
+      <div class="post-list">
+        {%- for p in site.posts limit: 3 %}
+        <a class="post-card" href="{{ p.url }}">
+          <span class="post-tag">{{ p.chu_de }}</span>
+          <b>{{ p.title }}</b>
+          <span class="muted">{{ p.description | strip_html }}</span>
+        </a>
+        {%- endfor %}
+      </div>
+      <p style="margin-top:20px"><a class="btn btn-ghost" href="kien-thuc/">Xem tất cả bài viết</a></p>
+    </div>
+  </section>
+
+  <section class="section alt" id="hoi-dap" aria-labelledby="faq-title">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Hỏi đáp</p>
@@ -366,7 +396,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </section>
 
-  <section class="section alt" id="lien-he" aria-labelledby="contact-title">
+  <section class="section" id="lien-he" aria-labelledby="contact-title">
     <div class="wrap signup">
       <div class="stack">
         <p class="eyebrow">Liên hệ</p>
@@ -445,6 +475,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <li><a href="shopee-ads.html">Quảng cáo Shopee</a></li>
         <li><a href="#nen-tang">TikTok, Google</a></li>
         <li><a href="qua-tang.html">Checklist 30 mục</a></li>
+        <li><a href="kien-thuc/">Kiến thức</a></li>
       </ul>
     </div>
     <div>

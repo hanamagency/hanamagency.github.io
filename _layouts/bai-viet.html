@@ -1,0 +1,64 @@
+---
+layout: trang
+page_type: article
+---
+{%- comment -%}
+Khuôn một bài viết. Biến trong phần khai báo đầu bài: title, description, chu_de, nen_tang (facebook, shopee, google, tiktok hoặc chung), tags, image, image_alt, updated.
+{%- endcomment -%}
+{%- assign so_tu = content | strip_html | number_of_words -%}
+{%- assign phut = so_tu | divided_by: 220 | plus: 1 -%}
+{%- case page.nen_tang -%}
+  {%- when 'facebook' -%}{%- assign dv_link = '/facebook-ads.html#dang-ky' -%}{%- assign dv_ten = 'Kiểm tra tài khoản quảng cáo Facebook miễn phí' -%}{%- assign dv_mo_ta = 'Bạn cấp quyền chỉ xem, Nam xem tài khoản cùng bạn khoảng 20 phút và gửi 1 trang nhận xét: chỗ đang tốn tiền, việc nên sửa trước.' -%}{%- assign dv_trang = '/facebook-ads.html' -%}{%- assign dv_trang_ten = 'Dịch vụ quảng cáo Facebook & Instagram' -%}
+  {%- when 'shopee' -%}{%- assign dv_link = '/shopee-ads.html#dang-ky' -%}{%- assign dv_ten = 'Kiểm tra quảng cáo Shopee miễn phí' -%}{%- assign dv_mo_ta = 'Xem cùng bạn qua chia sẻ màn hình khoảng 20 phút, không cần gửi mật khẩu, rồi gửi 1 trang nhận xét về sản phẩm và ngân sách.' -%}{%- assign dv_trang = '/shopee-ads.html' -%}{%- assign dv_trang_ten = 'Dịch vụ quảng cáo Shopee' -%}
+  {%- else -%}{%- assign dv_link = '/#lien-he' -%}{%- assign dv_ten = 'Trao đổi với HÀ NAM AGENCY' -%}{%- assign dv_mo_ta = 'Để lại số Zalo, trong giờ làm việc Nam sẽ liên hệ và cùng bạn xem hướng làm phù hợp với sản phẩm, ngân sách.' -%}{%- assign dv_trang = '/#nen-tang' -%}{%- assign dv_trang_ten = 'Các dịch vụ của HÀ NAM AGENCY' -%}
+{%- endcase -%}
+<article class="section post">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Đường dẫn"><a href="/">Trang chủ</a> <span aria-hidden="true">›</span> <a href="/kien-thuc/">Kiến thức</a> <span aria-hidden="true">›</span> <span>{{ page.chu_de }}</span></nav>
+    <header class="post-head">
+      <p class="eyebrow">{{ page.chu_de }}</p>
+      <h1>{{ page.title }}</h1>
+      <p class="lead">{{ page.description }}</p>
+      <div class="post-meta">
+        <img src="/assets/nam.jpg" alt="" width="40" height="40" loading="lazy" decoding="async">
+        <span>Nam, người sáng lập HÀ&nbsp;NAM&nbsp;AGENCY</span>
+        <span aria-hidden="true">·</span>
+        <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%d/%m/%Y' }}</time>
+        {%- if page.updated %}<span aria-hidden="true">·</span><span>Cập nhật {{ page.updated | date: '%d/%m/%Y' }}</span>{% endif %}
+        <span aria-hidden="true">·</span>
+        <span>Đọc khoảng {{ phut }} phút</span>
+      </div>
+    </header>
+
+    <div class="prose">
+{{ content }}
+    </div>
+
+    <aside class="post-cta" aria-label="Bước tiếp theo">
+      <p class="eyebrow">Bước tiếp theo</p>
+      <h2>{{ dv_ten }}</h2>
+      <p>{{ dv_mo_ta }}</p>
+      <div class="btn-row">
+        <a class="btn btn-brand" href="{{ dv_link }}">Đăng ký</a>
+        <a class="btn btn-ghost" href="https://zalo.me/0986219360" target="_blank" rel="noopener">Nhắn Zalo 0986&nbsp;219&nbsp;360</a>
+      </div>
+      <p class="muted">Xem thêm: <a href="{{ dv_trang }}">{{ dv_trang_ten }}</a> · <a href="/qua-tang.html">Checklist 30 mục miễn phí</a></p>
+    </aside>
+
+    {%- assign khac = site.posts | where_exp: "p", "p.url != page.url" -%}
+    {%- if khac.size > 0 %}
+    <section class="post-more" aria-labelledby="bai-khac">
+      <h2 id="bai-khac">Bài viết khác</h2>
+      <div class="post-list">
+        {%- for p in khac limit: 3 %}
+        <a class="post-card" href="{{ p.url }}">
+          <span class="post-tag">{{ p.chu_de }}</span>
+          <b>{{ p.title }}</b>
+          <span class="muted">{{ p.description | strip_html }}</span>
+        </a>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+  </div>
+</article>

@@ -1,8 +1,49 @@
 # Lịch sử thay đổi web HÀ NAM AGENCY
 
-Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục: ngày, việc đã làm, việc còn chờ. Thư mục `_ghi_chu` không được xuất bản lên web (Jekyll bỏ qua thư mục bắt đầu bằng dấu gạch dưới), nhưng vẫn đọc được trên GitHub vì repo công khai.
+Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục gồm: ngày, file đã sửa, nội dung trước và sau (tóm tắt), lý do, kết quả kiểm thử, trạng thái và việc còn lại. Chỉ ghi "đã xong" khi đã kiểm thử. Thư mục `docs` không xuất bản lên web (khai báo trong `_config.yml`), nhưng vẫn đọc được trên GitHub vì repo công khai. Trước ngày 13/10/2026 file này nằm ở `_ghi_chu/LICH_SU.md`.
 
-Phiên bản CSS và JS hiện tại: `site.css?v=6`, `site.js?v=6`.
+Phiên bản CSS và JS hiện tại: `site.css?v=6`, `site.js?v=6` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
+
+## 2026-10-13 (lượt 3): Mục Kiến thức, mục người sáng lập, menu Dịch vụ, bộ tài liệu docs
+
+Cùng nhánh `claude/facebook-business-verify-address-00wvp2` và PR số 3. Trạng thái: đã kiểm thử trên máy chủ thử, chưa xuất bản, chờ Nam "duyệt".
+
+Mục người sáng lập (trang Facebook, Shopee):
+- Trước: dòng nhỏ "Người trực tiếp làm việc với bạn", tiêu đề "Nam, phụ trách HÀ NAM AGENCY", câu dẫn "Bạn trao đổi trực tiếp với người lên chiến dịch, soát nội dung và viết báo cáo, không qua khâu trung gian."
+- Sau: dòng nhỏ "Người trực tiếp đồng hành cùng bạn" (khớp khẩu hiệu "Đồng hành tăng trưởng"), tiêu đề "Nam, người sáng lập HÀ NAM AGENCY", câu dẫn "Từ buổi trao đổi đầu tiên đến báo cáo mỗi thứ Hai, Nam trực tiếp lên kế hoạch, triển khai chiến dịch và giải thích số liệu cho bạn. Có việc cần hỏi, bạn liên hệ thẳng người đang theo sát tài khoản của mình."
+- Lý do: Nam muốn ghi đúng vai trò người sáng lập nhưng không phô trương; "phụ trách" làm vai trò nhỏ đi; câu dẫn cũ dùng cách nói phủ định.
+- Ảnh `assets/nam.jpg` thay bằng ảnh chân dung mới (áo sơ mi, nền trơn), cắt vuông 480px. Trang chủ thêm `founder` vào schema.org.
+
+Câu chữ theo brief giai đoạn 2:
+- Shopee: câu trích "Ngày sale, ngân sách quảng cáo tăng mạnh nhưng số đơn không tăng như kỳ vọng."; "tiền quảng cáo đi nhanh" thành "ngân sách quảng cáo tiêu nhanh".
+- Tài khoản agency (trang Facebook): bỏ cách nói "thường được xử lý nhanh hơn" chung chung, thay bằng "phối hợp xử lý qua kênh hỗ trợ riêng, thường kịp thời hơn, tùy từng trường hợp"; thêm ý kênh hỗ trợ làm việc theo chính sách nền tảng và tài khoản agency dùng cho sản phẩm, nội dung đáp ứng chính sách quảng cáo của Meta.
+- Thanh toán cách 2: thêm "Tiền quảng cáo và phí dịch vụ ghi tách riêng, kèm số liệu chi tiêu xuất từ trình quản lý quảng cáo". Điều khoản: tiền chuyển trước chỉ dùng để thanh toán cho nền tảng, phí dịch vụ ghi tách khỏi tiền quảng cáo.
+- Câu "Facebook phải dò lại người xem từ đầu" (trang Facebook, Checklist) thành "dễ đưa nhóm quảng cáo quay lại giai đoạn máy học", vì câu cũ khẳng định quá mức.
+
+Menu và đo lường:
+- Nút menu "Nền tảng" đổi tên thành "Dịch vụ" ở 5 trang; nhãn nhóm trên điện thoại "Dịch vụ theo nền tảng". Thêm mục "Kiến thức" trong menu và chân trang.
+- `site.js`: bấm mục trong menu Dịch vụ đẩy `select_content` với `content_type: service_menu`, `content_id` lấy từ thuộc tính `data-menu`. Mục TikTok, Google dẫn sang Zalo không đẩy thêm (đã có `contact`).
+
+Mục Kiến thức (mới, dựng bằng Jekyll của GitHub Pages):
+- File mới: `_layouts/trang.html`, `_layouts/bai-viet.html`, `_includes/dau-trang.html`, `_includes/chan-trang.html`, `kien-thuc/index.html`, `kien-thuc/feed.xml`, 3 bài trong `_posts/`.
+- `sitemap.xml` chuyển sang dạng tự thêm bài viết. `index.html` có phần khai báo đầu file để hiện 3 bài mới (mục `#kien-thuc` trước phần Hỏi đáp; Hỏi đáp và Liên hệ đổi nền xen kẽ cho đúng thứ tự).
+- 3 bài đầu Nam đã duyệt chủ đề: tăng ngân sách Facebook, ngân sách Shopee ngày sale, quyền chỉ xem tài khoản quảng cáo. Link nội bộ từ trang Facebook, Shopee, trang chủ, trang cảm ơn tới bài liên quan.
+- `site.css`: thêm kiểu cho bài viết, danh sách bài, bảng trong bài.
+
+Tài liệu:
+- `_ghi_chu/LICH_SU.md` chuyển thành `docs/CHANGELOG.md`. Thêm `docs/HA_NAM_AGENCY_CONTEXT.md`, `docs/TRACKING_PLAN.md`, `docs/CONTENT_AND_BLOG_WORKFLOW.md`, `docs/IMPLEMENTATION_STATUS.md`. `CLAUDE.md` rút gọn, trỏ tới các file này.
+
+Kiểm thử:
+- `jekyll build --safe` bản 3.10.0 (cùng bản GitHub Pages dùng): không lỗi. 8 trang .html cũ ra đúng từng byte như file gốc.
+- Sơ đồ trang và nguồn tin là XML hợp lệ (9 địa chỉ, 3 bài). Dữ liệu cấu trúc JSON-LD hợp lệ ở trang chủ, trang danh sách và 3 bài.
+- 5 trang Kiến thức và trang chủ ở 1366px và 360px: không tràn ngang, không lỗi JavaScript, ảnh đủ mô tả, 20 link nội bộ không hỏng.
+- Bấm menu Dịch vụ: `select_content:service_menu:shopee`; bấm TikTok mở khung liên hệ, không đẩy `select_content`.
+- Các bài kiểm tra cũ (tràn ngang 7 trang, form 10 trường hợp, menu, 404): xem mục kiểm thử trong PR.
+
+Còn lại:
+- Nam "duyệt" để xuất bản. Sau khi xuất bản: khai báo Search Console, gửi sitemap.
+- Nam dán Apps Script 2.4.
+- Câu "5 suất mỗi tuần" ở trang chủ và trang Facebook: chờ Nam xác nhận có giới hạn thật, nếu không thì bỏ.
 
 ## 2026-10-13 (lượt 2): Tiêu đề khiêm tốn hơn, ảnh chân dung, tài khoản của khách, email theo lựa chọn
 
@@ -13,7 +54,7 @@ Cùng nhánh và PR với lượt 1. Nam đã xem và đồng ý các mục củ
 - Tài khoản quảng cáo: thêm lựa chọn chạy trên tài khoản đứng tên khách (thẻ cách 1, lời dẫn mục tài khoản, hỏi đáp trang Facebook, hỏi đáp trang chủ, điều khoản).
 - Nam xác nhận BM đã được Meta xác minh, giữ câu "đã được Facebook xác minh".
 - Apps Script 2.4 (gửi Nam để dán vào Google Sheet, không nằm trong repo): email gửi khách đổi theo lựa chọn "Bạn cần gì?", trước đây chọn gì cũng nhận email Checklist. Đây là nguyên nhân chính của lỗi "chọn gì cũng chỉ gửi Checklist".
-- Quyết định về blog: chưa mở mục Kiến thức khi chưa có bài (xem CLAUDE.md).
+- Quyết định về blog lúc đó: chưa mở mục Kiến thức khi chưa có bài. Lượt 3 đã mở sau khi Nam duyệt 3 chủ đề.
 - Hướng dẫn Nam tự làm: Google Search Console, hồ sơ Google Business cho văn phòng Long Thành.
 
 Còn chờ Nam:
@@ -51,7 +92,7 @@ Giao diện:
 - Nút liên hệ nổi góc dưới bên phải, mở khung Zalo, Messenger, gọi điện. Điện thoại: chỉ hiện ở trang không có thanh liên hệ dưới đáy. Sự kiện đo: `contact_panel_open` và `contact` với `click_location: floating_button`.
 - Chân trang chừa khoảng trống phía dưới để nút nổi không che chữ.
 - Trang 404 riêng, ảnh chia sẻ riêng cho trang Facebook, Shopee, Checklist.
-- Thêm `CLAUDE.md`, `_ghi_chu/LICH_SU.md`, `_config.yml`.
+- Thêm `CLAUDE.md`, `_ghi_chu/LICH_SU.md` (nay là `docs/CHANGELOG.md`), `_config.yml`.
 
 Còn chờ Nam:
 - Trả lời "duyệt" để xuất bản.

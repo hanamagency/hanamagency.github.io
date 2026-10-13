@@ -6,7 +6,8 @@
      generate_lead   gửi form thành công (Meta: Lead). Tham số: form_id, lead_source, lead_need, lead_budget,
                      lead_platform, currency, event_id
      contact         bấm Zalo, chép số Zalo, Messenger, gọi điện (Meta: Contact). Tham số: method, click_location, link_url
-     select_content  bấm chọn gói giá. Tham số: content_type, content_id
+     select_content  bấm chọn gói giá (content_type pricing_plan) hoặc một mục trong menu Dịch vụ (content_type service_menu).
+                     Tham số: content_type, content_id
      contact_panel_open, self_check_complete, fee_calculator_use, checklist_progress, lead_details_submit:
                      sự kiện riêng của web, chỉ gửi GA4
    Thông tin trang (content_group, page_type) khai báo trong thẻ <head> của từng trang, trước mã GTM. */
@@ -476,7 +477,7 @@
     });
   }
 
-  // ===== Menu đầu trang: mục Nền tảng xổ xuống (máy tính), nút menu (điện thoại, dưới 900px) =====
+  // ===== Menu đầu trang: mục Dịch vụ xổ xuống (máy tính), nút menu (điện thoại, dưới 900px) =====
   function initNav() {
     var header = document.querySelector('.site-header');
     if (!header) return;
@@ -501,6 +502,12 @@
         if (inside) btn.focus();
       });
       drop.addEventListener('focusout', function (ev) { if (ev.relatedTarget && !drop.contains(ev.relatedTarget)) setOpen(false); });
+      // Bấm một mục trong menu Dịch vụ: GA4 nhận select_content, content_type service_menu, content_id lấy từ data-menu.
+      // Mục dẫn sang Zalo (TikTok, Google) đã có sự kiện contact nên không đẩy thêm, tránh đếm hai lần.
+      menu.addEventListener('click', function (ev) {
+        var a = ev.target.closest('a[data-menu]');
+        if (a && !/zalo\.me/i.test(a.getAttribute('href') || '')) dl({ event: 'select_content', content_type: 'service_menu', content_id: a.getAttribute('data-menu') });
+      });
     }
     var toggle = header.querySelector('.menu-toggle');
     var nav = header.querySelector('.nav');
