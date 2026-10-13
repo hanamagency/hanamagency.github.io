@@ -4,6 +4,23 @@ Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục: ngày
 
 Phiên bản CSS và JS hiện tại: `site.css?v=6`, `site.js?v=6`.
 
+## 2026-10-13 (lượt 2): Tiêu đề khiêm tốn hơn, ảnh chân dung, tài khoản của khách, email theo lựa chọn
+
+Cùng nhánh và PR với lượt 1. Nam đã xem và đồng ý các mục của lượt 1, chờ Nam "duyệt" lần cuối.
+
+- Mục người phụ trách: "Nam, nhà sáng lập HÀ NAM AGENCY" đổi thành "Nam, phụ trách HÀ NAM AGENCY" (Nam thấy chữ "nhà sáng lập" phóng đại khi agency mới bắt đầu).
+- Thay chữ "N" bằng ảnh `assets/nam.jpg` ở trang Facebook và Shopee. Ảnh tạm, cắt từ ảnh Nam gửi, chỉ lấy mặt Nam.
+- Tài khoản quảng cáo: thêm lựa chọn chạy trên tài khoản đứng tên khách (thẻ cách 1, lời dẫn mục tài khoản, hỏi đáp trang Facebook, hỏi đáp trang chủ, điều khoản).
+- Nam xác nhận BM đã được Meta xác minh, giữ câu "đã được Facebook xác minh".
+- Apps Script 2.4 (gửi Nam để dán vào Google Sheet, không nằm trong repo): email gửi khách đổi theo lựa chọn "Bạn cần gì?", trước đây chọn gì cũng nhận email Checklist. Đây là nguyên nhân chính của lỗi "chọn gì cũng chỉ gửi Checklist".
+- Quyết định về blog: chưa mở mục Kiến thức khi chưa có bài (xem CLAUDE.md).
+- Hướng dẫn Nam tự làm: Google Search Console, hồ sơ Google Business cho văn phòng Long Thành.
+
+Còn chờ Nam:
+- "Duyệt" để xuất bản.
+- Dán Apps Script 2.4 và triển khai phiên bản mới (giữ nguyên link /exec).
+- Thông tin trang TikTok và Google. Ảnh chân dung chuyên nghiệp khi có.
+
 ## 2026-10-13: Câu chữ chuyên nghiệp hơn, văn phòng mới, 2 cách thanh toán, menu Nền tảng, nút liên hệ nổi
 
 Nhánh `claude/facebook-business-verify-address-00wvp2`, PR số 3. Chờ Nam "duyệt" rồi mới gộp.
@@ -13,7 +30,7 @@ Câu chữ:
 - "Bốn chuyện hay gặp" đổi thành "Bốn trường hợp hay gặp" (trang Facebook và Shopee).
 - Giai đoạn 2 trang Facebook: "Chạy 10 đến 30 triệu mỗi tháng thấy có lãi, nhưng cứ tăng lên là chi phí tăng đột biến không như kỳ vọng."
 - Ngày sale trang Shopee: "...mà đơn không tăng theo đúng kỳ vọng."
-- Mục người phụ trách: "Người trực tiếp làm việc với bạn", "Nam, nhà sáng lập HÀ NAM AGENCY", lead "Bạn trao đổi trực tiếp với người lên chiến dịch, soát nội dung và viết báo cáo, không qua khâu trung gian." Các ý bên dưới viết lại trang trọng hơn.
+- Mục người phụ trách: "Người trực tiếp làm việc với bạn", "Nam, nhà sáng lập HÀ NAM AGENCY" (lượt 2 đổi thành "phụ trách"), lead "Bạn trao đổi trực tiếp với người lên chiến dịch, soát nội dung và viết báo cáo, không qua khâu trung gian." Các ý bên dưới viết lại trang trọng hơn.
 - Checklist: "Còn vài lỗ hổng cần vá" đổi thành "Còn vài mục cần hoàn thiện".
 
 Địa chỉ:
@@ -38,11 +55,7 @@ Giao diện:
 
 Còn chờ Nam:
 - Trả lời "duyệt" để xuất bản.
-- Xác nhận tài khoản doanh nghiệp (BM) đã được Meta xác minh chưa, vì web đang ghi "đã được Facebook xác minh".
 - Thông tin để làm trang TikTok và trang Google.
-- Mã Apps Script nếu muốn email báo khác nhau theo lựa chọn.
-- Ảnh chân dung cho mục người phụ trách (đang dùng chữ "N").
-- Chọn cách đăng blog.
 
 ## 2026-10-09: Trang Shopee, tính thử phí, Checklist 2 tab
 
