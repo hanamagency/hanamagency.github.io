@@ -8,7 +8,7 @@ layout: null
   <link href="{{ site.url }}/kien-thuc/"/>
   <id>{{ site.url }}/kien-thuc/</id>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
-  <author><name>Nam, HÀ NAM AGENCY</name></author>
+  <author><name>Lê Nam, HÀ NAM AGENCY</name></author>
   {%- for post in site.posts limit: 20 %}
   <entry>
     <title>{{ post.title | xml_escape }}</title>

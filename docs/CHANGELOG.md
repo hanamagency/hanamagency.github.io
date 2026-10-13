@@ -4,6 +4,17 @@ Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục gồm:
 
 Phiên bản CSS và JS hiện tại: `site.css?v=6`, `site.js?v=6` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
 
+## 2026-10-13 (lượt 4): Họ tên Lê Nam, đầu trang Checklist đủ mục, chốt các câu hỏi còn mở
+
+Cùng nhánh và PR số 3. Trạng thái: đã kiểm thử trên máy chủ thử, chưa xuất bản, chờ Nam trả lời "duyệt".
+
+- Họ tên: tiêu đề mục người sáng lập (trang Facebook, Shopee) thành "Lê Nam, người sáng lập HÀ NAM AGENCY"; tên tác giả bài viết, mô tả ảnh, schema.org (`founder`, `author`) và nguồn tin dùng "Lê Nam". Câu văn bên trong vẫn gọi ngắn là "Nam".
+- Đầu trang Checklist (`qua-tang.html`): trước chỉ có nút "Dịch vụ", nay thêm "Kiến thức", "Cách làm việc", "Hỏi đáp" như trang chủ. Lý do: Nam thấy thanh trên cùng bị thu gọn, khó thao tác. Sửa luôn khoảng trống thừa trong nút "Đăng ký kiểm tra".
+- Nam xác nhận: giữ câu "5 suất mỗi tuần"; tạm coi 3 bài viết là ổn, sẽ sửa sau nếu cần.
+- Thêm số điện thoại 0356 256 128 (giữ cả số 0986 219 360): khối liên hệ trang chủ, khối liên hệ cạnh form trang Facebook và Shopee, chân trang (trang chủ, Facebook, Shopee, mục Kiến thức), chính sách, schema.org (`contactPoint`). Nút Zalo, mã QR và khung liên hệ vẫn dùng số 0986. Apps Script 2.4 thêm số mới vào chữ ký email. Kế hoạch chuyển số chính ở `HA_NAM_AGENCY_CONTEXT.md`.
+- 8 việc ngoài web (duyệt, Apps Script, GTM, Search Console, kế toán, trang TikTok và Google, khuôn dùng chung, Google Business và tên miền) chưa làm. Hướng dẫn ở `docs/HUONG_DAN_VIEC_CAN_LAM.md`.
+- Kiểm thử: dựng Jekyll 3.10 không lỗi; đầu trang Checklist không tràn ở 900, 1024, 1280, 1730px; 7 trang không tràn ở 320 đến 768px; menu và nút nổi chạy đúng.
+
 ## 2026-10-13 (lượt 3): Mục Kiến thức, mục người sáng lập, menu Dịch vụ, bộ tài liệu docs
 
 Cùng nhánh `claude/facebook-business-verify-address-00wvp2` và PR số 3. Trạng thái: đã kiểm thử trên máy chủ thử, chưa xuất bản, chờ Nam "duyệt".
@@ -43,7 +54,7 @@ Kiểm thử:
 Còn lại:
 - Nam "duyệt" để xuất bản. Sau khi xuất bản: khai báo Search Console, gửi sitemap.
 - Nam dán Apps Script 2.4.
-- Câu "5 suất mỗi tuần" ở trang chủ và trang Facebook: chờ Nam xác nhận có giới hạn thật, nếu không thì bỏ.
+- Câu "5 suất mỗi tuần": lượt 4 Nam xác nhận giữ.
 
 ## 2026-10-13 (lượt 2): Tiêu đề khiêm tốn hơn, ảnh chân dung, tài khoản của khách, email theo lựa chọn
 

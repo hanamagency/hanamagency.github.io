@@ -6,6 +6,7 @@
 - `docs/CHANGELOG.md`: lịch sử thay đổi (mới nhất ở trên)
 - `docs/TRACKING_PLAN.md`: GTM, GA4, Meta Pixel và các sự kiện, khi đụng tới đo lường, form, nút liên hệ
 - `docs/CONTENT_AND_BLOG_WORKFLOW.md`: khi viết bài cho mục Kiến thức
+- `docs/HUONG_DAN_VIEC_CAN_LAM.md`: các việc Nam tự làm ngoài web (Apps Script, GTM, Search Console, Google Business)
 
 Repo công khai trên GitHub. Không ghi vào bất kỳ file nào trong repo: thông tin thuế, doanh thu, chiến lược kinh doanh riêng, mật khẩu, token, email cá nhân của Nam.
 
@@ -37,7 +38,9 @@ Cách trả lời Nam: tiếng Việt, không dùng ký tự markdown (dấu sao
 - Không dùng: cam kết, đảm bảo, bảo đảm, 100%, tốt nhất, số 1, hàng đầu, duy nhất, tuyệt đối, chắc chắn, ngay lập tức và các lời hứa kết quả tương tự.
 - Không bịa con số, lời chứng thực, logo khách. Số liệu mẫu ghi "Ví dụ minh họa".
 - Tránh từ suồng sã ("nói chuyện", "chuyện", "hở", "đội lên", "gánh"). Dùng "trao đổi", "trường hợp", "tăng đột biến", "không như kỳ vọng".
-- Người sáng lập: "Nam, người sáng lập HÀ NAM AGENCY", dòng nhỏ "Người trực tiếp đồng hành cùng bạn". Không dùng "CEO", "founder", "giám đốc", "nhà sáng lập".
+- Người sáng lập: "Lê Nam, người sáng lập HÀ NAM AGENCY", dòng nhỏ "Người trực tiếp đồng hành cùng bạn". Câu văn gọi ngắn là "Nam". Không dùng "CEO", "founder", "giám đốc", "nhà sáng lập".
+- Trang nào cũng giữ đủ mục điều hướng ở đầu trang (Nam không muốn thanh trên cùng bị thu gọn).
+- Số điện thoại: 0986 219 360 (Zalo, số chính hiện tại) và 0356 256 128. Nam sẽ chuyển dần sang số 0356. Các bước đổi số chính ở `docs/HA_NAM_AGENCY_CONTEXT.md`.
 - Thanh toán tiền quảng cáo luôn có 2 lựa chọn ngang nhau (thẻ của khách, hoặc thẻ của HÀ NAM AGENCY), phí dịch vụ ghi tách riêng. Không tự đổi khi chưa hỏi Nam.
 - Tài khoản agency: có kênh hỗ trợ riêng của nền tảng, xử lý tùy trường hợp và chính sách nền tảng. Không hứa thời gian xử lý.
 - Thương hiệu viết `HÀ&nbsp;NAM&nbsp;AGENCY` trong HTML.

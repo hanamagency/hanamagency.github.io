@@ -26,7 +26,7 @@ defaults:
       type: posts
     values:
       layout: bai-viet
-      tac_gia: Nam
+      tac_gia: Lê Nam
 
 # Không xuất bản tài liệu nội bộ lên web (thư mục bắt đầu bằng dấu gạch dưới tự được bỏ qua)
 exclude:

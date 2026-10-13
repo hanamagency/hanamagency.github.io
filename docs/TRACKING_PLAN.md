@@ -31,7 +31,7 @@ Mỗi trang đẩy `content_group` và `page_type` vào `dataLayer` trước mã
 
 `click_location` gồm: `floating_button`, `mobile_bar`, `header`, `footer`, `hero` hoặc `id` của mục chứa nút.
 
-Không có dữ liệu cá nhân (tên, số điện thoại, email, nội dung tin nhắn) trong tham số sự kiện. `link_url` chỉ chứa số Zalo, Messenger của HÀ NAM AGENCY.
+Không có dữ liệu cá nhân (tên, số điện thoại, email, nội dung tin nhắn) trong tham số sự kiện. `link_url` chỉ chứa số Zalo, số điện thoại (0986 219 360 hoặc 0356 256 128), Messenger của HÀ NAM AGENCY. Phân biệt lượt gọi 2 số bằng `link_url`.
 
 ## Đối chiếu với danh sách sự kiện trong brief
 
