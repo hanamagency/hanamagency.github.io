@@ -6,7 +6,8 @@
      generate_lead   gửi form thành công (Meta: Lead). Tham số: form_id, lead_source, lead_need, lead_budget,
                      lead_platform, currency, event_id
      contact         bấm Zalo, chép số Zalo, Messenger, gọi điện (Meta: Contact). Tham số: method, click_location, link_url
-     select_content  bấm chọn gói giá. Tham số: content_type, content_id
+     select_content  bấm chọn gói giá (content_type pricing_plan) hoặc một mục trong menu Dịch vụ (content_type service_menu).
+                     Tham số: content_type, content_id
      contact_panel_open, self_check_complete, fee_calculator_use, checklist_progress, lead_details_submit:
                      sự kiện riêng của web, chỉ gửi GA4
    Thông tin trang (content_group, page_type) khai báo trong thẻ <head> của từng trang, trước mã GTM. */
@@ -356,6 +357,7 @@
       post(payload).then(function () {
         dl({ event: 'lead_details_submit', form_id: sGet('hn_form_id') || '', lead_need: data.need || '', lead_budget: data.budget || '', lead_source: data.lead_source || '' });
         sSet('hn_lead_short', '');
+        if (data.need) { sSet('hn_lead_need', data.need); try { document.dispatchEvent(new CustomEvent('hn:need-change')); } catch (e) {} }
         if (data.email) { sSet('hn_lead_email', '1'); var mail = document.querySelector('[data-email-note]'); if (mail) mail.hidden = false; }
         form.innerHTML = '<p class="form-done">Đã nhận thêm thông tin. Cảm ơn bạn, buổi trao đổi sẽ nhanh hơn.</p>';
       }).catch(function () {
@@ -437,6 +439,7 @@
     }
   }
   function locationOf(el) {
+    if (el.closest('.float-contact')) return 'floating_button';
     if (el.closest('.mobile-bar')) return 'mobile_bar';
     if (el.closest('.site-header')) return 'header';
     if (el.closest('.site-footer')) return 'footer';
@@ -472,6 +475,73 @@
       else if (/^mailto:/i.test(href)) dl({ event: 'contact', method: 'email', click_location: locationOf(a), link_url: href });
       else if (/^https?:\/\/(m\.me|www\.messenger\.com)\//i.test(href)) dl({ event: 'contact', method: 'messenger', click_location: locationOf(a), link_url: href });
     });
+  }
+
+  // ===== Menu đầu trang: mục Dịch vụ xổ xuống (máy tính), nút menu (điện thoại, dưới 900px) =====
+  function initNav() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    var drop = header.querySelector('[data-nav-drop]');
+    if (drop) {
+      var btn = drop.querySelector('.nav-drop-btn');
+      var menu = drop.querySelector('.nav-drop-menu');
+      var timer;
+      var hover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      var setOpen = function (on) { menu.hidden = !on; btn.setAttribute('aria-expanded', String(on)); };
+      // Máy có chuột: rê vào là mở, nên bấm nút chỉ mở (không đóng lại ngay). Màn hình cảm ứng: bấm để mở, bấm lại để đóng.
+      btn.addEventListener('click', function () { setOpen(hover ? true : menu.hidden); });
+      if (hover) {
+        drop.addEventListener('mouseenter', function () { clearTimeout(timer); setOpen(true); });
+        drop.addEventListener('mouseleave', function () { timer = setTimeout(function () { setOpen(false); }, 250); });
+      }
+      document.addEventListener('click', function (ev) { if (!drop.contains(ev.target)) setOpen(false); });
+      document.addEventListener('keydown', function (ev) {
+        if (ev.key !== 'Escape' || menu.hidden) return;
+        var inside = drop.contains(document.activeElement);
+        setOpen(false);
+        if (inside) btn.focus();
+      });
+      drop.addEventListener('focusout', function (ev) { if (ev.relatedTarget && !drop.contains(ev.relatedTarget)) setOpen(false); });
+      // Bấm một mục trong menu Dịch vụ: GA4 nhận select_content, content_type service_menu, content_id lấy từ data-menu.
+      // Mục dẫn sang Zalo (TikTok, Google) đã có sự kiện contact nên không đẩy thêm, tránh đếm hai lần.
+      menu.addEventListener('click', function (ev) {
+        var a = ev.target.closest('a[data-menu]');
+        if (a && !/zalo\.me/i.test(a.getAttribute('href') || '')) dl({ event: 'select_content', content_type: 'service_menu', content_id: a.getAttribute('data-menu') });
+      });
+    }
+    var toggle = header.querySelector('.menu-toggle');
+    var nav = header.querySelector('.nav');
+    if (toggle && nav) {
+      var burger = toggle.innerHTML;
+      var close = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+      var setMenu = function (on) {
+        header.classList.toggle('nav-open', on);
+        toggle.setAttribute('aria-expanded', String(on));
+        toggle.setAttribute('aria-label', on ? 'Đóng menu' : 'Mở menu');
+        toggle.innerHTML = on ? close : burger;
+      };
+      toggle.addEventListener('click', function () { setMenu(!header.classList.contains('nav-open')); });
+      nav.addEventListener('click', function (ev) { if (ev.target.closest('a')) setMenu(false); });
+      document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && header.classList.contains('nav-open')) { setMenu(false); toggle.focus(); } });
+      document.addEventListener('click', function (ev) {
+        if (!header.classList.contains('nav-open')) return;
+        var path = ev.composedPath ? ev.composedPath() : [ev.target];
+        if (path.indexOf(header) === -1) setMenu(false);
+      });
+    }
+  }
+
+  // ===== Nút liên hệ nổi: máy tính hiện ở mọi trang; điện thoại chỉ hiện ở trang không có thanh liên hệ dưới đáy =====
+  // Bấm nút mở khung liên hệ (mã QR Zalo, Messenger, gọi). GTM nhận contact_panel_open và contact với click_location = floating_button.
+  function initFloat() {
+    if (document.body.hasAttribute('data-no-float') || document.querySelector('.float-contact')) return;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'float-contact';
+    b.setAttribute('aria-label', 'Nhắn tin cho HÀ NAM AGENCY qua Zalo hoặc Messenger');
+    b.innerHTML = ICON.chat + '<span>Nhắn tin tư vấn</span>';
+    b.addEventListener('click', function () { openSheet(b); });
+    document.body.appendChild(b);
   }
 
   // ===== Tính thử phí dịch vụ (dùng chung các trang nền tảng) =====
@@ -651,7 +721,7 @@
       if (label) label.textContent = done + '/' + boxes.length + ' mục đã sẵn sàng';
       if (verdict) {
         verdict.textContent = done >= 26 ? (root.getAttribute('data-verdict-high') || 'Tài khoản khá sẵn sàng') :
-          done >= 18 ? (root.getAttribute('data-verdict-mid') || 'Còn vài lỗ hổng cần vá') :
+          done >= 18 ? (root.getAttribute('data-verdict-mid') || 'Còn vài mục cần hoàn thiện') :
           (root.getAttribute('data-verdict-low') || 'Nên sửa trước khi tăng ngân sách');
       }
     }
@@ -741,10 +811,19 @@
       each('input, select, textarea', function (i) { i.disabled = !on; }, el);
     }, root);
     if (platform === 'shopee') each('[data-placeholder-shopee]', function (i) { i.placeholder = i.getAttribute('data-placeholder-shopee'); }, root);
-    var need = sGet('hn_lead_need');
-    each('[data-audit-note]', function (a) {
-      a.hidden = !matches(a) || (need !== 'kiem-tra-tai-khoan' && need !== 'tang-ngan-sach');
-    }, root);
+    // Bước tiếp theo theo lựa chọn "Bạn cần gì?" (data-need-only="giá trị ..."; "none" = chưa chọn hoặc form trang chủ)
+    function applyNeed() {
+      var need = sGet('hn_lead_need') || '';
+      var key = (need === '' || need === 'tu-van') ? 'none' : need;
+      each('[data-audit-note]', function (a) {
+        a.hidden = !matches(a) || (need !== 'kiem-tra-tai-khoan' && need !== 'tang-ngan-sach');
+      }, root);
+      each('[data-need-only]', function (el) {
+        el.hidden = !matches(el) || el.getAttribute('data-need-only').split(' ').indexOf(key) === -1;
+      }, root);
+    }
+    applyNeed();
+    document.addEventListener('hn:need-change', applyNeed);
   }
 
   // ===== Khởi động =====
@@ -757,6 +836,8 @@
     each('[data-quiz]', initQuiz);
     initPrefillLinks();
     initContactLinks();
+    initFloat();
+    initNav();
     initMore();
     initChecklists();
     each('[data-thanks]', initThanks);

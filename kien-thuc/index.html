@@ -1,0 +1,26 @@
+---
+layout: trang
+title: Kiến thức quảng cáo cho chủ shop
+description: Bài viết về quảng cáo Facebook, Shopee, TikTok, Google cho chủ shop và doanh nghiệp nhỏ. Viết từ việc vận hành thực tế, có ví dụ và các bước làm được ngay.
+content_group: kien-thuc
+page_type: blog_index
+---
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Kiến thức</p>
+      <h1>{{ page.title }}</h1>
+      <p class="lead">Viết từ việc vận hành quảng cáo hằng ngày cho chủ shop: vì sao số liệu thay đổi, nên làm gì trước, làm sao giữ an toàn cho tài khoản. Bài mới được đăng định kỳ.</p>
+    </div>
+    <div class="post-list">
+      {%- for p in site.posts %}
+      <a class="post-card" href="{{ p.url }}">
+        <span class="post-tag">{{ p.chu_de }}</span>
+        <b>{{ p.title }}</b>
+        <span class="muted">{{ p.description | strip_html }}</span>
+        <span class="post-date"><time datetime="{{ p.date | date: '%Y-%m-%d' }}">{{ p.date | date: '%d/%m/%Y' }}</time></span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

@@ -1,3 +1,6 @@
+---
+# Trang chủ có khai báo này để Jekyll chèn danh sách bài viết mới ở mục Kiến thức. Không dùng dấu ngoặc nhọn đôi trong trang.
+---
 <!doctype html>
 <html lang="vi">
 <head>
@@ -16,6 +19,10 @@
 <meta property="og:description" content="Facebook, TikTok, Google, Shopee cho chủ shop và doanh nghiệp nhỏ. Đo được quảng cáo ra bao nhiêu đơn, bạn duyệt trước khi chạy.">
 <meta property="og:url" content="https://hanamagency.github.io/">
 <meta property="og:image" content="https://hanamagency.github.io/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="HÀ NAM AGENCY · Quảng cáo đúng chính sách, đo được từng đồng">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0E4F57">
 <script>window.dataLayer=window.dataLayer||[];window.dataLayer.push({content_group:'trang-chu',page_type:'home'});</script>
 <!-- Google Tag Manager -->
@@ -33,7 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="stylesheet" href="assets/site.css?v=5">
+<link rel="stylesheet" href="assets/site.css?v=6">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -50,6 +57,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  "logo": "https://hanamagency.github.io/assets/icons/favicon-512.png",
  "image": "https://hanamagency.github.io/assets/og-image.jpg",
  "telephone": "+84986219360",
+ "contactPoint": [
+  { "@type": "ContactPoint", "telephone": "+84986219360", "contactType": "customer service", "availableLanguage": "vi" },
+  { "@type": "ContactPoint", "telephone": "+84356256128", "contactType": "customer service", "availableLanguage": "vi" }
+ ],
  "email": "hanamagency@gmail.com",
  "taxID": "045088006768",
  "identifier": [
@@ -65,12 +76,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
  ],
  "foundingDate": "2025-01-15",
+ "founder": {
+  "@type": "Person",
+  "name": "Lê Nam",
+  "jobTitle": "Người sáng lập",
+  "image": "https://hanamagency.github.io/assets/nam.jpg"
+ },
  "address": {
   "@type": "PostalAddress",
   "streetAddress": "84/11/3 Lê Duẩn, khu Bàu Cá",
   "addressLocality": "Xã An Phước, Huyện Long Thành",
   "addressRegion": "Tỉnh Đồng Nai",
   "addressCountry": "VN"
+ },
+ "location": {
+  "@type": "Place",
+  "name": "Văn phòng HÀ NAM AGENCY",
+  "address": {
+   "@type": "PostalAddress",
+   "streetAddress": "Block E, Khu ID Town, đường N3, Khu đô thị iD Junction, đường Phạm Văn Đồng",
+   "addressLocality": "Phường Long Thành",
+   "addressRegion": "Thành phố Đồng Nai",
+   "addressCountry": "VN"
+  }
  },
  "openingHours": "Mo-Sa 08:00-17:00",
  "areaServed": "VN",
@@ -102,13 +130,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <svg class="brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96" fill="#0E4F57" stroke="#E3B54E" stroke-width="6"/><circle cx="100" cy="100" r="85" fill="none" stroke="#E3B54E" stroke-width="1.4"/><g transform="translate(100 100) scale(1.06) translate(-100 -100)"><rect x="44" y="62" width="15" height="76" style="fill:#FFF8EC"></rect><rect x="92" y="62" width="15" height="76" style="fill:#FFF8EC"></rect><rect x="146" y="62" width="8" height="76" style="fill:#FFF8EC"></rect><polygon points="92,62 111,62 154,138 135,138" style="fill:#FFF8EC"></polygon><rect x="58" y="90" width="35" height="8" style="fill:#FFF8EC"></rect><path d="M59 113 Q75.5 87 92 113" style="fill:none;stroke:#E3B54E;stroke-width:4px"></path><rect x="38" y="62" width="27" height="5" style="fill:#FFF8EC"></rect><rect x="38" y="133" width="27" height="5" style="fill:#FFF8EC"></rect><rect x="86" y="62" width="27" height="5" style="fill:#FFF8EC"></rect><rect x="86" y="133" width="27" height="5" style="fill:#FFF8EC"></rect><rect x="139" y="62" width="22" height="5" style="fill:#FFF8EC"></rect></g></svg>
       <span class="brand-name">HÀ&nbsp;NAM&nbsp;AGENCY<small>Đồng hành tăng trưởng</small></span>
     </a>
-    <nav class="nav" aria-label="Chính">
-      <a href="#nen-tang">Dịch vụ</a>
+    <nav class="nav" id="site-nav" aria-label="Chính">
+      <div class="nav-drop" data-nav-drop>
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-controls="menu-nen-tang">Dịch vụ<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-drop-menu" id="menu-nen-tang" hidden>
+          <p class="nav-drop-label">Dịch vụ theo nền tảng</p>
+          <a data-menu="facebook" class="dd-item pf-facebook" href="facebook-ads.html"><b>Facebook &amp; Instagram</b><span>Từ 3.000.000đ/tháng</span></a>
+          <a data-menu="shopee" class="dd-item pf-shopee" href="shopee-ads.html"><b>Shopee</b><span>Từ 2.000.000đ/tháng</span></a>
+          <a data-menu="tiktok" class="dd-item pf-tiktok" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>TikTok</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
+          <a data-menu="google" class="dd-item pf-google" href="https://zalo.me/0986219360" target="_blank" rel="noopener"><b>Google</b><span>Trang chi tiết sắp có, hỏi qua Zalo</span></a>
+          <div class="dd-sep" aria-hidden="true"></div>
+          <a data-menu="checklist" class="dd-item dd-plain" href="qua-tang.html"><b>Checklist 30 mục miễn phí</b><span>Tự chấm trước khi chạy quảng cáo</span></a>
+          <a data-menu="kien_thuc" class="dd-item dd-plain" href="kien-thuc/"><b>Kiến thức</b><span>Bài viết về quảng cáo cho chủ shop</span></a>
+          <a data-menu="all_services" class="dd-item dd-plain" href="#nen-tang"><b>Xem tất cả dịch vụ</b><span>So sánh các nền tảng trên trang chủ</span></a>
+        </div>
+      </div>
       <a href="#cach-lam">Cách làm việc</a>
       <a href="qua-tang.html">Checklist miễn phí</a>
       <a href="#hoi-dap">Hỏi đáp</a>
     </nav>
     <a class="btn btn-brand btn-sm" href="#lien-he">Nhận tư vấn</a>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Mở menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </header>
 
@@ -207,7 +249,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <article class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
           <h3>Tiền đi đâu, bạn biết rõ</h3>
-          <p class="muted">Mỗi thứ Hai có bảng đối soát: đã nạp, đã chi, còn lại. Quảng cáo Facebook chạy trên tài khoản agency nên bạn không cần thẻ, Fanpage vẫn đứng tên bạn.</p>
+          <p class="muted">Mỗi thứ Hai có bảng đối soát: đã nạp, đã chi, còn lại. Quảng cáo Facebook chạy trên tài khoản agency, bạn chọn thanh toán bằng thẻ của bạn hoặc thẻ của HÀ&nbsp;NAM&nbsp;AGENCY, Fanpage vẫn đứng tên bạn.</p>
         </article>
         <article class="card">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
@@ -291,19 +333,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="gift-item">
           <p class="eyebrow">Miễn phí</p>
           <h2 id="gift-title">Checklist 30 mục trước khi chạy quảng cáo Facebook</h2>
-          <p>Tick ngay trên điện thoại, biết tài khoản đang hở ở phần tài khoản, đo kết quả, nội dung, trang khách bấm vào hay ngân sách.</p>
+          <p>Tick ngay trên điện thoại, biết tài khoản còn thiếu sót ở phần nào: tài khoản, đo kết quả, nội dung, trang khách bấm vào hay ngân sách.</p>
           <div class="btn-row"><a class="btn btn-brand" href="qua-tang.html">Mở Checklist</a></div>
         </div>
         <div class="gift-item">
-          <h3>Muốn người khác xem giúp? <span class="tag">5 suất mỗi tuần</span></h3>
-          <p>Đăng ký buổi kiểm tra tài khoản bạn đang chạy, 20 phút. HÀ&nbsp;NAM&nbsp;AGENCY xem bằng quyền chỉ xem (không sửa, không tiêu tiền được) và gửi 1 trang nhận xét, không cần mật khẩu.</p>
+          <h3>Muốn được kiểm tra trực tiếp? <span class="tag">5 suất mỗi tuần</span></h3>
+          <p>Đăng ký buổi kiểm tra tài khoản bạn đang chạy, 20 phút. HÀ&nbsp;NAM&nbsp;AGENCY xem bằng <a href="kien-thuc/quyen-chi-xem-tai-khoan-quang-cao/">quyền chỉ xem</a> (không sửa, không tiêu tiền được) và gửi 1 trang nhận xét, không cần mật khẩu.</p>
           <div class="btn-row"><a class="btn btn-ghost" href="facebook-ads.html#dang-ky">Đăng ký kiểm tra</a></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="hoi-dap" aria-labelledby="faq-title">
+  <section class="section" id="kien-thuc" aria-labelledby="blog-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Kiến thức</p>
+        <h2 id="blog-title">Bài viết mới cho chủ shop</h2>
+        <p class="lead">Viết từ việc vận hành quảng cáo hằng ngày: vì sao số liệu thay đổi, nên làm gì trước, làm sao giữ an toàn cho tài khoản.</p>
+      </div>
+      <div class="post-list">
+        {%- for p in site.posts limit: 3 %}
+        <a class="post-card" href="{{ p.url }}">
+          <span class="post-tag">{{ p.chu_de }}</span>
+          <b>{{ p.title }}</b>
+          <span class="muted">{{ p.description | strip_html }}</span>
+        </a>
+        {%- endfor %}
+      </div>
+      <p style="margin-top:20px"><a class="btn btn-ghost" href="kien-thuc/">Xem tất cả bài viết</a></p>
+    </div>
+  </section>
+
+  <section class="section alt" id="hoi-dap" aria-labelledby="faq-title">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Hỏi đáp</p>
@@ -316,7 +378,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </details>
         <details>
           <summary>Quảng cáo chạy trên tài khoản của ai?</summary>
-          <p>Với Facebook, quảng cáo chạy trên tài khoản agency của HÀ&nbsp;NAM&nbsp;AGENCY: bạn không cần thẻ, tiền quảng cáo chuyển trước và đối soát mỗi thứ Hai, Fanpage vẫn là của bạn. Với Shopee, quảng cáo chạy trong tài khoản người bán của bạn. TikTok và Google trao đổi cụ thể khi tư vấn.</p>
+          <p>Với Facebook, quảng cáo thường chạy trên tài khoản agency của HÀ&nbsp;NAM&nbsp;AGENCY, có kênh hỗ trợ riêng của nền tảng khi có sự cố. Bạn muốn chạy trên tài khoản quảng cáo đứng tên mình cũng được. Tiền quảng cáo bạn chọn trả bằng thẻ của bạn hoặc chuyển trước để HÀ&nbsp;NAM&nbsp;AGENCY thanh toán bằng thẻ của agency, đối soát mỗi thứ Hai. Fanpage vẫn là của bạn. Với Shopee, quảng cáo chạy trong tài khoản người bán của bạn. TikTok và Google trao đổi cụ thể khi tư vấn.</p>
         </details>
         <details>
           <summary>Tôi có phải đưa mật khẩu tài khoản không?</summary>
@@ -338,17 +400,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </section>
 
-  <section class="section alt" id="lien-he" aria-labelledby="contact-title">
+  <section class="section" id="lien-he" aria-labelledby="contact-title">
     <div class="wrap signup">
       <div class="stack">
         <p class="eyebrow">Liên hệ</p>
-        <h2 id="contact-title">Nói chuyện với HÀ&nbsp;NAM&nbsp;AGENCY</h2>
-        <p class="lead">Để lại số Zalo, trong giờ làm việc Nam sẽ nhắn cho bạn. Muốn nhanh hơn, bạn nhắn trước qua Zalo 0986 219 360.</p>
+        <h2 id="contact-title">Trao đổi với HÀ&nbsp;NAM&nbsp;AGENCY</h2>
+        <p class="lead">Để lại số Zalo, trong giờ làm việc Nam sẽ liên hệ với bạn. Cần trao đổi ngay, bạn nhắn Zalo 0986&nbsp;219&nbsp;360.</p>
         <dl class="contact-lines">
           <div><dt>Zalo, điện thoại</dt><dd><a href="tel:+84986219360">0986 219 360</a></dd></div>
+          <div><dt>Điện thoại</dt><dd><a href="tel:+84356256128">0356 256 128</a></dd></div>
           <div><dt>Email</dt><dd>hanamagency@gmail.com</dd></div>
           <div><dt>Giờ làm việc</dt><dd>Thứ 2 – Thứ 7, 8:00 – 17:00</dd></div>
-          <div><dt>Địa chỉ</dt><dd>84/11/3 Lê Duẩn, khu Bàu Cá, xã An Phước, huyện Long Thành, tỉnh Đồng Nai</dd></div>
+          <div><dt>Văn phòng</dt><dd>Block E, Khu ID Town, đường N3, Khu đô thị iD Junction, đường Phạm Văn Đồng, phường Long Thành, thành phố Đồng Nai</dd></div>
+          <div><dt>Địa chỉ đăng ký kinh doanh</dt><dd>84/11/3 Lê Duẩn, khu Bàu Cá, xã An Phước, huyện Long Thành, tỉnh Đồng Nai</dd></div>
         </dl>
       </div>
 
@@ -416,13 +480,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <li><a href="shopee-ads.html">Quảng cáo Shopee</a></li>
         <li><a href="#nen-tang">TikTok, Google</a></li>
         <li><a href="qua-tang.html">Checklist 30 mục</a></li>
+        <li><a href="kien-thuc/">Kiến thức</a></li>
       </ul>
     </div>
     <div>
       <h3>Liên hệ</h3>
       <ul>
         <li>Zalo, điện thoại: <a href="tel:+84986219360">0986 219 360</a></li>
+        <li>Điện thoại: <a href="tel:+84356256128">0356 256 128</a></li>
         <li>Email: hanamagency@gmail.com</li>
+        <li>Văn phòng: Block E, Khu ID Town, đường N3, Khu đô thị iD Junction, đường Phạm Văn Đồng, phường Long Thành, thành phố Đồng Nai</li>
         <li><a href="https://www.facebook.com/HaNamAgency/" target="_blank" rel="noopener">facebook.com/HaNamAgency</a></li>
         <li><a href="chinh-sach.html">Chính sách bảo mật và điều khoản</a></li>
       </ul>
@@ -437,6 +504,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <a class="btn btn-cta" href="#lien-he">Nhận tư vấn</a>
 </nav>
 
-<script src="assets/site.js?v=5" defer></script>
+<script src="assets/site.js?v=6" defer></script>
 </body>
 </html>

@@ -1,0 +1,22 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="vi">
+  <title>Kiến thức quảng cáo cho chủ shop · HÀ NAM AGENCY</title>
+  <link href="{{ site.url }}/kien-thuc/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/kien-thuc/"/>
+  <id>{{ site.url }}/kien-thuc/</id>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <author><name>Lê Nam, HÀ NAM AGENCY</name></author>
+  {%- for post in site.posts limit: 20 %}
+  <entry>
+    <title>{{ post.title | xml_escape }}</title>
+    <link href="{{ site.url }}{{ post.url }}"/>
+    <id>{{ site.url }}{{ post.url }}</id>
+    <published>{{ post.date | date_to_xmlschema }}</published>
+    <updated>{{ post.updated | default: post.date | date_to_xmlschema }}</updated>
+    <summary>{{ post.description | strip_html | xml_escape }}</summary>
+  </entry>
+  {%- endfor %}
+</feed>
