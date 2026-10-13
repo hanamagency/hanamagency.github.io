@@ -1,0 +1,6 @@
+# Web là HTML tĩnh, không dùng theme hay plugin của Jekyll.
+# File này chỉ để không xuất bản các file ghi chú lên web.
+# Thư mục _ghi_chu tự được bỏ qua vì bắt đầu bằng dấu gạch dưới.
+exclude:
+  - CLAUDE.md
+  - README.md
