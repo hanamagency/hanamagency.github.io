@@ -4,9 +4,14 @@ Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục gồm:
 
 Phiên bản CSS và JS hiện tại: `site.css?v=6`, `site.js?v=6` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
 
+## 2026-10-13: Xuất bản PR số 3
+
+- Nam trả lời "duyệt". PR số 3 (lượt 1 đến lượt 4 bên dưới) được gộp vào `main`, GitHub Pages dựng lại web.
+- Chế độ repo: Nam quyết định giữ công khai cả `hanamagency.github.io` và `quang-cao-co-lai`, chấp nhận người khác có thể fork. Lý do: ở gói GitHub Free, repo riêng tư thì GitHub Pages ngừng xuất bản web.
+
 ## 2026-10-13 (lượt 4): Họ tên Lê Nam, đầu trang Checklist đủ mục, chốt các câu hỏi còn mở
 
-Cùng nhánh và PR số 3. Trạng thái: đã kiểm thử trên máy chủ thử, chưa xuất bản, chờ Nam trả lời "duyệt".
+Cùng nhánh và PR số 3. Trạng thái: đã xuất bản cùng PR số 3.
 
 - Họ tên: tiêu đề mục người sáng lập (trang Facebook, Shopee) thành "Lê Nam, người sáng lập HÀ NAM AGENCY"; tên tác giả bài viết, mô tả ảnh, schema.org (`founder`, `author`) và nguồn tin dùng "Lê Nam". Câu văn bên trong vẫn gọi ngắn là "Nam".
 - Đầu trang Checklist (`qua-tang.html`): trước chỉ có nút "Dịch vụ", nay thêm "Kiến thức", "Cách làm việc", "Hỏi đáp" như trang chủ. Lý do: Nam thấy thanh trên cùng bị thu gọn, khó thao tác. Sửa luôn khoảng trống thừa trong nút "Đăng ký kiểm tra".

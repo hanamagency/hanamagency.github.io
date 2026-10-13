@@ -8,7 +8,7 @@
 - `docs/CONTENT_AND_BLOG_WORKFLOW.md`: khi viết bài cho mục Kiến thức
 - `docs/HUONG_DAN_VIEC_CAN_LAM.md`: các việc Nam tự làm ngoài web (Apps Script, GTM, Search Console, Google Business)
 
-Repo công khai trên GitHub. Không ghi vào bất kỳ file nào trong repo: thông tin thuế, doanh thu, chiến lược kinh doanh riêng, mật khẩu, token, email cá nhân của Nam.
+Repo công khai trên GitHub, Nam quyết định giữ công khai (13/10/2026). Không chuyển repo sang riêng tư khi tài khoản còn ở gói Free, vì GitHub Pages sẽ ngừng xuất bản web. Không ghi vào bất kỳ file nào trong repo: thông tin thuế, doanh thu, chiến lược kinh doanh riêng, mật khẩu, token, email cá nhân của Nam.
 
 ## Web và triển khai
 

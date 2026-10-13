@@ -38,6 +38,7 @@ Tài liệu cho mọi phiên Claude và người làm web sau này. Repo công k
 | Nút liên hệ nổi | Máy tính: mọi trang. Điện thoại: chỉ trang chưa có thanh liên hệ dưới đáy | 13/10/2026 |
 | Blog | Mục Kiến thức bằng Jekyll, Claude dàn trang và soát, Nam duyệt rồi đăng. Không làm forum | 13/10/2026 |
 | Kiểm tra miễn phí | Giữ câu "5 suất mỗi tuần" (Nam xác nhận) | 13/10/2026 |
+| Chế độ repo | Giữ công khai cả 2 repo (web chính và trang giáo trình). Gói GitHub Free không xuất bản web từ repo riêng tư | 13/10/2026 |
 | Số điện thoại | Giữ cả 2 số: 0986 219 360 (Zalo, điện thoại, đang là số chính) và 0356 256 128 (điện thoại). Nam sẽ chuyển dần sang số 0356 256 128 đặt tên HÀ NAM AGENCY | 13/10/2026 |
 | Đầu trang | Trang nào cũng có đủ mục điều hướng, không thu gọn còn mỗi nút Dịch vụ (trừ trang cảm ơn và 404 giữ tối giản) | 13/10/2026 |
 

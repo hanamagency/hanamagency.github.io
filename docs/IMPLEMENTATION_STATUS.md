@@ -1,12 +1,12 @@
 # Trạng thái triển khai
 
-Cập nhật: 13/10/2026, sau lượt 4 của PR số 3 (nhánh `claude/facebook-business-verify-address-00wvp2`).
+Cập nhật: 13/10/2026. PR số 3 (nhánh `claude/facebook-business-verify-address-00wvp2`) đã được Nam duyệt và gộp vào `main`.
 
 Ý nghĩa trạng thái: Đã kiểm tra (đã đọc mã, đối chiếu), Đã sửa (đã đổi mã), Đã kiểm thử (đã chạy thử và đạt), Chờ xác nhận (chờ Nam quyết), Chờ quyền truy cập (cần tài khoản Nam), Chưa triển khai.
 
-"Đã kiểm thử" ở đây là kiểm trên máy chủ thử. Web thật chỉ đổi sau khi Nam trả lời "duyệt" và PR được gộp vào `main`.
+"Đã kiểm thử" ở đây là kiểm trên máy chủ thử trước khi gộp. Các hạng mục trong bảng "Trên web" đã lên web thật cùng PR số 3.
 
-## Trên web (trong PR số 3)
+## Trên web (đã xuất bản cùng PR số 3)
 
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
@@ -25,9 +25,10 @@ Cập nhật: 13/10/2026, sau lượt 4 của PR số 3 (nhánh `claude/facebook
 | Mục Kiến thức và 3 bài đầu | Đã kiểm thử | Nam tạm coi nội dung là ổn, sửa sau nếu cần |
 | Trang 404, ảnh chia sẻ riêng | Đã kiểm thử | |
 | Câu "5 suất mỗi tuần" | Đã kiểm tra | Nam xác nhận giữ |
-| Xuất bản (gộp PR vào `main`) | Chờ xác nhận | Nam trả lời "duyệt" |
+| Xuất bản (gộp PR số 3 vào `main`) | Đã xuất bản | Nam duyệt ngày 13/10/2026 |
+| Chế độ repo | Đã kiểm tra | Giữ công khai cả 2 repo, Nam quyết định 13/10/2026 |
 
-## Ngoài web (Nam làm, hướng dẫn ở `HUONG_DAN_VIEC_CAN_LAM.md`)
+## Ngoài web (Nam làm, hướng dẫn ở `HUONG_DAN_VIEC_CAN_LAM.md`, bỏ qua việc 1 vì đã xuất bản)
 
 | Việc | Trạng thái | Ghi chú |
 |---|---|---|
