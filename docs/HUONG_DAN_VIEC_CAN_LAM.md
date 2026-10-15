@@ -14,6 +14,8 @@ Trên máy tính: sau khi gộp, mở thư mục web và chạy `git pull` để
 
 ## 2. Cài Apps Script bản 2.4
 
+Đã xong: Apps Script đang chạy bản 2.5 từ sáng 16/10/2026 (2.4 + vẫn trả `ok: true` khi Telegram, email lỗi sau khi đã ghi Sheet). Các bước dưới giữ để tham khảo khi cần cài lại hoặc quay về bản cũ.
+
 Mã nằm trong gói tải về (`apps-script/Code-2.4.gs`), không có trong repo.
 
 1. Mở Google Sheet nhận đăng ký, chọn Tiện ích mở rộng, Apps Script.

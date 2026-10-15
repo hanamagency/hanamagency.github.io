@@ -46,7 +46,7 @@ Cập nhật: 16/10/2026. Đợt 16/10 (nhánh `claude/xac-nhan-lead-va-noi-dung
 | Trang TikTok Ads, Google Ads | Chưa triển khai | Chờ Nam gửi gói, giá, phạm vi việc |
 | Đầu trang dùng chung cho 5 trang .html | Chưa triển khai | Chuyển 5 trang sang khuôn Jekyll để sửa menu một chỗ |
 | `self_check_start` | Chưa triển khai | Cần thêm trình kích hoạt trong GTM |
-| Form đọc được kết quả từ Apps Script | Đã kiểm thử | 16/10/2026. Đã thử thật với Apps Script 2.3 (đọc được JSON). 7 ca kiểm thử đạt |
+| Form đọc được kết quả từ Apps Script | Đã kiểm thử | 16/10/2026. Đã thử thật với Apps Script 2.3 và 2.5 (đọc được JSON). 7 ca kiểm thử đạt |
 
 ## Đợt 16/10/2026
 
@@ -61,7 +61,10 @@ Cập nhật: 16/10/2026. Đợt 16/10 (nhánh `claude/xac-nhan-lead-va-noi-dung
 | Chính sách nêu Google Ads, ChatGPT Ads | Đã sửa | |
 | GTM bản v6 (tên theo nền tảng, ChatGPT Ads) | Đã xuất bản | Phiên bản 6, 00:54 16/10/2026. Xem trước trên web thật đạt (page_view, contact, select_content, generate_lead; Meta Lead, Contact; ChatGPT lead_created) |
 | Sự kiện chuyển đổi ChatGPT Ads | Đã tạo | HN wRwY - Gui form (lead_created), HN wRwY - Lien he (contact), HN wRwY - Xem trang (page_viewed) |
-| Apps Script 2.5 (2.4 + giữ ok: true khi Telegram, email lỗi) | Đã lưu trong trình soạn thảo, chưa triển khai | Mã ngoài repo. /exec vẫn trả 2.3; web chạy đúng với 2.3 |
+| Apps Script 2.5 (2.4 + giữ ok: true khi Telegram, email lỗi) | Đã triển khai | Nam triển khai sáng 16/10/2026, `/exec` trả `"version":"2.5"`. Mã ngoài repo. Thử thật 06:43: trả `ok: true, saved: true`, sang trang cảm ơn |
+| Meta 6008 kiểm bằng Thử nghiệm sự kiện | Đã kiểm thử | 16/10/2026 06:43: Lead có ID sự kiện bằng `event_id` của web, Contact, PageView. `SubscribedButtonClick` là sự kiện Meta tự ghi, không phải chuyển đổi |
+| GA4 5LXP: phương diện tùy chỉnh, sự kiện chính | Đã kiểm thử | 11 phương diện (thêm `content_type`, `content_id` ngày 16/10); `generate_lead` là sự kiện chính, đang nhận dữ liệu |
+| Google Ads 9025: hành động chuyển đổi "Gửi form" | Chưa triển khai | Cần tạo trong Google Ads rồi thêm thẻ GTM bản 7 |
 | Search Console, sitemap | Chưa triển khai | |
 | Báo cáo phễu hằng tuần trong Google Sheet | Chưa triển khai | Đợt sau |
 | Nút tự nguyện gửi kết quả Checklist | Chưa triển khai | Đợt sau |

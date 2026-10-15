@@ -4,6 +4,15 @@ Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục gồm:
 
 Phiên bản CSS và JS hiện tại: `site.css?v=7`, `site.js?v=7` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
 
+## 2026-10-16 (sáng): Apps Script 2.5 đã chạy, kiểm đo lường trên web thật
+
+Không sửa trang web, chỉ ghi trạng thái.
+
+- Nam triển khai Apps Script 2.5 (lần triển khai `AKfycbz7BI9N59`), `/exec` trả `"version":"2.5"`.
+- Thử thật 06:43 trên web đang chạy (không dùng Xem trước): form trả `ok: true, saved: true`, sang trang cảm ơn. Meta Thử nghiệm sự kiện nhận Lead có ID sự kiện bằng `event_id`, Contact, PageView. GA4 nhận `contact_panel_open`, `contact`, `generate_lead`. ChatGPT Ads nhận `lead_created`, `contact`.
+- GA4: thêm phương diện tùy chỉnh `content_type`, `content_id` (tổng 11). `generate_lead` là sự kiện chính.
+- Việc còn lại: Nam xóa các dòng thử trong Google Sheet; hành động chuyển đổi Google Ads và thẻ GTM bản 7; Search Console.
+
 ## 2026-10-16: Form xác nhận lưu thật, sửa nội dung theo 2 bản rà soát, GTM bản v6 có ChatGPT Ads
 
 Nhánh `claude/xac-nhan-lead-va-noi-dung-2026-10-16`. Nam giao toàn quyền trong phiên này (tự kiểm thử, tự xuất bản).
