@@ -14,9 +14,9 @@ Phần lớn trường hợp không phải do "Facebook đổi thuật toán". T
 
 ## 1. Nhóm quảng cáo quay lại giai đoạn máy học
 
-Sau khi bật mới hoặc sửa lớn, Facebook cần thời gian để tìm đúng người xem. Meta gọi khoảng thời gian này là giai đoạn máy học. Theo hướng dẫn của Meta, một nhóm quảng cáo thường cần khoảng 50 kết quả trong 7 ngày kể từ lần sửa lớn gần nhất để ra khỏi giai đoạn này.
+Sau khi bật mới hoặc sửa lớn, Facebook cần thời gian để tìm đúng người xem. Meta gọi khoảng thời gian này là giai đoạn máy học. Theo hướng dẫn của Meta, một nhóm quảng cáo thường cần khoảng 50 sự kiện tối ưu trong 7 ngày kể từ lần sửa lớn gần nhất để ra khỏi giai đoạn này. Sự kiện tối ưu là kết quả bạn chọn cho nhóm quảng cáo (tin nhắn, khách hàng tiềm năng, đơn hàng...), không phải lúc nào cũng là đơn hàng.
 
-Thay đổi ngân sách nhiều trong một lần được tính là sửa lớn. Khi quay lại giai đoạn máy học, kết quả dao động mạnh và chi phí thường cao hơn lúc ổn định.
+Thay đổi ngân sách nhiều trong một lần có thể được tính là sửa lớn, tùy mức thay đổi. Khi quay lại giai đoạn máy học, kết quả dao động mạnh và chi phí thường cao hơn lúc ổn định.
 
 Cách nhận biết: xem cột Phân phối của nhóm quảng cáo. Trạng thái kiểu "Đang học" hoặc "Học bị giới hạn" cho biết nhóm đó chưa ổn định. Tên hiển thị có thể khác đôi chút tùy phiên bản giao diện.
 
@@ -32,9 +32,11 @@ Ngân sách tăng nhưng tệp người xem không đổi thì cùng một ngư�
 
 Cách nhận biết: thêm 3 cột Tần suất, Tỷ lệ nhấp (CTR) và Chi phí trên 1.000 lượt hiển thị (CPM) vào báo cáo. Tần suất tăng dần trong khi tỷ lệ nhấp giảm là dấu hiệu mẫu quảng cáo cần được thay mới.
 
-## 4. Đo lường đếm thiếu đơn
+## 4. Đo lường đếm thiếu kết quả
 
-Facebook tối ưu dựa trên những đơn mà nó đếm được. Nếu mã theo dõi (Pixel) đếm thiếu, ví dụ do trình duyệt trên iPhone chặn, hoặc đơn được chốt qua tin nhắn mà không ghi nhận lại, thì Facebook đang học từ dữ liệu không đủ. Khi tăng ngân sách, sai lệch này lớn dần.
+Facebook phân phối quảng cáo dựa trên sự kiện tối ưu mà nhóm quảng cáo đã chọn và những tín hiệu nó nhận được. Nếu mã theo dõi (Pixel) đếm thiếu, ví dụ do trình duyệt trên iPhone chặn, thì Facebook đang học từ dữ liệu không đủ. Khi tăng ngân sách, sai lệch này lớn dần.
+
+Shop chốt đơn qua tin nhắn, điện thoại hoặc nhiều kênh cùng lúc cũng cần lưu ý: Facebook chỉ thấy tin nhắn hoặc lượt gửi form, không thấy đơn chốt sau đó. Nếu không đối chiếu với sổ bán hàng, số đơn thật có thể khác khá xa số kết quả nền tảng báo.
 
 Cách nhận biết: mỗi tuần so số đơn trong sổ bán hàng của shop với số kết quả Facebook báo. Hai con số chênh nhau nhiều thì nên sửa phần đo lường trước khi tăng tiếp. [Checklist 30 mục](/qua-tang.html) có nhóm câu hỏi riêng về phần này.
 
@@ -51,6 +53,13 @@ Con số này là điểm dừng cho mọi quyết định tăng hay giảm ở 
 ### Bước 2: Tăng từng bước, có khoảng nghỉ
 
 Kinh nghiệm của nhiều người chạy quảng cáo là tăng khoảng 15% đến 20% mỗi lần, cách nhau 2 đến 3 ngày, để hạn chế việc nhóm quảng cáo quay lại giai đoạn máy học. Đây là kinh nghiệm thực tế, không phải quy định của Meta. Mỗi tài khoản phản ứng khác nhau, nên theo dõi số liệu sau mỗi lần tăng.
+
+Chỉ nên tăng khi đủ các điều kiện sau:
+
+- Nhóm quảng cáo đã ra khỏi giai đoạn máy học.
+- Chi phí mỗi đơn đang thấp hơn mức tối đa ở bước 1.
+- Đủ hàng để bán thêm trong 1 đến 2 tuần tới.
+- Đủ người trả lời tin nhắn và chốt đơn khi lượng khách tăng.
 
 ### Bước 3: Mở rộng song song thay vì dồn tiền
 
@@ -79,3 +88,12 @@ Ví dụ một quy tắc dừng: sau khi nhóm quảng cáo ra khỏi giai đo�
 Nếu đã tăng từng bước, đã thay mẫu mới mà chi phí mỗi đơn vẫn vượt mức tối đa, nên kiểm tra lại phần đo lường và cấu trúc chiến dịch trước khi tăng tiếp. Tăng thêm ngân sách lúc này thường chỉ làm khoảng chênh lớn hơn.
 
 Khi cần người xem cùng, bạn chỉ cần cấp quyền chỉ xem, không phải gửi mật khẩu. Cách cấp quyền có trong bài [Quyền chỉ xem tài khoản quảng cáo là gì, cấp thế nào cho an toàn](/kien-thuc/quyen-chi-xem-tai-khoan-quang-cao/).
+
+## Nguồn tham khảo
+
+- Trung tâm trợ giúp doanh nghiệp của Meta: [Giới thiệu về giai đoạn máy học](https://www.facebook.com/business/help/112167992830700)
+- Trung tâm trợ giúp doanh nghiệp của Meta: [Học bị giới hạn](https://www.facebook.com/business/help/269269737396981)
+
+Mốc 15% đến 20% và khoảng nghỉ 2 đến 3 ngày là kinh nghiệm thực tế, không lấy từ tài liệu của Meta.
+
+*Cập nhật 16/10/2026: viết rõ sự kiện tối ưu không phải lúc nào cũng là đơn hàng, thêm điều kiện nên tăng ngân sách và nguồn tham khảo.*

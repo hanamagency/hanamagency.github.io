@@ -29,7 +29,7 @@ Khoảng 7 đến 10 ngày trước ngày sale, mục tiêu là chuẩn bị, ch
 Phần lớn ngân sách của cả đợt nên dành cho ngày sale chính.
 
 - **Dồn ngân sách cho sản phẩm chủ lực đã thử ở giai đoạn trước**, không tăng giá thầu đồng loạt cho mọi sản phẩm.
-- **Theo dõi theo khung giờ.** Nhiều shop ghi nhận đơn dồn vào các khung giờ mở sale như 0 giờ, 12 giờ và buổi tối. Xem lại số liệu ngày sale trước của chính shop mình để biết khung giờ nào cần theo sát.
+- **Theo dõi theo khung giờ.** Nhiều shop ghi nhận đơn dồn vào các khung giờ mở sale như 0 giờ, 12 giờ và buổi tối, nhưng mỗi shop mỗi khác. Lấy lịch sử đơn theo giờ của chính shop mình ở các đợt sale trước làm gốc để chọn khung giờ cần theo sát.
 - **Kiểm tra nhiều lần trong ngày:** số dư quảng cáo, sản phẩm sắp hết hàng (tắt quảng cáo của sản phẩm đã hết), và ROAS của từng sản phẩm.
 - **Điều chỉnh theo ROAS hòa vốn.** Sản phẩm có ROAS thấp hơn mức hòa vốn trong vài giờ liền thì giảm giá thầu hoặc tạm dừng. Sản phẩm có ROAS tốt thì tăng ngân sách từng bước.
 
@@ -39,7 +39,18 @@ ROAS là doanh thu chia cho chi phí quảng cáo. ROAS hòa vốn là mức mà
 
 > ROAS hòa vốn = giá bán sau khuyến mãi chia cho lợi nhuận mỗi đơn trước quảng cáo.
 >
-> Ví dụ minh họa: giá sau voucher 200.000đ. Sau khi trừ giá vốn, phí sàn, phí thanh toán và phần voucher shop chịu, mỗi đơn còn 50.000đ. ROAS hòa vốn là 200.000 chia 50.000, bằng 4. ROAS dưới 4 nghĩa là phần quảng cáo đang lấy hết lợi nhuận của đơn.
+> Ví dụ minh họa: giá sau voucher 200.000đ. Sau khi trừ các khoản bên dưới, mỗi đơn còn 50.000đ. ROAS hòa vốn là 200.000 chia 50.000, bằng 4. ROAS dưới 4 nghĩa là phần quảng cáo đang lấy hết lợi nhuận của đơn.
+
+Lợi nhuận mỗi đơn trước quảng cáo là giá sau khuyến mãi trừ đi đủ các khoản:
+
+- Giá vốn sản phẩm và bao bì.
+- Phí sàn (phí cố định, phí dịch vụ) và phí thanh toán.
+- Phần voucher, mã giảm giá shop chịu.
+- Phần phí vận chuyển shop chịu (nếu có).
+- Hoàn hàng ước tính: tỷ lệ hoàn của shop nhân với tiền mất mỗi đơn hoàn.
+- Hoa hồng tiếp thị liên kết (affiliate) nếu đơn đến từ đó.
+
+Công thức chỉ đúng trong phạm vi các khoản đã đưa vào. Bỏ sót khoản nào thì ROAS hòa vốn tính ra thấp hơn thực tế, shop tưởng có lãi trong khi đang lỗ. Phí sàn thay đổi theo ngành hàng và theo từng đợt, nên lấy số mới nhất trong Kênh Người Bán.
 
 Shop muốn giữ lại một phần lợi nhuận thì đặt ngưỡng cao hơn mức hòa vốn.
 
@@ -70,3 +81,5 @@ Trong 2 đến 3 ngày sau sale, nhu cầu thường giảm.
 - Không ghi lại số liệu sau sale nên đợt sau lại bắt đầu từ đầu.
 
 [Checklist 30 mục](/qua-tang.html#shopee) có tab Shopee với nhóm câu hỏi riêng về ngày sale và khuyến mãi, bạn có thể tự chấm trước mỗi đợt.
+
+*Cập nhật 16/10/2026: liệt kê đủ các khoản cần trừ khi tính ROAS hòa vốn, nhấn mạnh chọn khung giờ theo lịch sử của từng shop.*
