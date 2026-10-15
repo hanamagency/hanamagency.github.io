@@ -3,8 +3,8 @@
 
    Đo lường: web không tự tải GA4 và Meta Pixel. Web chỉ đẩy sự kiện vào dataLayer, Google Tag Manager
    (GTM-KGTWH2R4) nhận rồi gửi sang GA4 và Meta. Tên sự kiện và tham số theo chuẩn của Google và Meta:
-     generate_lead   gửi form thành công (Meta: Lead). Tham số: form_id, lead_source, lead_need, lead_budget,
-                     lead_platform, currency, event_id
+     generate_lead   gửi form thành công VÀ Apps Script báo đã lưu (ok: true) (Meta: Lead). Tham số: form_id, lead_source,
+                     lead_need, lead_budget, lead_platform, currency, event_id. Không xác nhận được thì không đẩy.
      contact         bấm Zalo, chép số Zalo, Messenger, gọi điện (Meta: Contact). Tham số: method, click_location, link_url
      select_content  bấm chọn gói giá (content_type pricing_plan) hoặc một mục trong menu Dịch vụ (content_type service_menu).
                      Tham số: content_type, content_id
@@ -21,7 +21,9 @@
     // false = GA4 và Pixel do Google Tag Manager tải. true = web tự tải như bản cũ (khi đó tạm dừng thẻ GA4, Pixel trong GTM).
     LOAD_TAGS_DIRECT: false,
     META_PIXEL_ID: '939933335396008',
-    GA4_ID: 'G-BTZNP2S6D1',
+    GA4_ID: 'G-3RYL845LXP', // tài sản GA4 "Hà Nam Agency" từ 11/10/2026 (chỉ dùng khi LOAD_TAGS_DIRECT = true)
+    // Chờ Apps Script trả lời tối đa bao nhiêu mili giây (Apps Script ghi Sheet, báo Telegram, gửi email rồi mới trả lời)
+    SAVE_TIMEOUT_MS: 25000,
     CURRENCY: 'VND',
     ZALO_PHONE: '0986219360',
     ZALO_DISPLAY: '0986 219 360',
@@ -201,14 +203,22 @@
     else { field.removeAttribute('data-invalid'); if (box) box.textContent = ''; }
   }
 
+  // Câu báo lỗi từng ô, dùng chung cho kiểm tra trên web và lỗi Apps Script trả về
+  var FIELD_MSG = {
+    name: 'Bạn cho HÀ NAM AGENCY biết tên để tiện xưng hô nhé.',
+    zalo: 'Số Zalo chưa đúng. Ví dụ: 0986 219 360.',
+    email: 'Email chưa đúng định dạng. Bỏ trống nếu không cần.',
+    consent_contact: 'Cần tick ô này để HÀ NAM AGENCY được liên hệ lại với bạn.'
+  };
+
   function validate(form, data, partial) {
     var errors = {};
     if (!partial) {
-      if (!data.name || data.name.length < 2) errors.name = 'Bạn cho HÀ NAM AGENCY biết tên để tiện xưng hô nhé.';
-      if (!isPhone(data.zalo)) errors.zalo = 'Số Zalo chưa đúng. Ví dụ: 0986 219 360.';
-      if (!data.consent_contact) errors.consent_contact = 'Cần tick ô này để HÀ NAM AGENCY được liên hệ lại với bạn.';
+      if (!data.name || data.name.length < 2) errors.name = FIELD_MSG.name;
+      if (!isPhone(data.zalo)) errors.zalo = FIELD_MSG.zalo;
+      if (!data.consent_contact) errors.consent_contact = FIELD_MSG.consent_contact;
     }
-    if (data.email && !isEmail(data.email)) errors.email = 'Email chưa đúng định dạng. Bỏ trống nếu không cần.';
+    if (data.email && !isEmail(data.email)) errors.email = FIELD_MSG.email;
     if (data.page && data.page.indexOf('.') === -1) errors.page = 'Dán đường dẫn đầy đủ, ví dụ facebook.com/HaNamAgency. Bỏ trống nếu chưa có.';
     ['name', 'zalo', 'email', 'page', 'consent_contact'].forEach(function (k) { setError(form, k, errors[k] || ''); });
     return errors;
@@ -267,9 +277,30 @@
     window.location.href = CONFIG.THANK_YOU_PAGE;
   }
 
+  // Gửi về Apps Script và đọc câu trả lời. Kết quả { status, id, errors }:
+  //   saved    Apps Script báo đã lưu (ok: true). Chỉ trường hợp này mới đẩy generate_lead và sang trang cảm ơn
+  //   invalid  Apps Script báo thiếu hoặc sai thông tin (ok: false, errors: ['name', 'zalo', 'email', 'consent_contact'])
+  //   failed   Apps Script báo lỗi khi lưu (ok: false, không kèm errors)
+  //   unknown  không đọc được câu trả lời (mất mạng, quá thời gian chờ, trình duyệt chặn): chưa biết đã lưu hay chưa
+  // Gửi dạng application/x-www-form-urlencoded (không cần hỏi trước CORS); Apps Script trả JSON đọc được từ web.
   function post(payload) {
-    if (!CONFIG.ENDPOINT) return Promise.resolve(); // chế độ xem thử
-    return fetch(CONFIG.ENDPOINT, { method: 'POST', mode: 'no-cors', body: payload });
+    if (!CONFIG.ENDPOINT) return Promise.resolve({ status: 'saved', id: '', preview: true }); // chế độ xem thử
+    var ctrl = null, timer = null;
+    try { ctrl = new AbortController(); } catch (e) {}
+    var opts = { method: 'POST', body: payload, redirect: 'follow', credentials: 'omit' };
+    if (ctrl) opts.signal = ctrl.signal;
+    var request = fetch(CONFIG.ENDPOINT, opts)
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res.ok === true) return { status: 'saved', id: res.id || '' };
+        if (res && res.ok === false && res.errors && res.errors.length) return { status: 'invalid', errors: res.errors };
+        if (res && res.ok === false) return { status: 'failed' };
+        return { status: 'unknown' };
+      }, function () { return { status: 'unknown' }; });
+    var timeout = new Promise(function (resolve) {
+      timer = setTimeout(function () { try { if (ctrl) ctrl.abort(); } catch (e) {} resolve({ status: 'unknown', timeout: true }); }, CONFIG.SAVE_TIMEOUT_MS);
+    });
+    return Promise.race([request, timeout]).then(function (res) { clearTimeout(timer); return res; });
   }
 
   function initForm(form) {
@@ -315,13 +346,30 @@
       button.textContent = 'Đang gửi…';
       showStatus('info', '');
 
-      post(payload)
-        .then(function () { trackLead(formId, eventId, data, function () { goThanks(data, formId, eventId, isShort); }); })
-        .catch(function () {
-          button.disabled = false;
-          button.textContent = oldLabel;
-          showStatus('error', 'Chưa gửi được do lỗi mạng. Bạn thử lại, hoặc nhắn Zalo ' + CONFIG.ZALO_DISPLAY + ' để HÀ NAM AGENCY hỗ trợ ngay.');
-        });
+      post(payload).then(function (res) {
+        if (res.status === 'saved') {
+          // Đã lưu thật: lúc này mới báo generate_lead cho GA4, Meta, Google Ads, ChatGPT Ads rồi sang trang cảm ơn
+          sSet('hn_lead_id', res.id || '');
+          trackLead(formId, eventId, data, function () { goThanks(data, formId, eventId, isShort); });
+          return;
+        }
+        button.disabled = false;
+        button.textContent = oldLabel;
+        if (res.status === 'invalid') {
+          var bad = res.errors.filter(function (k) { return form.querySelector('[data-field="' + k + '"]'); });
+          bad.forEach(function (k) { setError(form, k, FIELD_MSG[k] || 'Thông tin chưa hợp lệ, bạn kiểm tra lại giúp.'); });
+          showStatus('error', bad.length ? 'Còn ' + bad.length + ' mục cần sửa trước khi gửi.' : 'Thông tin chưa hợp lệ. Bạn kiểm tra lại, hoặc nhắn Zalo ' + CONFIG.ZALO_DISPLAY + '.');
+          var firstBad = bad.length && form.querySelector('[data-field="' + bad[0] + '"] input, [data-field="' + bad[0] + '"] select');
+          if (firstBad) firstBad.focus();
+          return;
+        }
+        // failed hoặc unknown: không báo lead, giữ nguyên dữ liệu trong form, cho gửi lại.
+        // Gửi lại bị trùng thì Apps Script tự lọc theo số Zalo trong 24 giờ.
+        button.textContent = 'Gửi lại';
+        showStatus('error', res.status === 'failed'
+          ? 'Hệ thống chưa lưu được đăng ký của bạn. Bạn bấm Gửi lại, hoặc nhắn Zalo ' + CONFIG.ZALO_DISPLAY + ' để HÀ\u00a0NAM\u00a0AGENCY hỗ trợ.'
+          : 'Chưa xác nhận được đăng ký do mạng chập chờn. Thông tin bạn điền vẫn còn trong form, bạn bấm Gửi lại, hoặc nhắn Zalo ' + CONFIG.ZALO_DISPLAY + '.');
+      });
     });
 
     // Xóa báo lỗi khi người dùng sửa
@@ -354,7 +402,13 @@
       ['budget', 'need', 'page', 'email', 'lead_source'].forEach(function (k) { if (data[k]) payload.append(k, data[k]); });
       button.disabled = true;
       button.textContent = 'Đang gửi…';
-      post(payload).then(function () {
+      post(payload).then(function (res) {
+        if (res.status !== 'saved') {
+          button.disabled = false;
+          button.textContent = 'Gửi thêm thông tin';
+          if (status) { status.hidden = false; status.setAttribute('data-kind', 'error'); status.textContent = res.status === 'unknown' ? 'Chưa xác nhận được do mạng chập chờn, bạn bấm gửi lại nhé.' : 'Chưa lưu được phần bổ sung. Bạn thử lại, hoặc nhắn Zalo ' + CONFIG.ZALO_DISPLAY + '.'; }
+          return;
+        }
         dl({ event: 'lead_details_submit', form_id: sGet('hn_form_id') || '', lead_need: data.need || '', lead_budget: data.budget || '', lead_source: data.lead_source || '' });
         sSet('hn_lead_short', '');
         if (data.need) { sSet('hn_lead_need', data.need); try { document.dispatchEvent(new CustomEvent('hn:need-change')); } catch (e) {} }

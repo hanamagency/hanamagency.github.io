@@ -135,4 +135,4 @@ Còn chờ Nam:
 
 ## 2026-09-24: Web xác minh doanh nghiệp Meta
 
-- Làm web cho HỘ KINH DOANH HÀ NAM để Meta xác minh doanh nghiệp, có MST 045088006768. Nội dung hiện đủ khi không chạy JavaScript để bot của Meta đọc được.
+- Làm web cho HỘ KINH DOANH HÀ NAM để Meta xác minh doanh nghiệp, có mã số thuế (không ghi số ở đây vì repo công khai). Nội dung hiện đủ khi không chạy JavaScript để bot của Meta đọc được.

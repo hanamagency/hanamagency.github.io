@@ -18,7 +18,7 @@ kramdown:
   hard_wrap: false
 
 # Số phiên bản CSS, JS. Tăng số này và số ?v= ở các trang .html cùng lúc mỗi khi sửa site.css, site.js
-asset_v: 6
+asset_v: 7
 
 defaults:
   - scope:

@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /cam-on.html
 Sitemap: https://hanamagency.github.io/sitemap.xml
