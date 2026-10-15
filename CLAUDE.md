@@ -4,7 +4,7 @@
 - `docs/IMPLEMENTATION_STATUS.md`: hạng mục nào đã xong, đang chờ gì
 - `docs/HA_NAM_AGENCY_CONTEXT.md`: định vị, khách hàng, các quyết định đã thống nhất, cách diễn đạt
 - `docs/CHANGELOG.md`: lịch sử thay đổi (mới nhất ở trên)
-- `docs/TRACKING_PLAN.md`: GTM, GA4, Meta Pixel và các sự kiện, khi đụng tới đo lường, form, nút liên hệ
+- `docs/TRACKING_PLAN.md`: GTM, GA4, Meta Pixel, Google Ads, ChatGPT Ads, cách đặt tên trong GTM và các sự kiện, khi đụng tới đo lường, form, nút liên hệ
 - `docs/CONTENT_AND_BLOG_WORKFLOW.md`: khi viết bài cho mục Kiến thức
 - `docs/HUONG_DAN_VIEC_CAN_LAM.md`: các việc Nam tự làm ngoài web (Apps Script, GTM, Search Console, Google Business)
 
@@ -24,7 +24,7 @@ Repo công khai trên GitHub, Nam quyết định giữ công khai (13/10/2026).
 1. Đọc mã thật trước khi kết luận. Không mặc định bản trên máy giống bản trên web.
 2. Đề xuất trước với thay đổi lớn (kiến trúc, CMS, thiết kế lại, quy trình thanh toán thật).
 3. Làm trên nhánh riêng, mở PR nháp vào `main`, gửi ảnh chụp các phần đã sửa.
-4. Chỉ gộp vào `main` khi Nam trả lời đúng chữ "duyệt".
+4. Chỉ gộp vào `main` khi Nam trả lời đúng chữ "duyệt" (ngoại lệ: phiên ngày 16/10/2026 Nam giao toàn quyền tự kiểm thử và xuất bản; phiên khác vẫn hỏi).
 5. Cập nhật `docs/CHANGELOG.md` và `docs/IMPLEMENTATION_STATUS.md` sau mỗi đợt sửa.
 
 Trước khi sửa luôn `git fetch` và xem nhánh mới nhất, vì có hơn một phiên Claude cùng làm trên repo này. Không ghi đè việc của phiên khác.

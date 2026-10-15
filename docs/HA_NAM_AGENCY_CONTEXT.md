@@ -21,7 +21,7 @@ Tài liệu cho mọi phiên Claude và người làm web sau này. Repo công k
 - Các trang: trang chủ, Facebook Ads, Shopee Ads, Checklist 30 mục (`qua-tang.html`), trang cảm ơn, chính sách, 404, mục Kiến thức (`/kien-thuc/`).
 - TikTok và Google chưa có trang riêng. Menu dẫn sang Zalo với ghi chú "Trang chi tiết sắp có". Không tạo link tới trang chưa tồn tại.
 - Liên hệ: Zalo và điện thoại 0986 219 360, điện thoại 0356 256 128, email hanamagency@gmail.com, Messenger m.me/HaNamAgency, Fanpage facebook.com/HaNamAgency. Giờ làm việc Thứ 2 đến Thứ 7, 8:00 đến 17:00.
-- Văn phòng: Block E, Khu ID Town, đường N3, Khu đô thị iD Junction, đường Phạm Văn Đồng, phường Long Thành, thành phố Đồng Nai. Địa chỉ đăng ký kinh doanh: 84/11/3 Lê Duẩn, khu Bàu Cá, xã An Phước, huyện Long Thành, tỉnh Đồng Nai.
+- Văn phòng: Block E, Khu ID Town, đường N3, Khu đô thị iD Junction, đường Phạm Văn Đồng, phường Long Thành, thành phố Đồng Nai. Địa chỉ đăng ký kinh doanh: 84/11/3 Lê Duẩn, khu Bàu Cá, xã An Phước, thành phố Đồng Nai (giấy chứng nhận cấp trước khi sắp xếp đơn vị hành chính ghi xã An Phước, huyện Long Thành, tỉnh Đồng Nai; trang chính sách ghi cả hai cách). Đồng Nai là thành phố trực thuộc Trung ương từ 30/4/2026.
 
 ## Các quyết định đã thống nhất với Nam
 
@@ -38,6 +38,14 @@ Tài liệu cho mọi phiên Claude và người làm web sau này. Repo công k
 | Nút liên hệ nổi | Máy tính: mọi trang. Điện thoại: chỉ trang chưa có thanh liên hệ dưới đáy | 13/10/2026 |
 | Blog | Mục Kiến thức bằng Jekyll, Claude dàn trang và soát, Nam duyệt rồi đăng. Không làm forum | 13/10/2026 |
 | Kiểm tra miễn phí | Giữ câu "5 suất mỗi tuần" (Nam xác nhận) | 13/10/2026 |
+| Quy trình | 16/10/2026 Nam giao toàn quyền cho Claude trong phiên làm việc: tự kiểm thử, tự xuất bản, ghi lịch sử đầy đủ. Ngoài phiên đó vẫn theo quy trình "duyệt" | 16/10/2026 |
+| Mã định danh | Bỏ trường taxID (số căn cước dùng làm mã số thuế) khỏi dữ liệu cho Google và tài liệu repo. Chân trang giữ mã số hộ kinh doanh 8130617574-001. Không viết lại lịch sử repo | 16/10/2026 |
+| Địa chỉ | Ghi theo đơn vị hành chính mới (thành phố Đồng Nai); trang chính sách ghi thêm cách ghi trên giấy chứng nhận | 16/10/2026 |
+| Giá | Giữ công thức theo gói, ô nhập nhận số lẻ. Phí dịch vụ chưa gồm thuế, thu trước khi làm. Ghi rõ quy tắc chuyển gói và ví dụ sát ngưỡng cạnh ô tính phí | 16/10/2026 |
+| TikTok, Google | Đã nhận dự án thật, chưa làm trang chi tiết; giữ menu dẫn sang Zalo. Ưu tiên Facebook, Shopee | 16/10/2026 |
+| Tên miền riêng | Chưa mua, để sau | 16/10/2026 |
+| Form | Chỉ báo generate_lead khi Apps Script trả ok: true (đã lưu thật) | 16/10/2026 |
+| Đo lường | Thêm pixel ChatGPT Ads (OpenAI) 6KVVaRY4BpLzCftuXGWRwY qua GTM. Tên thẻ, biến trong GTM đặt theo nền tảng: [Nền tảng] [mã 4 ký tự] - [Loại] - [Chi tiết] | 16/10/2026 |
 | Chế độ repo | Giữ công khai cả 2 repo (web chính và trang giáo trình). Gói GitHub Free không xuất bản web từ repo riêng tư | 13/10/2026 |
 | Số điện thoại | Giữ cả 2 số: 0986 219 360 (Zalo, điện thoại, đang là số chính) và 0356 256 128 (điện thoại). Nam sẽ chuyển dần sang số 0356 256 128 đặt tên HÀ NAM AGENCY | 13/10/2026 |
 | Đầu trang | Trang nào cũng có đủ mục điều hướng, không thu gọn còn mỗi nút Dịch vụ (trừ trang cảm ơn và 404 giữ tối giản) | 13/10/2026 |

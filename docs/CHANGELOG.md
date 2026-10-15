@@ -2,7 +2,25 @@
 
 Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục gồm: ngày, file đã sửa, nội dung trước và sau (tóm tắt), lý do, kết quả kiểm thử, trạng thái và việc còn lại. Chỉ ghi "đã xong" khi đã kiểm thử. Thư mục `docs` không xuất bản lên web (khai báo trong `_config.yml`), nhưng vẫn đọc được trên GitHub vì repo công khai. Trước ngày 13/10/2026 file này nằm ở `_ghi_chu/LICH_SU.md`.
 
-Phiên bản CSS và JS hiện tại: `site.css?v=6`, `site.js?v=6` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
+Phiên bản CSS và JS hiện tại: `site.css?v=7`, `site.js?v=7` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
+
+## 2026-10-16: Form xác nhận lưu thật, sửa nội dung theo 2 bản rà soát, GTM bản v6 có ChatGPT Ads
+
+Nhánh `claude/xac-nhan-lead-va-noi-dung-2026-10-16`. Nam giao toàn quyền trong phiên này (tự kiểm thử, tự xuất bản).
+
+- `assets/site.js`: bỏ `mode: 'no-cors'`, đọc trả lời JSON của Apps Script. Chỉ khi `ok: true` mới đẩy `generate_lead` và sang trang cảm ơn. `ok: false` kèm `errors` thì báo lỗi đúng ô; `ok: false` không kèm `errors`, mất mạng, trả lời không phải JSON hoặc quá 25 giây thì không đẩy `generate_lead`, giữ nguyên dữ liệu, nút đổi thành "Gửi lại", mời nhắn Zalo. Phần bổ sung ở trang cảm ơn cũng chỉ báo `lead_details_submit` khi lưu được. `GA4_ID` đổi thành `G-3RYL845LXP` (chỉ dùng khi tự tải thẻ). Lý do: trước đây Apps Script lỗi thì GA4, Meta vẫn đếm lead.
+- Đã thử thật từ hanamagency.github.io: Apps Script 2.3 trả JSON đọc được (CORS), khoảng 1,7 giây. Không cần đổi Apps Script để form chạy đúng.
+- Checklist (`qua-tang.html`): sửa 3 mục (xác minh tên miền không ngăn người khác dùng link; mốc khoảng 50 sự kiện tối ưu trong 7 ngày, không phải lúc nào cũng là đơn; "Hạn chế sửa liên tục khi chưa đủ dữ liệu" là kinh nghiệm, không phải quy định). Tiêu đề trang có cả Shopee.
+- Bài tăng ngân sách Facebook: viết theo sự kiện tối ưu, "có thể được tính là sửa lớn", thêm trường hợp chốt qua tin nhắn, điện thoại, điều kiện nên tăng, nguồn tham khảo của Meta, dòng cập nhật.
+- Bài ngân sách Shopee ngày sale: liệt kê đủ các khoản cần trừ khi tính ROAS hòa vốn (giá vốn, phí sàn, phí thanh toán, voucher, vận chuyển shop chịu, hoàn hàng, hoa hồng affiliate), khung giờ theo lịch sử từng shop.
+- Ô tính phí Facebook, Shopee: ghi quy tắc gói, ví dụ sát ngưỡng (30 triệu phí 3 triệu, 31 triệu phí 3,72 triệu; Shopee 20 triệu phí 2 triệu, 21 triệu phí 2,52 triệu), phí chưa gồm thuế, thanh toán trước khi bắt đầu, thanh kéo theo bước 1 triệu. Không đổi giá.
+- Trang Facebook: thêm câu Fanpage và tài khoản doanh nghiệp vẫn đứng tên khách, gỡ quyền được bất cứ lúc nào.
+- Địa chỉ đăng ký ghi theo đơn vị hành chính mới ở chân trang, trang chủ, schema.org; trang chính sách ghi thêm cách ghi trên giấy chứng nhận. Bỏ `taxID` khỏi schema.org. Bỏ số mã số thuế khỏi mục 2026-09-24 bên dưới.
+- `robots.txt`: bỏ dòng chặn `/cam-on.html` để Google đọc được `noindex` trong trang.
+- Chính sách: nêu Google Ads, mã đo lường ChatGPT Ads (OpenAI), cách tắt quảng cáo cá nhân hóa của Google, Meta.
+- `site.css`, `site.js` lên `?v=7`.
+- GTM (ngoài repo): file `GTM-HANAM-do-luong-v6.json` nhập vào không gian làm việc mới "Đo lường v6 - tên theo nền tảng + ChatGPT" (Ghi đè). Xem `TRACKING_PLAN.md`.
+- Kiểm thử: 7 ca form với Apps Script giả (lưu được, sai ô, lỗi lưu, mất mạng, trả lời lạ, trả lời chậm 4 giây, quá 27 giây) đều đạt, không lỗi JavaScript; 4 khu vực sửa không tràn ngang ở 360 và 1280px. Không dựng được Jekyll trên máy chủ của Claude (bị chặn tải gói), các file Jekyll chỉ đổi chữ, không thêm mã Liquid.
 
 ## 2026-10-13: Xuất bản PR số 3
 

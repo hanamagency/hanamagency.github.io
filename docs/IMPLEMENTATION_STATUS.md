@@ -1,6 +1,6 @@
 # Trạng thái triển khai
 
-Cập nhật: 13/10/2026. PR số 3 (nhánh `claude/facebook-business-verify-address-00wvp2`) đã được Nam duyệt và gộp vào `main`.
+Cập nhật: 16/10/2026. Đợt 16/10 (nhánh `claude/xac-nhan-lead-va-noi-dung-2026-10-16`) Nam giao toàn quyền, Claude tự kiểm thử và xuất bản. PR số 3 đã gộp ngày 13/10/2026.
 
 Ý nghĩa trạng thái: Đã kiểm tra (đã đọc mã, đối chiếu), Đã sửa (đã đổi mã), Đã kiểm thử (đã chạy thử và đạt), Chờ xác nhận (chờ Nam quyết), Chờ quyền truy cập (cần tài khoản Nam), Chưa triển khai.
 
@@ -46,4 +46,21 @@ Cập nhật: 13/10/2026. PR số 3 (nhánh `claude/facebook-business-verify-add
 | Trang TikTok Ads, Google Ads | Chưa triển khai | Chờ Nam gửi gói, giá, phạm vi việc |
 | Đầu trang dùng chung cho 5 trang .html | Chưa triển khai | Chuyển 5 trang sang khuôn Jekyll để sửa menu một chỗ |
 | `self_check_start` | Chưa triển khai | Cần thêm trình kích hoạt trong GTM |
-| Form đọc được kết quả từ Apps Script | Chưa triển khai | Bỏ `no-cors`, đọc phản hồi JSON; cần thử với Apps Script thật trước |
+| Form đọc được kết quả từ Apps Script | Đã kiểm thử | 16/10/2026. Đã thử thật với Apps Script 2.3 (đọc được JSON). 7 ca kiểm thử đạt |
+
+## Đợt 16/10/2026
+
+| Hạng mục | Trạng thái | Ghi chú |
+|---|---|---|
+| Form chỉ báo lead khi Apps Script xác nhận lưu | Đã kiểm thử | Xem CHANGELOG |
+| Checklist 3 mục, tiêu đề có Shopee | Đã sửa | |
+| Bài tăng ngân sách Facebook, bài Shopee ngày sale | Đã sửa | Có nguồn tham khảo, dòng cập nhật |
+| Ô tính phí: quy tắc gói, ví dụ sát ngưỡng, chưa gồm thuế, trả trước | Đã kiểm thử | 360, 1280px không tràn |
+| Địa chỉ theo đơn vị hành chính mới, bỏ taxID | Đã sửa | |
+| robots.txt bỏ chặn trang cảm ơn | Đã sửa | Trang vẫn có `noindex` |
+| Chính sách nêu Google Ads, ChatGPT Ads | Đã sửa | |
+| GTM bản v6 (tên theo nền tảng, ChatGPT Ads) | Đã nhập không gian làm việc | Kiểm bằng Xem trước rồi xuất bản, xem nhật ký ngoài repo |
+| Apps Script 2.5 (2.4 + giữ ok: true khi Telegram, email lỗi) | Chưa triển khai | Mã ngoài repo |
+| Search Console, sitemap | Chưa triển khai | |
+| Báo cáo phễu hằng tuần trong Google Sheet | Chưa triển khai | Đợt sau |
+| Nút tự nguyện gửi kết quả Checklist | Chưa triển khai | Đợt sau |
