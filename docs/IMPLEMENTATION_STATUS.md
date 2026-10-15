@@ -59,8 +59,9 @@ Cập nhật: 16/10/2026. Đợt 16/10 (nhánh `claude/xac-nhan-lead-va-noi-dung
 | Địa chỉ theo đơn vị hành chính mới, bỏ taxID | Đã sửa | |
 | robots.txt bỏ chặn trang cảm ơn | Đã sửa | Trang vẫn có `noindex` |
 | Chính sách nêu Google Ads, ChatGPT Ads | Đã sửa | |
-| GTM bản v6 (tên theo nền tảng, ChatGPT Ads) | Đã nhập không gian làm việc | Kiểm bằng Xem trước rồi xuất bản, xem nhật ký ngoài repo |
-| Apps Script 2.5 (2.4 + giữ ok: true khi Telegram, email lỗi) | Chưa triển khai | Mã ngoài repo |
+| GTM bản v6 (tên theo nền tảng, ChatGPT Ads) | Đã xuất bản | Phiên bản 6, 00:54 16/10/2026. Xem trước trên web thật đạt (page_view, contact, select_content, generate_lead; Meta Lead, Contact; ChatGPT lead_created) |
+| Sự kiện chuyển đổi ChatGPT Ads | Đã tạo | HN wRwY - Gui form (lead_created), HN wRwY - Lien he (contact), HN wRwY - Xem trang (page_viewed) |
+| Apps Script 2.5 (2.4 + giữ ok: true khi Telegram, email lỗi) | Đã lưu trong trình soạn thảo, chưa triển khai | Mã ngoài repo. /exec vẫn trả 2.3; web chạy đúng với 2.3 |
 | Search Console, sitemap | Chưa triển khai | |
 | Báo cáo phễu hằng tuần trong Google Sheet | Chưa triển khai | Đợt sau |
 | Nút tự nguyện gửi kết quả Checklist | Chưa triển khai | Đợt sau |
