@@ -37,7 +37,7 @@ Không cài trực tiếp các mã này vào HTML khi chúng đang chạy qua GT
 | OpenAI wRwY - Lead (gửi form) | `generate_lead` | `lead_created`, Event ID = `event_id` (OpenAI bỏ trùng theo mã này) |
 | OpenAI wRwY - Contact (bấm liên hệ) | `contact` | sự kiện tùy chỉnh `contact` |
 
-Bản 7 (không gian làm việc "Đo lường v7 - thêm TikTok B2FG", dựng bằng `make_gtm_v7.py`, chưa xuất bản tới khi PR số 5 lên web) thêm:
+Bản 7 (Phiên bản 7 "Đo lường v7 - 16/10/2026 - thêm TikTok B2FG", dựng bằng `make_gtm_v7.py`, xuất bản 10:03 16/10/2026 sau khi PR số 5 lên web) thêm:
 
 | Thẻ | Khi chạy | Gửi gì |
 |---|---|---|
@@ -46,6 +46,8 @@ Bản 7 (không gian làm việc "Đo lường v7 - thêm TikTok B2FG", dựng b
 | TikTok B2FG - Contact | `contact` | Sự kiện chuẩn `Contact` |
 
 ## Gửi Lead từ máy chủ (CAPI), Apps Script 2.6
+
+Đang chạy từ 16/10/2026 (`/exec` trả `"version":"2.6"`, `capi` on cả 3 nơi). Thử thật 10:06 đạt: Meta ghi Lead trình duyệt và máy chủ "Đã bỏ trùng lặp", TikTok nhận Lead trình duyệt và máy chủ cùng `event_id`.
 
 Sau khi Google Sheet lưu xong, Apps Script gửi thêm sự kiện Lead cho ChatGPT Ads, Meta, TikTok cùng lúc. Cùng `event_id` với pixel trên web nên nền tảng gộp, không đếm 2 lần. Chỉ áp dụng cho Lead; bấm liên hệ, xem trang vẫn đo bằng pixel.
 

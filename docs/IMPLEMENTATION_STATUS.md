@@ -32,7 +32,7 @@ Cập nhật: 16/10/2026. Đợt 16/10 (nhánh `claude/xac-nhan-lead-va-noi-dung
 
 | Việc | Trạng thái | Ghi chú |
 |---|---|---|
-| Cài Apps Script 2.4 (email theo lựa chọn) | Chưa triển khai | Mã đã kiểm thử bằng Sheet giả, nằm trong gói tải về, không có trong repo |
+| Cài Apps Script (email theo lựa chọn, từ 2.4) | Đã triển khai | Đang chạy 2.6 từ 16/10/2026 (gồm 2.4, 2.5). Mã không có trong repo |
 | Kiểm sự kiện bằng GTM Preview, khai báo tham số trong GA4 | Chờ quyền truy cập | Xem `TRACKING_PLAN.md` |
 | Google Search Console và gửi sitemap | Chưa triển khai | Làm sau khi xuất bản |
 | Hỏi kế toán về thanh toán cách 2 | Chưa triển khai | Nội dung câu hỏi không lưu trong repo |
@@ -52,12 +52,13 @@ Cập nhật: 16/10/2026. Đợt 16/10 (nhánh `claude/xac-nhan-lead-va-noi-dung
 
 | Hạng mục | Trạng thái | Ghi chú |
 |---|---|---|
-| Web gửi kèm `oppref`, `obref`, `ttp`, `user_agent` (`?v=8`) | Đã kiểm thử | PR số 5, chờ Nam "duyệt" để gộp. 11 ca form đạt |
-| Dòng báo mã hóa dưới nút gửi, chính sách nêu TikTok và gửi từ máy chủ | Đã kiểm thử | Cùng PR số 5 |
+| Web gửi kèm `oppref`, `obref`, `ttp`, `user_agent` (`?v=8`) | Đã xuất bản | PR số 5, Nam duyệt 09:50 16/10/2026, gộp vào `main` (a21216f). Kiểm web thật: 7 trang đều `site.js?v=8` |
+| Dòng báo mã hóa dưới nút gửi, chính sách nêu TikTok và gửi từ máy chủ | Đã xuất bản | Cùng PR số 5 |
 | TikTok Pixel B2FG (`DB8NL0JC77UB6E0EB2FG`) | Đã tạo | Nam tạo 16/10/2026 01:14 trong Trung tâm doanh nghiệp Hà Nam Agency. So khớp nâng cao tự động: tắt (để nguyên, Apps Script gửi email, SĐT đã mã hóa). Cookie bên thứ nhất: bật |
-| GTM bản 7 (v6 + TikTok Pixel gốc, Lead, Contact) | Đã kiểm thử, chưa xuất bản | Không gian làm việc "Đo lường v7 - thêm TikTok B2FG": 5 mục thêm, 0 sửa, 0 xóa. Xem trước trên web thật: TikTok Pixel gốc chạy 1 lần, có cookie `_ttp`. Xuất bản sau khi PR số 5 lên web (chính sách nêu TikTok) |
-| Apps Script 2.6 (CAPI ChatGPT Ads, Meta, TikTok) | Đã kiểm thử, chưa triển khai | 13 ca kiểm thử với Sheet giả đạt. Đã lưu trong trình soạn (kiểm mã băm khớp). Cần: chạy `capNhatV2`, triển khai phiên bản mới, Nam tạo 3 mã truy cập |
-| Mã truy cập CAPI (OpenAI API key, Meta, TikTok) | Chờ Nam | Claude không được tạo hay nhập mã truy cập vào ô nào (quy tắc an toàn cố định) |
+| GTM bản 7 (v6 + TikTok Pixel gốc, Lead, Contact) | Đã xuất bản | Phiên bản 7 "Đo lường v7 - 16/10/2026 - thêm TikTok B2FG", 10:03 16/10/2026. `gtm.js` trên web có pixel B2FG, trình duyệt có cookie `_ttp` |
+| Apps Script 2.6 (CAPI ChatGPT Ads, Meta, TikTok) | Đã triển khai | Lần triển khai `AKfycbz7BI9N59` lên Phiên bản 8 "HÀ NAM Leads v2.6" lúc 09:31 16/10/2026 (mã trong trình soạn khớp mã băm 9990b0c7). `capNhatV2` chạy 09:59: Sheet có đủ 49 cột. `/exec` trả `"version":"2.6"`, `capi` on cả 3 |
+| Mã truy cập CAPI (OpenAI API key, Meta, TikTok) | Đã có | Nam tạo và dán vào Thuộc tính tập lệnh 16/10/2026, kèm `META_TEST_CODE`, `TIKTOK_TEST_CODE`. Claude không tạo, không nhập mã |
+| Thử thật CAPI trên web | Đã kiểm thử | 10:06 16/10/2026, form Facebook đầy đủ, email `+test`, lead HN-261016-1006-X7SZ, `event_id` hn-mvadzhio-9tcqik. Sheet: `capi_openai` CHỈ KIỂM OK 200, `capi_meta` THỬ OK 200 nhận 1, `capi_tiktok` THỬ OK 200; có `fbp`, `obref`, `ttp`, `user_agent`. Meta Thử nghiệm sự kiện: Lead trình duyệt và máy chủ cùng mã, "Đã bỏ trùng lặp". TikTok Sự kiện thử nghiệm: "Gửi biểu mẫu" trình duyệt và máy chủ cùng `event_id`. Từ lúc bấm gửi tới khi sang trang cảm ơn khoảng 8,6 giây |
 
 ## Đợt 16/10/2026
 
@@ -75,7 +76,7 @@ Cập nhật: 16/10/2026. Đợt 16/10 (nhánh `claude/xac-nhan-lead-va-noi-dung
 | Apps Script 2.5 (2.4 + giữ ok: true khi Telegram, email lỗi) | Đã triển khai | Nam triển khai sáng 16/10/2026, `/exec` trả `"version":"2.5"`. Mã ngoài repo. Thử thật 06:43: trả `ok: true, saved: true`, sang trang cảm ơn |
 | Meta 6008 kiểm bằng Thử nghiệm sự kiện | Đã kiểm thử | 16/10/2026 06:43: Lead có ID sự kiện bằng `event_id` của web, Contact, PageView. `SubscribedButtonClick` là sự kiện Meta tự ghi, không phải chuyển đổi |
 | GA4 5LXP: phương diện tùy chỉnh, sự kiện chính | Đã kiểm thử | 11 phương diện (thêm `content_type`, `content_id` ngày 16/10); `generate_lead` là sự kiện chính, đang nhận dữ liệu |
-| Google Ads 9025: hành động chuyển đổi "Gửi form" | Chưa triển khai | Cần tạo trong Google Ads rồi thêm thẻ GTM bản 7 |
+| Google Ads 9025: hành động chuyển đổi "Gửi form" | Chưa triển khai | Cần tạo trong Google Ads rồi thêm thẻ GTM bản 8 |
 | Search Console, sitemap | Chưa triển khai | |
 | Báo cáo phễu hằng tuần trong Google Sheet | Chưa triển khai | Đợt sau |
 | Nút tự nguyện gửi kết quả Checklist | Chưa triển khai | Đợt sau |

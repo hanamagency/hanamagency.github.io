@@ -4,9 +4,20 @@ Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục gồm:
 
 Phiên bản CSS và JS hiện tại: `site.css?v=8`, `site.js?v=8` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
 
+## 2026-10-16 (10:10): Đưa CAPI và TikTok lên thật
+
+Nam trả lời "duyệt" lúc 09:50.
+
+- Gộp PR số 5 vào `main` (a21216f) lúc 09:52. Web thật: trang chủ, Facebook, Shopee, Checklist, cảm ơn, chính sách, 404 đều tải `site.js?v=8`; `site.js` có `oppref`, `_ttp`, `user_agent`; chính sách có TikTok.
+- Apps Script: lần triển khai `AKfycbz7BI9N59` đã ở Phiên bản 8 "HÀ NAM Leads v2.6" (tạo 09:31). Chạy `capNhatV2` lúc 09:59, tab Leads đủ 49 cột (thêm `oppref`, `obref`, `ttp`, `user_agent`, `capi_openai`, `capi_meta`, `capi_tiktok`). `/exec` trả `"version":"2.6"`, `capi` on cả 3 nơi.
+- GTM: xuất bản Phiên bản 7 "Đo lường v7 - 16/10/2026 - thêm TikTok B2FG" lúc 10:03. `gtm.js` trên web có pixel B2FG, trình duyệt có cookie `_ttp`.
+- Thử thật 10:06 (form Facebook đầy đủ, email `+test`, mở qua nút "Mở trang web" của TikTok Sự kiện thử nghiệm): Apps Script trả `ok`, sang trang cảm ơn; Sheet ghi `capi_openai` CHỈ KIỂM OK 200, `capi_meta` THỬ OK 200 nhận 1, `capi_tiktok` THỬ OK 200. Meta: Lead trình duyệt và máy chủ cùng ID sự kiện, cả hai ghi "Đã bỏ trùng lặp". TikTok: "Gửi biểu mẫu" (Lead) trình duyệt và máy chủ cùng `event_id`.
+- Ghi nhận: từ lúc bấm gửi tới khi sang trang cảm ơn khoảng 8,6 giây (web chờ tối đa 25 giây).
+- Việc còn lại: Nam xóa dòng thử trong Sheet; hành động chuyển đổi Google Ads và GTM bản 8; Search Console.
+
 ## 2026-10-16 (trưa): Gửi Lead từ máy chủ (CAPI), TikTok Pixel B2FG
 
-Nhánh `claude/capi-tiktok-2026-10-16`, PR số 5. Nam giao Claude tự quyết lúc 08:21. Bước gộp vào `main` bị chặn bởi kiểm tra an toàn của Claude (gộp khi chưa có người duyệt), chờ Nam trả lời "duyệt".
+Nhánh `claude/capi-tiktok-2026-10-16`, PR số 5. Nam giao Claude tự quyết lúc 08:21. Gộp vào `main` sau khi Nam trả lời "duyệt" lúc 09:50 (xem mục 10:10 ở trên).
 
 - `assets/site.js`: form gửi kèm `oppref` (tham số `oppref` trên link quảng cáo ChatGPT, cookie `__oppref` của pixel OpenAI, hoặc bản web tự nhớ 30 ngày khi pixel bị chặn), `obref` (cookie `__obref`), `ttp` (cookie `_ttp` của TikTok Pixel), `user_agent`. Chỉ gửi trường có giá trị. Lý do: Apps Script 2.6 cần các mã này để gửi Lead từ máy chủ cho ChatGPT Ads, Meta, TikTok, nền tảng gộp với bản trình duyệt nhờ `event_id`.
 - 5 form (trang chủ, Facebook 2 form, Shopee 2 form): thêm dòng nhỏ dưới nút gửi "Email và số Zalo được mã hóa một chiều trước khi gửi cho Meta, TikTok, OpenAI để đo hiệu quả quảng cáo. Xem chi tiết." Không đổi câu chữ ô đồng ý, không đổi `consent_version`.
