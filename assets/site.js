@@ -10,7 +10,10 @@
                      Tham số: content_type, content_id
      contact_panel_open, self_check_complete, fee_calculator_use, checklist_progress, lead_details_submit:
                      sự kiện riêng của web, chỉ gửi GA4
-   Thông tin trang (content_group, page_type) khai báo trong thẻ <head> của từng trang, trước mã GTM. */
+   Thông tin trang (content_group, page_type) khai báo trong thẻ <head> của từng trang, trước mã GTM.
+   Gửi Lead từ máy chủ (từ 16/10/2026): form gửi kèm event_id, mã trình duyệt của các nền tảng (fbp, fbc, ttp, obref),
+   oppref của ChatGPT Ads và user_agent cho Apps Script. Apps Script 2.6 gửi lại Lead cho Meta, TikTok, ChatGPT Ads
+   từ máy chủ, cùng event_id nên nền tảng gộp với bản trình duyệt, không đếm 2 lần. */
 (function () {
   'use strict';
 
@@ -139,6 +142,19 @@
     var m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/[.$?*|{}()[\]\\/+^]/g, '\\$&') + '=([^;]*)'));
     return m ? decodeURIComponent(m[1]) : '';
   }
+  // oppref: mã ChatGPT Ads gắn vào link quảng cáo (?oppref=...). Pixel OpenAI tự lưu cookie __oppref 30 ngày;
+  // web lưu thêm một bản 30 ngày trong trình duyệt phòng khi pixel bị chặn. Gửi nguyên văn, không sửa.
+  var OPPREF_DAYS = 30;
+  function captureOppref() {
+    try {
+      var v = new URLSearchParams(window.location.search).get('oppref');
+      if (v) lSet('hn_oppref', JSON.stringify({ v: v.slice(0, 500), ts: nowIso() }));
+    } catch (e) {}
+  }
+  function storedOppref() {
+    var o = jGet(lGet, 'hn_oppref');
+    return o && o.v && o.ts && (Date.now() - Date.parse(o.ts)) < OPPREF_DAYS * 864e5 ? String(o.v) : '';
+  }
   function parseGaClientId(v) {
     var m = String(v || '').match(/^GA\d\.\d+\.(\d+\.\d+)$/);
     return m ? m[1] : '';
@@ -179,6 +195,11 @@
     if (!fbc && out.fbclid) fbc = 'fb.1.' + Date.parse((last && last.ts) || nowIso()) + '.' + out.fbclid;
     out.fbc = fbc;
     out.ga_client_id = parseGaClientId(getCookie('_ga'));
+    // Cho Apps Script gửi Lead từ máy chủ: ChatGPT Ads (oppref, obref), TikTok (ttp), mọi nền tảng (user_agent)
+    out.oppref = getCookie('__oppref') || storedOppref();
+    out.obref = getCookie('__obref');
+    out.ttp = getCookie('_ttp');
+    out.user_agent = String(navigator.userAgent || '').slice(0, 400);
     return out;
   }
 
@@ -884,6 +905,7 @@
   function start() {
     loadTagsDirect();
     captureAttribution();
+    captureOppref();
     each('form[data-lead-form]', initForm);
     each('form[data-lead-details]', initDetails);
     each('[data-calc]', initCalc);
