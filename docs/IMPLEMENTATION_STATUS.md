@@ -48,6 +48,17 @@ Cập nhật: 16/10/2026. Đợt 16/10 (nhánh `claude/xac-nhan-lead-va-noi-dung
 | `self_check_start` | Chưa triển khai | Cần thêm trình kích hoạt trong GTM |
 | Form đọc được kết quả từ Apps Script | Đã kiểm thử | 16/10/2026. Đã thử thật với Apps Script 2.3 và 2.5 (đọc được JSON). 7 ca kiểm thử đạt |
 
+## Đợt 16/10/2026 (trưa): gửi Lead từ máy chủ (CAPI), TikTok Pixel
+
+| Hạng mục | Trạng thái | Ghi chú |
+|---|---|---|
+| Web gửi kèm `oppref`, `obref`, `ttp`, `user_agent` (`?v=8`) | Đã kiểm thử | PR số 5, chờ Nam "duyệt" để gộp. 11 ca form đạt |
+| Dòng báo mã hóa dưới nút gửi, chính sách nêu TikTok và gửi từ máy chủ | Đã kiểm thử | Cùng PR số 5 |
+| TikTok Pixel B2FG (`DB8NL0JC77UB6E0EB2FG`) | Đã tạo | Nam tạo 16/10/2026 01:14 trong Trung tâm doanh nghiệp Hà Nam Agency. So khớp nâng cao tự động: tắt (để nguyên, Apps Script gửi email, SĐT đã mã hóa). Cookie bên thứ nhất: bật |
+| GTM bản 7 (v6 + TikTok Pixel gốc, Lead, Contact) | Đã kiểm thử, chưa xuất bản | Không gian làm việc "Đo lường v7 - thêm TikTok B2FG": 5 mục thêm, 0 sửa, 0 xóa. Xem trước trên web thật: TikTok Pixel gốc chạy 1 lần, có cookie `_ttp`. Xuất bản sau khi PR số 5 lên web (chính sách nêu TikTok) |
+| Apps Script 2.6 (CAPI ChatGPT Ads, Meta, TikTok) | Đã kiểm thử, chưa triển khai | 13 ca kiểm thử với Sheet giả đạt. Đã lưu trong trình soạn (kiểm mã băm khớp). Cần: chạy `capNhatV2`, triển khai phiên bản mới, Nam tạo 3 mã truy cập |
+| Mã truy cập CAPI (OpenAI API key, Meta, TikTok) | Chờ Nam | Claude không được tạo hay nhập mã truy cập vào ô nào (quy tắc an toàn cố định) |
+
 ## Đợt 16/10/2026
 
 | Hạng mục | Trạng thái | Ghi chú |
