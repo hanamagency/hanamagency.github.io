@@ -17,7 +17,7 @@ Repo công khai trên GitHub, Nam quyết định giữ công khai (13/10/2026).
 - Jekyll dựng: `index.html` (có phần khai báo đầu file để chèn 3 bài mới), `sitemap.xml`, mục Kiến thức (`_posts/`, `_layouts/`, `_includes/`, `kien-thuc/`). Trong mọi trang không được có dấu ngoặc nhọn đôi hay `{%` ngoài mã Liquid cố ý.
 - `_config.yml` loại `CLAUDE.md`, `docs/` khỏi web. `asset_v` trong đó phải bằng số `?v=` ở các trang .html.
 - `404.html` dùng đường dẫn từ gốc (`/assets/...`). Khuôn mục Kiến thức cũng dùng đường dẫn từ gốc.
-- Mã Apps Script nhận form (bản 2.4, gửi email theo lựa chọn "Bạn cần gì?") nằm trong Google Sheet của Nam, không có trong repo. Bản sao Nam lưu trên máy, ngoài repo.
+- Mã Apps Script nhận form nằm trong Google Sheet của Nam, không có trong repo (bản đang triển khai 2.5; bản 2.6 gửi Lead từ máy chủ cho ChatGPT Ads, Meta, TikTok đã lưu trong trình soạn, chờ triển khai). Bản sao Nam lưu trên máy, ngoài repo. Mã truy cập CAPI chỉ nằm trong Thuộc tính tập lệnh của Apps Script, không bao giờ ghi vào repo.
 
 ## Quy trình làm việc với Nam (bắt buộc)
 

@@ -2,7 +2,18 @@
 
 Ghi mới nhất ở trên cùng. Mỗi lần sửa web thêm một mục gồm: ngày, file đã sửa, nội dung trước và sau (tóm tắt), lý do, kết quả kiểm thử, trạng thái và việc còn lại. Chỉ ghi "đã xong" khi đã kiểm thử. Thư mục `docs` không xuất bản lên web (khai báo trong `_config.yml`), nhưng vẫn đọc được trên GitHub vì repo công khai. Trước ngày 13/10/2026 file này nằm ở `_ghi_chu/LICH_SU.md`.
 
-Phiên bản CSS và JS hiện tại: `site.css?v=7`, `site.js?v=7` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
+Phiên bản CSS và JS hiện tại: `site.css?v=8`, `site.js?v=8` (biến `asset_v` trong `_config.yml` dùng cho mục Kiến thức).
+
+## 2026-10-16 (trưa): Gửi Lead từ máy chủ (CAPI), TikTok Pixel B2FG
+
+Nhánh `claude/capi-tiktok-2026-10-16`, PR số 5. Nam giao Claude tự quyết lúc 08:21. Bước gộp vào `main` bị chặn bởi kiểm tra an toàn của Claude (gộp khi chưa có người duyệt), chờ Nam trả lời "duyệt".
+
+- `assets/site.js`: form gửi kèm `oppref` (tham số `oppref` trên link quảng cáo ChatGPT, cookie `__oppref` của pixel OpenAI, hoặc bản web tự nhớ 30 ngày khi pixel bị chặn), `obref` (cookie `__obref`), `ttp` (cookie `_ttp` của TikTok Pixel), `user_agent`. Chỉ gửi trường có giá trị. Lý do: Apps Script 2.6 cần các mã này để gửi Lead từ máy chủ cho ChatGPT Ads, Meta, TikTok, nền tảng gộp với bản trình duyệt nhờ `event_id`.
+- 5 form (trang chủ, Facebook 2 form, Shopee 2 form): thêm dòng nhỏ dưới nút gửi "Email và số Zalo được mã hóa một chiều trước khi gửi cho Meta, TikTok, OpenAI để đo hiệu quả quảng cáo. Xem chi tiết." Không đổi câu chữ ô đồng ý, không đổi `consent_version`.
+- `chinh-sach.html`: thêm TikTok Pixel, mã `_ttp`, `__obref`, `oppref`, thông tin trình duyệt; mục Chia sẻ dữ liệu (`#chia-se-du-lieu`) giải thích thông báo đăng ký gửi từ máy chủ gồm gì, không gồm gì; cách tắt quảng cáo cá nhân hóa của TikTok.
+- `?v=8`, `asset_v: 8`.
+- Kiểm thử (Chromium thật, Apps Script giả): 4 ca mới (oppref từ link, từ cookie, nhớ qua trang khác; không có cookie thì không gửi trường rỗng) và 7 ca cũ đều đạt; không tràn ngang ở 360, 1280px. Không dựng được Jekyll trên máy chủ của Claude (bị chặn tải gói); `index.html` chỉ thêm một dòng HTML, không có mã Liquid.
+- Ngoài repo, đã chuẩn bị: Apps Script 2.6 (đã lưu trong trình soạn, chưa triển khai), GTM không gian làm việc "Đo lường v7 - thêm TikTok B2FG" (chưa xuất bản). Xem `IMPLEMENTATION_STATUS.md`, `TRACKING_PLAN.md`.
 
 ## 2026-10-16 (sáng): Apps Script 2.5 đã chạy, kiểm đo lường trên web thật
 
